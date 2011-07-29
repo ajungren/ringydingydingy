@@ -1,15 +1,15 @@
 package org.vorti.RingyDingyDingy;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 public class RingyDingyDingyRemoteRing extends Activity {
@@ -25,7 +25,7 @@ public class RingyDingyDingyRemoteRing extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.remote_ring);
+        //setContentView(R.layout.remote_ring);
 
         // Get the source of the message
         Intent intent = this.getIntent();
@@ -49,19 +49,23 @@ public class RingyDingyDingyRemoteRing extends Activity {
         // Play the ringtone
         ringtone.play();
 
-        TextView textView = (TextView)findViewById(R.id.remote_ring_information);
+        // An ugly kludge to append the source of the command to the resource string
+        TextView textView = new TextView(this);
         textView.setText(R.string.remote_ring_text);
         textView.append(" " + source);
 
-        // Set up the button to stop the ringing
-        Button button = (Button)findViewById(R.id.stop_button);
-        button.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                // Stop the ringer and close the activity
-                stopRinging();
-                finish();
-            }
-        });
+        // Show an AlertDialog and stop the ringtone when the user hits Stop
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(R.string.app_name)
+               .setMessage(textView.getText())
+               .setNeutralButton(R.string.remote_ring_stop_button, new DialogInterface.OnClickListener() {
+                   public void onClick(DialogInterface dialog, int id) {
+                       RingyDingyDingyRemoteRing.this.stopRinging();
+                       RingyDingyDingyRemoteRing.this.finish();
+                   }
+               });
+        AlertDialog alertdialog = builder.create();
+        alertdialog.show();
     }
 
     @Override
