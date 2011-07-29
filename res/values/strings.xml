@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">RingyDingyDingy</string>
-    <string name="preferences_header">Welcome to RingyDingyDingy! You can make your phone ring (even if it\'s set on silent or vibrate only) at any time by sending a text message (\&quot;RingyDingyDingy\&quot;, a space, then your activation code) to your phone. Anyone with your activation code can make your phone ring at any time, so make sure to reset it if you give it to anyone you don\'t trust.</string>
-    <string name="preferences_reset_button">Reset Activation Code</string>
+    <string name="preferences_header">Welcome to RingyDingyDingy! You can make your phone ring (even if it\'s set on silent or vibrate only) at any time by sending a text message (\&quot;RingyDingyDingy\&quot;, a space, then your activation code) to your phone. Anyone with your activation code can make your phone ring at any time, so make sure to change it if you give it to anyone you don\'t trust.</string>
+    <string name="preferences_generate_button">Generate New Activation Code</string>
     <string name="your_activation_code">Your activation code is:</string>
     <string name="remote_ring_stop_button">Stop</string>
     <string name="remote_ring_text">Remote ring has been initiated by</string>
     <string name="preferences_set_button">Manually Set Activation Code</string>
     <string name="code_prompt_text">Your new code must be between four and eight characters long.</string>
     <string name="code_prompt_title">Enter New Activation Code</string>
-    <string name="code_prompt_error_text">Sorry, your code wasn\'t between four and eight characters. Please enter a code that is.</string>
+    <string name="code_prompt_error_text">Sorry, your code wasn\'t between four and eight characters.</string>
+    <string name="preferences_warning">Please note that anyone with access to your phone can view your code at any time. Please don\'t use anything secret, like a debit card PIN, etc. for your activation code!</string>
+    <string name="cancel">Cancel</string>
+    <string name="ok">OK</string>
 </resources>
 

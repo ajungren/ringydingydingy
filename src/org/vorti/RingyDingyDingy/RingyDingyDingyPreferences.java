@@ -18,14 +18,14 @@ public class RingyDingyDingyPreferences extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.preferences);
+        setContentView(R.layout.preference_manager);
 
         preferencemanager = new RingyDingyDingyPreferenceManager(this.getSharedPreferences(RingyDingyDingyPreferenceManager.PREFERENCE_NAME, Context.MODE_PRIVATE));
         updateCode();
 
         // Set up the button to reset the code
-        Button resetButton = (Button)findViewById(R.id.reset_button);
-        resetButton.setOnClickListener(new View.OnClickListener() {
+        Button generateButton = (Button)findViewById(R.id.generate_button);
+        generateButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 preferencemanager.resetCode();
                 updateCode();
@@ -35,7 +35,21 @@ public class RingyDingyDingyPreferences extends Activity {
         Button setButton = (Button)findViewById(R.id.set_button);
         setButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                promptForCode(R.string.code_prompt_text);
+                final AlertDialog.Builder builder = new AlertDialog.Builder(RingyDingyDingyPreferences.this);
+                builder.setTitle(R.string.app_name)
+                       .setMessage(R.string.preferences_warning)
+                       .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                           public void onClick(DialogInterface dialog, int id) {
+                        	   promptForCode(R.string.code_prompt_text);
+                           }
+                       })
+                       .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                           public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                           }
+                       });
+                AlertDialog alertdialog = builder.create();
+                alertdialog.show();
             }
         });
     }
@@ -62,7 +76,7 @@ public class RingyDingyDingyPreferences extends Activity {
         edittext.setMaxLines(1);
         builder.setTitle(R.string.code_prompt_title)
                .setMessage(promptText)
-               .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+               .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                    public void onClick(DialogInterface dialog, int id) {
                        String string = edittext.getText().toString();
                        int length = string.length();
@@ -72,7 +86,7 @@ public class RingyDingyDingyPreferences extends Activity {
                            promptForCode(R.string.code_prompt_error_text);
                    }
                })
-               .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+               .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                    public void onClick(DialogInterface dialog, int id) {
                         dialog.cancel();
                    }
