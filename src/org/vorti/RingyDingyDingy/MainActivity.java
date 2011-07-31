@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
@@ -19,6 +21,13 @@ public class MainActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+
+        if(Integer.parseInt(Build.VERSION.SDK) >= 8) {
+            LockingSupport lockingSupport = LockingSupport.getInstance(this);
+            Intent lockingActivationIntent = lockingSupport.getActivationIntent();
+            if(lockingActivationIntent != null)
+                this.startActivity(lockingActivationIntent);
+        }
 
         preferencemanager = new PreferenceManager(this.getSharedPreferences(PreferenceManager.PREFERENCE_NAME, Context.MODE_PRIVATE));
         updateCode();
@@ -40,7 +49,7 @@ public class MainActivity extends Activity {
                        .setMessage(R.string.preferences_warning)
                        .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                            public void onClick(DialogInterface dialog, int id) {
-                        	   promptForCode(R.string.code_prompt_text);
+                               promptForCode(R.string.code_prompt_text);
                            }
                        })
                        .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {

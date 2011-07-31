@@ -4,7 +4,9 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.telephony.SmsManager;
 import android.telephony.SmsMessage;
 
 public class SmsReceiver extends BroadcastReceiver {
@@ -25,18 +27,42 @@ public class SmsReceiver extends BroadcastReceiver {
             for(int i=0; i< msgs.length; i++) {
                 msgs[i] = SmsMessage.createFromPdu((byte[])pdus[i]);
                 message = msgs[i].getMessageBody().toString();
+                String[] tokens = message.trim().split("\\s+");
+                String source = msgs[i].getOriginatingAddress();
 
-                if(("RingyDingyDingy " + code).compareToIgnoreCase(message) == 0) {
+                if(tokens[0].compareToIgnoreCase("RingyDingyDingy") == 0 && tokens[1].compareTo(code) == 0) {
+                    // Drop the SMS message so it doesn't go to the user's inbox
                     this.abortBroadcast();
-                    Intent remoteRingIntent = new Intent();
-                    remoteRingIntent.setClass(context, RemoteRingActivity.class)
-                                    .setData(Uri.fromParts("remotering", msgs[i].getOriginatingAddress(), null))
-                                    .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    context.startActivity(remoteRingIntent);
+
+                    if(tokens[2].compareToIgnoreCase("lock") == 0) {
+                        if(Integer.parseInt(Build.VERSION.SDK) >= 8) {
+                            LockingSupport lockingSupport = LockingSupport.getInstance(context);
+                            if(lockingSupport.isActive()) {
+                                lockingSupport.lock();
+                                sendSMS(source, "Phone locked!");
+                            }
+                            else
+                                sendSMS(source, "Sorry, but I can't do a remote lock. I haven't been given permission to.");
+                        }
+                        else
+                            sendSMS(source, "Sorry, but I can't do a remote lock. Locking needs Froyo or newer.");
+                    }
+                    else {
+                        Intent remoteRingIntent = new Intent();
+                        remoteRingIntent.setClass(context, RemoteRingActivity.class)
+                                        .setData(Uri.fromParts("remotering", source, null))
+                                        .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        context.startActivity(remoteRingIntent);
+                    }
                 }
             }
         }
     }
 
+    private void sendSMS(String destination, String message) {
+        SmsManager smsManager = SmsManager.getDefault();
+        smsManager.sendTextMessage(destination, null, message, null, null);
+    }
+    
 }
 

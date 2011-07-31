@@ -13,5 +13,6 @@
     <string name="preferences_warning">Please note that anyone with access to your phone can view your code at any time. Please don\'t use anything secret, like a debit card PIN, etc. for your activation code!</string>
     <string name="cancel">Cancel</string>
     <string name="ok">OK</string>
+    <string name="device_admin_prompt">RingyDingyDingy needs device administraton privileges to enable remote locking. Please accept this if you want to lock your phone remotely.</string>
 </resources>
 
