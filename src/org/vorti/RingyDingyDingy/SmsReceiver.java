@@ -63,6 +63,6 @@ public class SmsReceiver extends BroadcastReceiver {
         SmsManager smsManager = SmsManager.getDefault();
         smsManager.sendTextMessage(destination, null, message, null, null);
     }
-    
+
 }
 

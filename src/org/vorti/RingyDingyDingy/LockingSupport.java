@@ -44,7 +44,7 @@ public class LockingSupport {
             policyManager.setMaximumTimeToLock(deviceAdmin, 1);
             policyManager.lockNow();
             policyManager.setMaximumTimeToLock(deviceAdmin, lockTime);
-        }   
+        }
     }
 
 }
