@@ -19,7 +19,7 @@ public class SmsReceiver extends BroadcastReceiver {
             msgs = new SmsMessage[pdus.length];
 
             // Get the activation code
-            RingyDingyDingyPreferenceManager preferencemanager = new RingyDingyDingyPreferenceManager(context.getSharedPreferences(RingyDingyDingyPreferenceManager.PREFERENCE_NAME, Context.MODE_PRIVATE));
+            PreferenceManager preferencemanager = new PreferenceManager(context.getSharedPreferences(PreferenceManager.PREFERENCE_NAME, Context.MODE_PRIVATE));
             String code = preferencemanager.getCode();
 
             for(int i=0; i< msgs.length; i++) {
@@ -28,7 +28,7 @@ public class SmsReceiver extends BroadcastReceiver {
 
                 if(("RingyDingyDingy " + code).compareToIgnoreCase(message) == 0) {
                     Intent remoteRingIntent = new Intent();
-                    remoteRingIntent.setClass(context, RingyDingyDingyRemoteRing.class)
+                    remoteRingIntent.setClass(context, RemoteRingActivity.class)
                                     .setData(Uri.fromParts("remotering", msgs[i].getOriginatingAddress(), null))
                                     .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(remoteRingIntent);

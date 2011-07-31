@@ -11,16 +11,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class RingyDingyDingyPreferences extends Activity {
-    RingyDingyDingyPreferenceManager preferencemanager = null;
+public class MainActivity extends Activity {
+    PreferenceManager preferencemanager = null;
 
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.preference_manager);
+        setContentView(R.layout.main);
 
-        preferencemanager = new RingyDingyDingyPreferenceManager(this.getSharedPreferences(RingyDingyDingyPreferenceManager.PREFERENCE_NAME, Context.MODE_PRIVATE));
+        preferencemanager = new PreferenceManager(this.getSharedPreferences(PreferenceManager.PREFERENCE_NAME, Context.MODE_PRIVATE));
         updateCode();
 
         // Set up the button to reset the code
@@ -35,7 +35,7 @@ public class RingyDingyDingyPreferences extends Activity {
         Button setButton = (Button)findViewById(R.id.set_button);
         setButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                final AlertDialog.Builder builder = new AlertDialog.Builder(RingyDingyDingyPreferences.this);
+                final AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                 builder.setTitle(R.string.app_name)
                        .setMessage(R.string.preferences_warning)
                        .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
@@ -70,8 +70,8 @@ public class RingyDingyDingyPreferences extends Activity {
     }
 
     public void promptForCode(int promptText) {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(RingyDingyDingyPreferences.this);
-        final EditText edittext = new EditText(RingyDingyDingyPreferences.this);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        final EditText edittext = new EditText(MainActivity.this);
         edittext.setInputType(InputType.TYPE_TEXT_FLAG_IME_MULTI_LINE);
         edittext.setMaxLines(1);
         builder.setTitle(R.string.code_prompt_title)
@@ -81,7 +81,7 @@ public class RingyDingyDingyPreferences extends Activity {
                        String string = edittext.getText().toString();
                        int length = string.length();
                        if(length >= 4 && length <= 8)
-                           RingyDingyDingyPreferences.this.preferencemanager.setCode(string);
+                           MainActivity.this.preferencemanager.setCode(string);
                        else
                            promptForCode(R.string.code_prompt_error_text);
                    }

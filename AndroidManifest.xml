@@ -6,7 +6,7 @@
     <uses-permission android:name="android.permission.RECEIVE_SMS"></uses-permission>
 
     <application android:icon="@drawable/icon" android:label="@string/app_name">
-        <activity android:name=".RingyDingyDingyPreferences"
+        <activity android:name=".MainActivity"
                   android:label="@string/app_name" android:enabled="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,7 +18,7 @@
                 <action android:name="android.provider.Telephony.SMS_RECEIVED"></action>
             </intent-filter>
         </receiver>
-        <activity android:name=".RingyDingyDingyRemoteRing" android:enabled="true" android:theme="@android:style/Theme.Dialog">
+        <activity android:name=".RemoteRingActivity" android:enabled="true" android:theme="@android:style/Theme.Dialog">
             <intent-filter>
                 <action android:name="org.vorti.RingyDingyDingy.REMOTE_RING"></action>
             </intent-filter>

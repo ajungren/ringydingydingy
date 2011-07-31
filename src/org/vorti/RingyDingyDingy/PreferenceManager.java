@@ -3,11 +3,11 @@ package org.vorti.RingyDingyDingy;
 import android.content.SharedPreferences;
 import java.util.Random;
 
-public class RingyDingyDingyPreferenceManager {
+public class PreferenceManager {
     public static final String PREFERENCE_NAME = "RingyDingyDingy";
     private SharedPreferences sharedPreferences = null;
 
-    public RingyDingyDingyPreferenceManager(SharedPreferences preferences) {
+    public PreferenceManager(SharedPreferences preferences) {
         sharedPreferences = preferences;
     }
 

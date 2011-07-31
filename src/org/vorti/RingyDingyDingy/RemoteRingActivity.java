@@ -12,7 +12,7 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.widget.TextView;
 
-public class RingyDingyDingyRemoteRing extends Activity {
+public class RemoteRingActivity extends Activity {
     public static final String INTENT = "org.vorti.RingyDingyDingy.REMOTE_RING";
 
     public AudioManager audiomanager = null;
@@ -60,8 +60,8 @@ public class RingyDingyDingyRemoteRing extends Activity {
                .setMessage(textView.getText())
                .setNeutralButton(R.string.remote_ring_stop_button, new DialogInterface.OnClickListener() {
                    public void onClick(DialogInterface dialog, int id) {
-                       RingyDingyDingyRemoteRing.this.stopRinging();
-                       RingyDingyDingyRemoteRing.this.finish();
+                       RemoteRingActivity.this.stopRinging();
+                       RemoteRingActivity.this.finish();
                    }
                });
         AlertDialog alertdialog = builder.create();
