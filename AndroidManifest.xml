@@ -14,7 +14,7 @@
             </intent-filter>
         </activity>
         <receiver android:name=".SmsReceiver" android:enabled="true">
-            <intent-filter>
+            <intent-filter android:priority="1000">
                 <action android:name="android.provider.Telephony.SMS_RECEIVED"></action>
             </intent-filter>
         </receiver>

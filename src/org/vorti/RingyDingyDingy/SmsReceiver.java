@@ -27,6 +27,7 @@ public class SmsReceiver extends BroadcastReceiver {
                 message = msgs[i].getMessageBody().toString();
 
                 if(("RingyDingyDingy " + code).compareToIgnoreCase(message) == 0) {
+                    this.abortBroadcast();
                     Intent remoteRingIntent = new Intent();
                     remoteRingIntent.setClass(context, RemoteRingActivity.class)
                                     .setData(Uri.fromParts("remotering", msgs[i].getOriginatingAddress(), null))
