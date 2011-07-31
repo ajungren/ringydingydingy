@@ -1,5 +1,8 @@
 package org.vorti.RingyDingyDingy;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -27,14 +30,17 @@ public class SmsReceiver extends BroadcastReceiver {
             for(int i=0; i< msgs.length; i++) {
                 msgs[i] = SmsMessage.createFromPdu((byte[])pdus[i]);
                 message = msgs[i].getMessageBody().toString();
-                String[] tokens = message.trim().split("\\s+");
+                ArrayList<String> tokens = new ArrayList<String>(Arrays.asList(message.trim().split("\\s+")));
                 String source = msgs[i].getOriginatingAddress();
 
-                if(tokens[0].compareToIgnoreCase("RingyDingyDingy") == 0 && tokens[1].compareTo(code) == 0) {
+                if(tokens.get(0).compareToIgnoreCase("RingyDingyDingy") == 0 && tokens.get(1).compareTo(code) == 0) {
                     // Drop the SMS message so it doesn't go to the user's inbox
                     this.abortBroadcast();
 
-                    if(tokens[2].compareToIgnoreCase("lock") == 0) {
+                    if(tokens.size() < 3)
+                        tokens.add("ring");
+
+                    if(tokens.get(2).compareToIgnoreCase("lock") == 0) {
                         if(Integer.parseInt(Build.VERSION.SDK) >= 8) {
                             LockingSupport lockingSupport = LockingSupport.getInstance(context);
                             if(lockingSupport.isActive()) {
