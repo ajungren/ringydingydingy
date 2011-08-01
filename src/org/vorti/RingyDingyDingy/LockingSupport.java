@@ -28,7 +28,7 @@ public class LockingSupport {
             Intent intent = new Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN);
             intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, this.deviceAdmin);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
-            //intent.putExtra(DevicePolicyManager.EXTRA_ADD_EXPLANATION, getText(R.string.device_admin_prompt));
+            intent.putExtra(DevicePolicyManager.EXTRA_ADD_EXPLANATION, Resources.getString(R.string.device_admin_prompt, this.context));
             return intent;
         }
         return null;
