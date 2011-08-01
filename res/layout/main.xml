@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    >
-<TextView  
-    android:layout_width="fill_parent" 
-    android:layout_height="wrap_content" 
-    android:id="@+id/header" 
-    />
-<LinearLayout
-    android:layout_width="fill_parent"
-    android:orientation="vertical" android:gravity="center_vertical|center_horizontal" android:layout_height="fill_parent" android:id="@+id/container">
-    <TextView android:text="@string/your_activation_code" android:layout_height="wrap_content" android:layout_width="wrap_content"></TextView>
-    <TextView android:text="TextView" android:layout_width="fill_parent" android:textSize="65sp" android:layout_height="wrap_content" android:gravity="center_horizontal" android:layout_marginBottom="10px" android:id="@+id/activation_code" android:typeface="monospace"></TextView>
-    <Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/preferences_generate_button" android:id="@+id/generate_button"></Button>
-    <Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/preferences_set_button" android:id="@+id/set_button"></Button>
-</LinearLayout>
-</LinearLayout>
+    android:layout_height="fill_parent">
+    <LinearLayout android:orientation="vertical"
+        android:layout_height="wrap_content" android:layout_width="match_parent">
+    <TextView  
+        android:layout_width="fill_parent" 
+        android:layout_height="wrap_content" 
+        android:id="@+id/header" android:layout_marginBottom="25sp"/>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:orientation="vertical" android:gravity="center_vertical|center_horizontal" android:layout_height="fill_parent" android:id="@+id/container">
+        <TextView android:text="@string/your_activation_code" android:layout_height="wrap_content" android:layout_width="wrap_content"></TextView>
+        <TextView android:text="TextView" android:layout_width="fill_parent" android:textSize="65sp" android:layout_height="wrap_content" android:gravity="center_horizontal" android:layout_marginBottom="10px" android:id="@+id/activation_code" android:typeface="monospace"></TextView>
+        <Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/preferences_generate_button" android:id="@+id/generate_button"></Button>
+        <Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/preferences_set_button" android:id="@+id/set_button"></Button>
+    </LinearLayout>
+    </LinearLayout>
+</ScrollView>
 
