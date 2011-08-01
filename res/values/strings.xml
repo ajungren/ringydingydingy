@@ -18,5 +18,6 @@
     <string name="remote_ring_text">Remote ring has been initiated by</string>
     <string name="unknown_command">Unknown command. Please text &quot;RingyDingyDingy &lt;code&gt; help&quot; for a list of commands.</string>
     <string name="your_activation_code">Your activation code is:</string>
+    <string name="help_message">Text &quot;RingyDingyDingy &lt;code&gt; &lt;cmd&gt;&quot;. Replace &lt;code&gt; with your activation code. &lt;cmd&gt; is one of: help, lock, ring.</string>
 </resources>
 
