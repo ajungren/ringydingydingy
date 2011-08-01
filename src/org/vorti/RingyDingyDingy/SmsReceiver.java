@@ -45,13 +45,13 @@ public class SmsReceiver extends BroadcastReceiver {
                             LockingSupport lockingSupport = LockingSupport.getInstance(context);
                             if(lockingSupport.isActive()) {
                                 lockingSupport.lock();
-                                sendSMS(source, "Phone locked!");
+                                sendSMS(source, Resources.getString(R.string.lock_success, context));
                             }
                             else
-                                sendSMS(source, "Sorry, but I can't do a remote lock. I haven't been given permission to.");
+                                sendSMS(source, Resources.getString(R.string.lock_error_needs_permission, context));
                         }
                         else
-                            sendSMS(source, "Sorry, but I can't do a remote lock. Locking needs Froyo or newer.");
+                            sendSMS(source, Resources.getString(R.string.lock_error_needs_froyo, context));
                     }
                     else {
                         Intent remoteRingIntent = new Intent();
