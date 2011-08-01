@@ -53,13 +53,15 @@ public class SmsReceiver extends BroadcastReceiver {
                         else
                             sendSMS(source, Resources.getString(R.string.lock_error_needs_froyo, context));
                     }
-                    else {
+                    else if(tokens.get(2).compareToIgnoreCase("ring") == 0) {
                         Intent remoteRingIntent = new Intent();
                         remoteRingIntent.setClass(context, RemoteRingActivity.class)
                                         .setData(Uri.fromParts("remotering", source, null))
                                         .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         context.startActivity(remoteRingIntent);
                     }
+                    else
+                        sendSMS(source, Resources.getString(R.string.unknown_command, context));
                 }
             }
         }
