@@ -11,7 +11,7 @@
     <string name="lock_success">Phone locked!</string>
     <string name="ok">OK</string>
     <string name="preferences_generate_button">Generate New Activation Code</string>
-    <string name="preferences_header">Welcome to RingyDingyDingy! You can make your phone ring (even if it\'s set on silent or vibrate only) at any time by sending a text message (\&quot;RingyDingyDingy\&quot;, a space, then your activation code) to your phone. Anyone with your activation code can make your phone ring at any time, so make sure to change it if you give it to anyone you don\'t trust.</string>
+    <string name="preferences_header">Welcome to RingyDingyDingy!\n\nTo perform a remote ring, text \&quot;RingyDingyDingy &lt;code&gt;\&quot; or \&quot;RingyDingyDingy &lt;code&gt; ring\&quot; to this phone.\nTo perform a remote lock, text \&quot;RingyDingyDingy &lt;code&gt; lock\&quot; to this phone.</string>
     <string name="preferences_set_button">Manually Set Activation Code</string>
     <string name="preferences_warning">Please note that anyone with access to your phone can view your code at any time. Please don\'t use anything secret, like a debit card PIN, etc. for your activation code!</string>
     <string name="remote_ring_stop_button">Stop</string>

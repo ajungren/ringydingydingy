@@ -112,6 +112,11 @@ public class MainActivity extends Activity {
         // Show the activation code on the TextView
         TextView textView = (TextView)findViewById(R.id.activation_code);
         textView.setText(code);
+
+        // Update the header
+        TextView header = (TextView)findViewById(R.id.header);
+        String headerText = Resources.getString(R.string.preferences_header, this);
+        header.setText(headerText.replace("<code>", code));
     }
 }
 
