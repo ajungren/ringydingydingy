@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.InputType;
@@ -15,6 +16,13 @@ import android.widget.TextView;
 
 public class MainActivity extends Activity {
     PreferenceManager preferencemanager = null;
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+
+        setRequestedOrientation(newConfig.orientation);
+    }
 
     /** Called when the activity is first created. */
     @Override
@@ -64,8 +72,8 @@ public class MainActivity extends Activity {
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
+    public void onStop() {
+        super.onStop();
 
         // We don't need to stick around after the user switches to another
         // app, so let's get out of the way
