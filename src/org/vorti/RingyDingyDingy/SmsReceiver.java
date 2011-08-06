@@ -17,21 +17,21 @@ public class SmsReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         Bundle bundle = intent.getExtras();
-        SmsMessage[] msgs = null;
+        SmsMessage[] messages = null;
         String message = "";
         if(bundle != null) {
             Object[] pdus = (Object[]) bundle.get("pdus");
-            msgs = new SmsMessage[pdus.length];
+            messages = new SmsMessage[pdus.length];
 
             // Get the activation code
             PreferenceManager preferencemanager = new PreferenceManager(context.getSharedPreferences(PreferenceManager.PREFERENCE_NAME, Context.MODE_PRIVATE));
             String code = preferencemanager.getCode();
 
-            for(int i=0; i< msgs.length; i++) {
-                msgs[i] = SmsMessage.createFromPdu((byte[])pdus[i]);
-                message = msgs[i].getMessageBody().toString();
+            for(int i=0; i< messages.length; i++) {
+                messages[i] = SmsMessage.createFromPdu((byte[])pdus[i]);
+                message = messages[i].getMessageBody().toString();
                 ArrayList<String> tokens = new ArrayList<String>(Arrays.asList(message.trim().split("\\s+")));
-                String source = msgs[i].getOriginatingAddress();
+                String source = messages[i].getOriginatingAddress();
 
                 if(tokens.get(0).compareToIgnoreCase("RingyDingyDingy") == 0 && tokens.get(1).compareTo(code) == 0) {
                     // Drop the SMS message so it doesn't go to the user's inbox
@@ -41,7 +41,7 @@ public class SmsReceiver extends BroadcastReceiver {
                         tokens.add("ring");
 
                     if(tokens.get(2).compareToIgnoreCase("help") == 0)
-                    	sendSMS(source, Resources.getString(R.string.help_message, context));
+                        sendSMS(source, Resources.getString(R.string.help_message, context));
                     else if(tokens.get(2).compareToIgnoreCase("lock") == 0) {
                         if(Integer.parseInt(Build.VERSION.SDK) >= 8) {
                             LockingSupport lockingSupport = LockingSupport.getInstance(context);

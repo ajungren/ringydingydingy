@@ -14,7 +14,7 @@ import android.provider.Settings;
 public class RemoteRingActivity extends Activity {
     public static final String INTENT = "org.vorti.RingyDingyDingy.REMOTE_RING";
 
-    public AudioManager audiomanager = null;
+    public AudioManager audioManager = null;
     public int oldMode = 0;
     public int oldVolume = 0;
     public Ringtone ringtone = null;
@@ -24,7 +24,6 @@ public class RemoteRingActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.remote_ring);
 
         // Get the source of the message
         Intent intent = this.getIntent();
@@ -34,11 +33,11 @@ public class RemoteRingActivity extends Activity {
             source = "unknown";
 
         // Prepare the AudioManager, set the ringer mode to normal, and set the volume to maximum
-        audiomanager = (AudioManager)this.getSystemService(Context.AUDIO_SERVICE);
-        oldMode = audiomanager.getRingerMode();
-        oldVolume = audiomanager.getStreamVolume(AudioManager.STREAM_RING);
-        audiomanager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
-        audiomanager.setStreamVolume(AudioManager.STREAM_RING, audiomanager.getStreamMaxVolume(AudioManager.STREAM_RING), AudioManager.FLAG_REMOVE_SOUND_AND_VIBRATE);
+        audioManager = (AudioManager)this.getSystemService(Context.AUDIO_SERVICE);
+        oldMode = audioManager.getRingerMode();
+        oldVolume = audioManager.getStreamVolume(AudioManager.STREAM_RING);
+        audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
+        audioManager.setStreamVolume(AudioManager.STREAM_RING, audioManager.getStreamMaxVolume(AudioManager.STREAM_RING), AudioManager.FLAG_REMOVE_SOUND_AND_VIBRATE);
 
         // Get the current ringtone
         ringtone = RingtoneManager.getRingtone(this, Settings.System.DEFAULT_RINGTONE_URI);
@@ -58,8 +57,8 @@ public class RemoteRingActivity extends Activity {
                        RemoteRingActivity.this.finish();
                    }
                });
-        AlertDialog alertdialog = builder.create();
-        alertdialog.show();
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
 
     @Override
@@ -74,8 +73,8 @@ public class RemoteRingActivity extends Activity {
         // Stop the bloody ringer and reset the settings
         if(ringtone.isPlaying())
             ringtone.stop();
-        audiomanager.setRingerMode(oldMode);
-        audiomanager.setStreamVolume(AudioManager.STREAM_RING, oldVolume, AudioManager.FLAG_REMOVE_SOUND_AND_VIBRATE);
+        audioManager.setRingerMode(oldMode);
+        audioManager.setStreamVolume(AudioManager.STREAM_RING, oldVolume, AudioManager.FLAG_REMOVE_SOUND_AND_VIBRATE);
     }
 
 }

@@ -15,7 +15,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 public class MainActivity extends Activity {
-    PreferenceManager preferencemanager = null;
+    PreferenceManager preferenceManager = null;
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
@@ -37,14 +37,14 @@ public class MainActivity extends Activity {
                 this.startActivity(lockingActivationIntent);
         }
 
-        preferencemanager = new PreferenceManager(this.getSharedPreferences(PreferenceManager.PREFERENCE_NAME, Context.MODE_PRIVATE));
+        preferenceManager = new PreferenceManager(this.getSharedPreferences(PreferenceManager.PREFERENCE_NAME, Context.MODE_PRIVATE));
         updateCode();
 
         // Set up the button to reset the code
         Button generateButton = (Button)findViewById(R.id.generate_button);
         generateButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                preferencemanager.resetCode();
+                preferenceManager.resetCode();
                 updateCode();
             }
         });
@@ -65,8 +65,8 @@ public class MainActivity extends Activity {
                                 dialog.cancel();
                            }
                        });
-                AlertDialog alertdialog = builder.create();
-                alertdialog.show();
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
             }
         });
     }
@@ -88,17 +88,17 @@ public class MainActivity extends Activity {
 
     public void promptForCode(int promptText) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-        final EditText edittext = new EditText(MainActivity.this);
-        edittext.setInputType(InputType.TYPE_TEXT_FLAG_IME_MULTI_LINE);
-        edittext.setMaxLines(1);
+        final EditText editText = new EditText(MainActivity.this);
+        editText.setInputType(InputType.TYPE_TEXT_FLAG_IME_MULTI_LINE);
+        editText.setMaxLines(1);
         builder.setTitle(R.string.code_prompt_title)
                .setMessage(promptText)
                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                    public void onClick(DialogInterface dialog, int id) {
-                       String string = edittext.getText().toString();
+                       String string = editText.getText().toString();
                        int length = string.length();
                        if(length >= 4 && length <= 8)
-                           MainActivity.this.preferencemanager.setCode(string);
+                           MainActivity.this.preferenceManager.setCode(string);
                        else
                            promptForCode(R.string.code_prompt_error_text);
                    }
@@ -108,14 +108,14 @@ public class MainActivity extends Activity {
                         dialog.cancel();
                    }
                })
-               .setView(edittext);
-        AlertDialog alertdialog = builder.create();
-        alertdialog.show();
+               .setView(editText);
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
 
     public void updateCode() {
         // Get the activation code
-        String code = preferencemanager.getCode();
+        String code = preferenceManager.getCode();
 
         // Show the activation code on the TextView
         TextView textView = (TextView)findViewById(R.id.activation_code);
