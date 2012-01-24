@@ -6,9 +6,11 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.InputType;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -29,13 +31,6 @@ public class MainActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-
-        if(Integer.parseInt(Build.VERSION.SDK) >= 8) {
-            LockingSupport lockingSupport = LockingSupport.getInstance(this);
-            Intent lockingActivationIntent = lockingSupport.getActivationIntent();
-            if(lockingActivationIntent != null)
-                this.startActivity(lockingActivationIntent);
-        }
 
         preferenceManager = new PreferenceManager(this.getSharedPreferences(PreferenceManager.PREFERENCE_NAME, Context.MODE_PRIVATE));
         updateCode();
@@ -69,6 +64,27 @@ public class MainActivity extends Activity {
                 alertDialog.show();
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.main, menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menuItem) {
+        switch(menuItem.getItemId()) {
+        case R.id.settings:
+            Intent preferencesActivity = new Intent(this, PreferencesActivity.class);
+            startActivity(preferencesActivity);
+
+            return true;
+        default:
+            return super.onOptionsItemSelected(menuItem);
+        }
     }
 
     @Override

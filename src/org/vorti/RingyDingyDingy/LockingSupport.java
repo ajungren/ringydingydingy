@@ -47,5 +47,11 @@ public class LockingSupport {
         }
     }
 
+    public void removeAdmin() {
+        if(this.isActive()) {
+            policyManager.removeActiveAdmin(deviceAdmin);
+        }
+    }
+
 }
 

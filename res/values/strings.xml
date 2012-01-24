@@ -12,10 +12,16 @@
     <string name="ok">OK</string>
     <string name="preferences_generate_button">Generate New Activation Code</string>
     <string name="preferences_header">Welcome to RingyDingyDingy!\n\nTo perform a remote ring, text \&quot;RingyDingyDingy &lt;code&gt;\&quot; or \&quot;RingyDingyDingy &lt;code&gt; ring\&quot; to this phone.\nTo perform a remote lock, text \&quot;RingyDingyDingy &lt;code&gt; lock\&quot; to this phone.</string>
+    <string name="preferences_remote_control">Remote control</string>
+    <string name="preferences_remote_lock_title">Remote locking</string>
+    <string name="preferences_remote_lock_disable_summary">Tap to disable remote locking</string>
+    <string name="preferences_remote_lock_enable_summary">Tap to enable remote locking</string>
+    <string name="preferences_remote_lock_needs_froyo">Remote locking requires Android 2.1 (Froyo) or newer</string>
     <string name="preferences_set_button">Manually Set Activation Code</string>
     <string name="preferences_warning">Please note that anyone with access to your phone can view your code at any time. Please don\'t use anything secret, like a debit card PIN, etc. for your activation code!</string>
     <string name="remote_ring_stop_button">Stop</string>
     <string name="remote_ring_text">Remote ring has been initiated by</string>
+    <string name="settings">Settings</string>
     <string name="unknown_command">Unknown command. Please text \&quot;RingyDingyDingy &lt;code&gt; help\&quot; for a list of commands.</string>
     <string name="your_activation_code">Your activation code is:</string>
     <string name="help_message">Text \&quot;RingyDingyDingy &lt;code&gt; &lt;cmd&gt;\&quot;. Replace &lt;code&gt; with your activation code. &lt;cmd&gt; is one of: help, lock, ring.</string>

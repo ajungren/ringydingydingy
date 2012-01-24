@@ -25,6 +25,7 @@
                 <action android:name="org.vorti.RingyDingyDingy.REMOTE_RING"></action>
             </intent-filter>
         </activity>
+        <activity android:label="@string/settings" android:name=".PreferencesActivity"></activity>
     </application>
 </manifest>
 
