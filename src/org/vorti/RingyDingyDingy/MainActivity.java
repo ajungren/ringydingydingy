@@ -2,7 +2,6 @@ package org.vorti.RingyDingyDingy;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -17,7 +16,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 public class MainActivity extends Activity {
-    PreferenceManager preferenceManager = null;
+    PreferencesManager preferencesManager = null;
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
@@ -32,14 +31,14 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
-        preferenceManager = new PreferenceManager(this.getSharedPreferences(PreferenceManager.PREFERENCE_NAME, Context.MODE_PRIVATE));
+        preferencesManager = new PreferencesManager(this);
         updateCode();
 
         // Set up the button to reset the code
         Button generateButton = (Button)findViewById(R.id.generate_button);
         generateButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                preferenceManager.resetCode();
+                preferencesManager.resetCode();
                 updateCode();
             }
         });
@@ -105,7 +104,7 @@ public class MainActivity extends Activity {
                        String string = editText.getText().toString();
                        int length = string.length();
                        if(length >= 4 && length <= 8)
-                           MainActivity.this.preferenceManager.setCode(string);
+                           MainActivity.this.preferencesManager.setCode(string);
                        else
                            promptForCode(R.string.code_prompt_error_text);
                    }
@@ -122,7 +121,7 @@ public class MainActivity extends Activity {
 
     public void updateCode() {
         // Get the activation code
-        String code = preferenceManager.getCode();
+        String code = preferencesManager.getCode();
 
         // Show the activation code on the TextView
         TextView textView = (TextView)findViewById(R.id.activation_code);

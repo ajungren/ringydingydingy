@@ -1,14 +1,16 @@
 package org.vorti.RingyDingyDingy;
 
+import android.content.Context;
 import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import java.util.Random;
 
-public class PreferenceManager {
+public class PreferencesManager {
     public static final String PREFERENCE_NAME = "RingyDingyDingy";
     private SharedPreferences sharedPreferences = null;
 
-    public PreferenceManager(SharedPreferences preferences) {
-        sharedPreferences = preferences;
+    public PreferencesManager(Context context) {
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
     }
 
     public String getCode() {

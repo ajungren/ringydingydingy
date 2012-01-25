@@ -24,8 +24,8 @@ public class SmsReceiver extends BroadcastReceiver {
             messages = new SmsMessage[pdus.length];
 
             // Get the activation code
-            PreferenceManager preferencemanager = new PreferenceManager(context.getSharedPreferences(PreferenceManager.PREFERENCE_NAME, Context.MODE_PRIVATE));
-            String code = preferencemanager.getCode();
+            PreferencesManager preferencesManager = new PreferencesManager(context);
+            String code = preferencesManager.getCode();
 
             for(int i=0; i< messages.length; i++) {
                 messages[i] = SmsMessage.createFromPdu((byte[])pdus[i]);
