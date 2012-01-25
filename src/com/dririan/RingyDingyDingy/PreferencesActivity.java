@@ -67,7 +67,7 @@ public class PreferencesActivity extends PreferenceActivity {
         setCode.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             public boolean onPreferenceChange(Preference preference, Object newValue) {
                 int length = ((String) newValue).length();
-                if(length >= 4 && length <= 8)
+                if(length >= 4 && length <= 8 && !((String) newValue).contains(" "))
                     return true;
                 else {
                     AlertDialog.Builder builder = new AlertDialog.Builder(PreferencesActivity.this);
