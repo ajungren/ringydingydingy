@@ -1,4 +1,4 @@
-package org.vorti.RingyDingyDingy;
+package com.dririan.RingyDingyDingy;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -12,7 +12,7 @@ import android.os.Bundle;
 import android.provider.Settings;
 
 public class RemoteRingActivity extends Activity {
-    public static final String INTENT = "org.vorti.RingyDingyDingy.REMOTE_RING";
+    public static final String INTENT = "com.dririan.RingyDingyDingy.REMOTE_RING";
 
     public AudioManager audioManager = null;
     public int oldMode = 0;

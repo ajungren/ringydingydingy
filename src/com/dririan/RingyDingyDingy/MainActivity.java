@@ -1,4 +1,4 @@
-package org.vorti.RingyDingyDingy;
+package com.dririan.RingyDingyDingy;
 
 import android.app.Activity;
 import android.content.Intent;

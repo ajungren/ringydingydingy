@@ -1,4 +1,4 @@
-package org.vorti.RingyDingyDingy;
+package com.dririan.RingyDingyDingy;
 
 import android.app.AlertDialog;
 import android.content.Intent;

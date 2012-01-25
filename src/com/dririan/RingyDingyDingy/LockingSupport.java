@@ -1,4 +1,4 @@
-package org.vorti.RingyDingyDingy;
+package com.dririan.RingyDingyDingy;
 
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;

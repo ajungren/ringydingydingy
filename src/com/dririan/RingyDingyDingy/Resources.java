@@ -1,4 +1,4 @@
-package org.vorti.RingyDingyDingy;
+package com.dririan.RingyDingyDingy;
 
 import android.content.Context;
 import android.widget.TextView;

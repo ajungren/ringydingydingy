@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-      package="org.vorti.RingyDingyDingy"
+      package="com.dririan.RingyDingyDingy"
       android:versionCode="3" android:versionName="0.3-hg">
     <uses-sdk android:minSdkVersion="4" android:targetSdkVersion="8" /><uses-permission android:name="android.permission.BIND_INPUT_METHOD"></uses-permission><uses-permission android:name="android.permission.RECEIVE_SMS"></uses-permission>
     <uses-permission android:name="android.permission.SEND_SMS"></uses-permission>
@@ -22,7 +22,7 @@
         </receiver>
         <activity android:name=".RemoteRingActivity" android:enabled="true" android:theme="@android:style/Theme.Dialog">
             <intent-filter>
-                <action android:name="org.vorti.RingyDingyDingy.REMOTE_RING"></action>
+                <action android:name="com.dririan.RingyDingyDingy.REMOTE_RING"></action>
             </intent-filter>
         </activity>
         <activity android:label="@string/settings" android:name=".PreferencesActivity"></activity>
