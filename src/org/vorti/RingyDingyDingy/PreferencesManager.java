@@ -14,7 +14,7 @@ public class PreferencesManager {
     }
 
     public String getCode() {
-        String code = sharedPreferences.getString("activationCode", null);
+        String code = sharedPreferences.getString("activation_code", null);
 
         if(code == null)
             code = resetCode();
@@ -38,7 +38,7 @@ public class PreferencesManager {
 
     public void setCode(String code) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("activationCode", code);
+        editor.putString("activation_code", code);
         editor.commit();
     }
 }
