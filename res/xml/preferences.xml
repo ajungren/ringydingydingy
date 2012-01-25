@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <PreferenceCategory android:title="@string/preferences_activation_code">
+        <Preference android:title="@string/preferences_generate_code_title" android:summary="@string/preferences_generate_code_summary" android:key="generate_code" android:persistent="false" />
         <EditTextPreference android:title="@string/preferences_set_code_title" android:summary="@string/preferences_set_code_summary" android:dialogTitle="@string/preferences_set_code_dialog_title" android:dialogMessage="@string/preferences_set_code_dialog_message" android:key="activation_code" />
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/preferences_remote_control">

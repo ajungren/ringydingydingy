@@ -7,13 +7,15 @@
     <string name="lock_success">Phone locked!</string>
     <string name="ok">OK</string>
     <string name="preferences_activation_code">Activation code</string>
-    <string name="preferences_generate_button">Generate New Activation Code</string>
     <string name="preferences_header">Welcome to RingyDingyDingy!\n\nTo perform a remote ring, text \&quot;RingyDingyDingy &lt;code&gt;\&quot; or \&quot;RingyDingyDingy &lt;code&gt; ring\&quot; to this phone.\nTo perform a remote lock, text \&quot;RingyDingyDingy &lt;code&gt; lock\&quot; to this phone.</string>
     <string name="preferences_remote_control">Remote control</string>
     <string name="preferences_remote_lock_title">Remote locking</string>
     <string name="preferences_remote_lock_disable_summary">Tap to disable remote locking</string>
     <string name="preferences_remote_lock_enable_summary">Tap to enable remote locking</string>
     <string name="preferences_remote_lock_needs_froyo">Remote locking requires Android 2.1 (Froyo) or newer</string>
+    <string name="preferences_generate_code_dialog_text">Your new activation code is:\n&lt;code&gt;</string>
+    <string name="preferences_generate_code_summary">Tap to generate a new random code</string>
+    <string name="preferences_generate_code_title">Generate new code</string>
     <string name="preferences_set_code_dialog_message">Please enter your new activation code. It must be between four and eight characters long. Please note that anyone with access to your phone can view your code at any time, so don\'t use anything secret like a PIN code!</string>
     <string name="preferences_set_code_dialog_title">Enter New Activation Code</string>
     <string name="preferences_set_code_error">Sorry, your code wasn\'t valid. It must be between four and eight characters long.</string>

@@ -13,6 +13,7 @@ public class PreferencesActivity extends PreferenceActivity {
     private static final int REQUEST_CODE_ENABLE_ADMIN = 1;
     private CheckBoxPreference remoteLock;
     private EditTextPreference setCode;
+    private Preference generateCode;
 
     @Override
     protected void onActivityResult (int requestCode, int resultCode, Intent data) {
@@ -26,8 +27,25 @@ public class PreferencesActivity extends PreferenceActivity {
 
         addPreferencesFromResource(R.xml.preferences);
 
+        generateCode = findPreference("generate_code");
         setCode = (EditTextPreference)findPreference("activation_code");
         remoteLock = (CheckBoxPreference)findPreference("remote_lock");
+
+        generateCode.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            public boolean onPreferenceClick(Preference preference) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(PreferencesActivity.this);
+                PreferencesManager preferencesManager = new PreferencesManager(PreferencesActivity.this);
+                String code = preferencesManager.resetCode();
+
+                String message = Resources.getString(R.string.preferences_generate_code_dialog_text, PreferencesActivity.this).replace("<code>", code);
+                builder.setTitle(R.string.app_name)
+                       .setMessage(message)
+                       .setNeutralButton(R.string.ok, null)
+                       .show();
+
+                return true;
+            }
+        });
 
         setCode.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             public boolean onPreferenceChange(Preference preference, Object newValue) {
