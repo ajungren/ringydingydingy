@@ -27,6 +27,7 @@ import android.preference.PreferenceActivity;
 
 public class PreferencesActivity extends PreferenceActivity {
     private static final int REQUEST_CODE_ENABLE_ADMIN = 1;
+
     private CheckBoxPreference remoteLock;
     private EditTextPreference setCode;
     private Preference generateCode;

@@ -35,6 +35,7 @@ public class SmsReceiver extends BroadcastReceiver {
         Bundle bundle = intent.getExtras();
         SmsMessage[] messages = null;
         String message = "";
+
         if(bundle != null) {
             Object[] pdus = (Object[]) bundle.get("pdus");
             messages = new SmsMessage[pdus.length];
@@ -43,7 +44,7 @@ public class SmsReceiver extends BroadcastReceiver {
             PreferencesManager preferencesManager = new PreferencesManager(context);
             String code = preferencesManager.getCode();
 
-            for(int i=0; i< messages.length; i++) {
+            for(int i=0; i < messages.length; i++) {
                 messages[i] = SmsMessage.createFromPdu((byte[])pdus[i]);
                 message = messages[i].getMessageBody().toString();
                 ArrayList<String> tokens = new ArrayList<String>(Arrays.asList(message.trim().split("\\s+")));
@@ -91,4 +92,3 @@ public class SmsReceiver extends BroadcastReceiver {
     }
 
 }
-

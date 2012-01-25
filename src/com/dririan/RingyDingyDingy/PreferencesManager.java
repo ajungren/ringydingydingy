@@ -16,13 +16,15 @@
 
 package com.dririan.RingyDingyDingy;
 
+import java.util.Random;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import java.util.Random;
 
 public class PreferencesManager {
     public static final String PREFERENCE_NAME = "RingyDingyDingy";
+
     private SharedPreferences sharedPreferences = null;
 
     public PreferencesManager(Context context) {
@@ -58,4 +60,3 @@ public class PreferencesManager {
         editor.commit();
     }
 }
-

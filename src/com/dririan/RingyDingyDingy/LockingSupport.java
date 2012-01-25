@@ -22,11 +22,11 @@ import android.content.Context;
 import android.content.Intent;
 
 public class LockingSupport {
-
     private static LockingSupport _instance;
+
     private Context context;
     private DevicePolicyManager policyManager;
-    ComponentName deviceAdmin;
+    private ComponentName deviceAdmin;
 
     public static LockingSupport getInstance(Context context) {
         if(_instance == null) {
@@ -70,4 +70,3 @@ public class LockingSupport {
     }
 
 }
-

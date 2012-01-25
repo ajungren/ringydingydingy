@@ -27,7 +27,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 public class MainActivity extends Activity {
-    PreferencesManager preferencesManager = null;
+    private PreferencesManager preferencesManager = null;
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
@@ -103,4 +103,3 @@ public class MainActivity extends Activity {
         header.setText(headerText.replace("<remote_lock_information>", remoteLockInformation).replace("<remote_lock_settings>", remoteLockSettings).replace("<code>", code));
     }
 }
-
