@@ -88,15 +88,6 @@ public class MainActivity extends Activity {
     }
 
     @Override
-    public void onStop() {
-        super.onStop();
-
-        // We don't need to stick around after the user switches to another
-        // app, so let's get out of the way
-        finish();
-    }
-
-    @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         if(hasFocus)
             updateCode();
