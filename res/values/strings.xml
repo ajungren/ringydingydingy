@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">RingyDingyDingy</string>
-    <string name="cancel">Cancel</string>
     <string name="device_admin_prompt">RingyDingyDingy needs device administration privileges to enable remote locking. Please accept this if you want to lock your phone remotely.</string>
-    <string name="code_prompt_error_text">Sorry, your code wasn\'t between four and eight characters.</string>
-    <string name="code_prompt_text">Your new code must be between four and eight characters long.</string>
-    <string name="code_prompt_title">Enter New Activation Code</string>
     <string name="lock_error_needs_froyo">Sorry, but I can\'t do a remote lock. Locking needs Froyo or newer.</string>
     <string name="lock_error_needs_permission">Sorry, but I can\'t do a remote lock. I haven\'t been given permission to.</string>
     <string name="lock_success">Phone locked!</string>
     <string name="ok">OK</string>
+    <string name="preferences_activation_code">Activation code</string>
     <string name="preferences_generate_button">Generate New Activation Code</string>
     <string name="preferences_header">Welcome to RingyDingyDingy!\n\nTo perform a remote ring, text \&quot;RingyDingyDingy &lt;code&gt;\&quot; or \&quot;RingyDingyDingy &lt;code&gt; ring\&quot; to this phone.\nTo perform a remote lock, text \&quot;RingyDingyDingy &lt;code&gt; lock\&quot; to this phone.</string>
     <string name="preferences_remote_control">Remote control</string>
@@ -17,8 +14,11 @@
     <string name="preferences_remote_lock_disable_summary">Tap to disable remote locking</string>
     <string name="preferences_remote_lock_enable_summary">Tap to enable remote locking</string>
     <string name="preferences_remote_lock_needs_froyo">Remote locking requires Android 2.1 (Froyo) or newer</string>
-    <string name="preferences_set_button">Manually Set Activation Code</string>
-    <string name="preferences_warning">Please note that anyone with access to your phone can view your code at any time. Please don\'t use anything secret, like a debit card PIN, etc. for your activation code!</string>
+    <string name="preferences_set_code_dialog_message">Please enter your new activation code. It must be between four and eight characters long. Please note that anyone with access to your phone can view your code at any time, so don\'t use anything secret like a PIN code!</string>
+    <string name="preferences_set_code_dialog_title">Enter New Activation Code</string>
+    <string name="preferences_set_code_error">Sorry, your code wasn\'t valid. It must be between four and eight characters long.</string>
+    <string name="preferences_set_code_summary">Tap to type in your own activation code</string>
+    <string name="preferences_set_code_title">Manually set code</string>
     <string name="remote_ring_stop_button">Stop</string>
     <string name="remote_ring_text">Remote ring has been initiated by</string>
     <string name="settings">Settings</string>

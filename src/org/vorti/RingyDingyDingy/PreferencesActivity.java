@@ -1,15 +1,18 @@
 package org.vorti.RingyDingyDingy;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
+import android.preference.EditTextPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 
 public class PreferencesActivity extends PreferenceActivity {
     private static final int REQUEST_CODE_ENABLE_ADMIN = 1;
     private CheckBoxPreference remoteLock;
+    private EditTextPreference setCode;
 
     @Override
     protected void onActivityResult (int requestCode, int resultCode, Intent data) {
@@ -23,7 +26,25 @@ public class PreferencesActivity extends PreferenceActivity {
 
         addPreferencesFromResource(R.xml.preferences);
 
+        setCode = (EditTextPreference)findPreference("activation_code");
         remoteLock = (CheckBoxPreference)findPreference("remote_lock");
+
+        setCode.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                int length = ((String) newValue).length();
+                if(length >= 4 && length <= 8)
+                    return true;
+                else {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(PreferencesActivity.this);
+                    builder.setTitle(R.string.app_name)
+                           .setMessage(R.string.preferences_set_code_error)
+                           .setNeutralButton(R.string.ok, null)
+                           .show();
+
+                    return false;
+                }
+            }
+        });
 
         if(Integer.parseInt(Build.VERSION.SDK) < 8) {
             remoteLock.setEnabled(false);

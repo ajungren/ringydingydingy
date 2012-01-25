@@ -15,7 +15,6 @@
         <TextView android:text="@string/your_activation_code" android:layout_height="wrap_content" android:layout_width="wrap_content"></TextView>
         <TextView android:text="TextView" android:layout_width="fill_parent" android:textSize="65sp" android:layout_height="wrap_content" android:gravity="center_horizontal" android:layout_marginBottom="10px" android:id="@+id/activation_code" android:typeface="monospace"></TextView>
         <Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/preferences_generate_button" android:id="@+id/generate_button"></Button>
-        <Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/preferences_set_button" android:id="@+id/set_button"></Button>
     </LinearLayout>
     </LinearLayout>
 </ScrollView>

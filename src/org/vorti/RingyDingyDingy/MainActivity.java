@@ -1,18 +1,14 @@
 package org.vorti.RingyDingyDingy;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.text.InputType;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
 public class MainActivity extends Activity {
@@ -42,27 +38,6 @@ public class MainActivity extends Activity {
                 updateCode();
             }
         });
-
-        Button setButton = (Button)findViewById(R.id.set_button);
-        setButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                final AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                builder.setTitle(R.string.app_name)
-                       .setMessage(R.string.preferences_warning)
-                       .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                           public void onClick(DialogInterface dialog, int id) {
-                               promptForCode(R.string.code_prompt_text);
-                           }
-                       })
-                       .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                           public void onClick(DialogInterface dialog, int id) {
-                                dialog.cancel();
-                           }
-                       });
-                AlertDialog alertDialog = builder.create();
-                alertDialog.show();
-            }
-        });
     }
 
     @Override
@@ -90,33 +65,6 @@ public class MainActivity extends Activity {
     public void onWindowFocusChanged(boolean hasFocus) {
         if(hasFocus)
             updateCode();
-    }
-
-    public void promptForCode(int promptText) {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-        final EditText editText = new EditText(MainActivity.this);
-        editText.setInputType(InputType.TYPE_TEXT_FLAG_IME_MULTI_LINE);
-        editText.setMaxLines(1);
-        builder.setTitle(R.string.code_prompt_title)
-               .setMessage(promptText)
-               .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                   public void onClick(DialogInterface dialog, int id) {
-                       String string = editText.getText().toString();
-                       int length = string.length();
-                       if(length >= 4 && length <= 8)
-                           MainActivity.this.preferencesManager.setCode(string);
-                       else
-                           promptForCode(R.string.code_prompt_error_text);
-                   }
-               })
-               .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                   public void onClick(DialogInterface dialog, int id) {
-                        dialog.cancel();
-                   }
-               })
-               .setView(editText);
-        AlertDialog alertDialog = builder.create();
-        alertDialog.show();
     }
 
     public void updateCode() {
