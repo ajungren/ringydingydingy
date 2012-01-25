@@ -3,6 +3,7 @@ package org.vorti.RingyDingyDingy;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -26,7 +27,7 @@ public class MainActivity extends Activity {
         setContentView(R.layout.main);
 
         preferencesManager = new PreferencesManager(this);
-        updateCode();
+        updateHeader();
     }
 
     @Override
@@ -53,21 +54,37 @@ public class MainActivity extends Activity {
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         if(hasFocus)
-            updateCode();
+            updateHeader();
     }
 
-    public void updateCode() {
+    public void updateHeader() {
         // Get the activation code
         String code = preferencesManager.getCode();
+        String remoteLockInformation = "";
+        String remoteLockSettings = "";
 
         // Show the activation code on the TextView
         TextView textView = (TextView)findViewById(R.id.activation_code);
         textView.setText(code);
 
+        // If we're on Froyo or newer, show information about remote locking
+        if(Integer.parseInt(Build.VERSION.SDK) >= 8) {
+            remoteLockSettings = " " + Resources.getString(R.string.remote_lock_settings, this);
+
+            if(LockingSupport.getInstance(this).isActive()) {
+                remoteLockInformation = Resources.getString(R.string.remote_lock_information, this);
+                remoteLockSettings = remoteLockSettings.replace("<remote_lock_toggle>", "disable");
+            }
+            else {
+                remoteLockInformation = Resources.getString(R.string.remote_lock_disabled, this);
+                remoteLockSettings = remoteLockSettings.replace("<remote_lock_toggle>", "enable");
+            }
+        }
+
         // Update the header
         TextView header = (TextView)findViewById(R.id.header);
         String headerText = Resources.getString(R.string.preferences_header, this);
-        header.setText(headerText.replace("<code>", code));
+        header.setText(headerText.replace("<remote_lock_information>", remoteLockInformation).replace("<remote_lock_settings>", remoteLockSettings).replace("<code>", code));
     }
 }
 
