@@ -36,6 +36,15 @@ public class PreferencesActivity extends PreferenceActivity {
     protected void onActivityResult (int requestCode, int resultCode, Intent data) {
         if(resultCode == 0)
             remoteLock.setChecked(false);
+        else {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+            builder.setIcon(android.R.drawable.ic_dialog_alert)
+                   .setTitle(R.string.app_name)
+                   .setMessage(R.string.preferences_remote_lock_warning)
+                   .setNeutralButton(R.string.ok, null)
+                   .show();
+        }
     }
 
     @Override
