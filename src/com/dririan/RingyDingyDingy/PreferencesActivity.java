@@ -63,7 +63,7 @@ public class PreferencesActivity extends PreferenceActivity {
                 PreferencesManager preferencesManager = new PreferencesManager(PreferencesActivity.this);
                 String code = preferencesManager.resetCode();
 
-                String message = Resources.getString(R.string.preferences_generate_code_dialog_text, PreferencesActivity.this).replace("<code>", code);
+                String message = PreferencesActivity.this.getString(R.string.preferences_generate_code_dialog_text).replace("<code>", code);
                 builder.setTitle(R.string.app_name)
                        .setMessage(message)
                        .setNeutralButton(R.string.ok, null)

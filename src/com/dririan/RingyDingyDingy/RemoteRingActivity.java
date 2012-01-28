@@ -70,7 +70,7 @@ public class RemoteRingActivity extends Activity {
         // Show an AlertDialog and stop the ringtone when the user hits Stop
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.app_name)
-               .setMessage(Resources.getString(R.string.remote_ring_text, this) + " " + source)
+               .setMessage(this.getString(R.string.remote_ring_text) + " " + source)
                .setNeutralButton(R.string.remote_ring_stop_button, new DialogInterface.OnClickListener() {
                    public void onClick(DialogInterface dialog, int id) {
                        RemoteRingActivity.stopRinging();

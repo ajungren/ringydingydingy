@@ -86,14 +86,14 @@ public class MainActivity extends Activity {
 
         // If we're on Froyo or newer, show information about remote locking
         if(Integer.parseInt(Build.VERSION.SDK) >= 8) {
-            remoteLockSettings = " " + Resources.getString(R.string.remote_lock_settings, this);
+            remoteLockSettings = " " + this.getString(R.string.remote_lock_settings);
 
             if(LockingSupport.getInstance(this).isActive()) {
-                remoteLockInformation = Resources.getString(R.string.remote_lock_information, this);
+                remoteLockInformation = this.getString(R.string.remote_lock_information);
                 remoteLockSettings = remoteLockSettings.replace("<remote_lock_toggle>", "disable");
             }
             else {
-                remoteLockInformation = Resources.getString(R.string.remote_lock_disabled, this);
+                remoteLockInformation = this.getString(R.string.remote_lock_disabled);
                 remoteLockSettings = remoteLockSettings.replace("<remote_lock_toggle>", "enable");
             }
         }
@@ -101,13 +101,13 @@ public class MainActivity extends Activity {
         // If we're on Honeycomb or newer, the Settings icon is on the action
         // bar. Otherwise, it's in the normal menu.
         if(Integer.parseInt(Build.VERSION.SDK) >= 11)
-            settings = Resources.getString(R.string.preferences_header_settings_holo, this);
+            settings = this.getString(R.string.preferences_header_settings_holo);
         else
-            settings = Resources.getString(R.string.preferences_header_settings_default, this);
+            settings = this.getString(R.string.preferences_header_settings_default);
 
         // Update the header
         TextView header = (TextView)findViewById(R.id.header);
-        String headerText = Resources.getString(R.string.preferences_header, this);
+        String headerText = this.getString(R.string.preferences_header);
         header.setText(headerText.replace("<settings>", settings).replace("<remote_lock_information>", remoteLockInformation).replace("<remote_lock_settings>", remoteLockSettings).replace("<code>", code));
     }
 }

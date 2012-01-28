@@ -59,19 +59,19 @@ public class SmsReceiver extends BroadcastReceiver {
                         tokens.add("ring");
 
                     if(tokens.get(2).compareToIgnoreCase("help") == 0)
-                        sendSMS(source, Resources.getString(R.string.sms_help, context));
+                        sendSMS(source, context.getString(R.string.sms_help));
                     else if(tokens.get(2).compareToIgnoreCase("lock") == 0) {
                         if(Integer.parseInt(Build.VERSION.SDK) >= 8) {
                             LockingSupport lockingSupport = LockingSupport.getInstance(context);
                             if(lockingSupport.isActive()) {
                                 lockingSupport.lock();
-                                sendSMS(source, Resources.getString(R.string.sms_lock_success, context));
+                                sendSMS(source, context.getString(R.string.sms_lock_success));
                             }
                             else
-                                sendSMS(source, Resources.getString(R.string.sms_lock_needs_permission, context));
+                                sendSMS(source, context.getString(R.string.sms_lock_needs_permission));
                         }
                         else
-                            sendSMS(source, Resources.getString(R.string.sms_lock_needs_froyo, context));
+                            sendSMS(source, context.getString(R.string.sms_lock_needs_froyo));
                     }
                     else if(tokens.get(2).compareToIgnoreCase("ring") == 0) {
                         // If a remote ring is already happening, don't start another
@@ -83,16 +83,16 @@ public class SmsReceiver extends BroadcastReceiver {
                                         .setData(Uri.fromParts("remotering", source, null))
                                         .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         context.startActivity(remoteRingIntent);
-                        sendSMS(source, Resources.getString(R.string.sms_ring, context));
+                        sendSMS(source, context.getString(R.string.sms_ring));
                     }
                     else if(tokens.get(2).compareToIgnoreCase("stop") == 0) {
                         if(RemoteRingActivity.stopRinging())
-                            sendSMS(source, Resources.getString(R.string.sms_stop_success, context));
+                            sendSMS(source, context.getString(R.string.sms_stop_success));
                         else
-                            sendSMS(source, Resources.getString(R.string.sms_stop_was_not_ringing, context));
+                            sendSMS(source, context.getString(R.string.sms_stop_was_not_ringing));
                     }
                     else
-                        sendSMS(source, Resources.getString(R.string.sms_unknown_command, context));
+                        sendSMS(source, context.getString(R.string.sms_unknown_command));
                 }
             }
         }
