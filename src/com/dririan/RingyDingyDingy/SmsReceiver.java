@@ -79,9 +79,14 @@ public class SmsReceiver extends BroadcastReceiver {
                                         .setData(Uri.fromParts("remotering", source, null))
                                         .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         context.startActivity(remoteRingIntent);
+                        sendSMS(source, Resources.getString(R.string.sms_ring, context));
                     }
-                    else if(tokens.get(2).compareToIgnoreCase("stop") == 0)
-                        RemoteRingActivity.stopRinging();
+                    else if(tokens.get(2).compareToIgnoreCase("stop") == 0) {
+                        if(RemoteRingActivity.stopRinging())
+                            sendSMS(source, Resources.getString(R.string.sms_stop_success, context));
+                        else
+                            sendSMS(source, Resources.getString(R.string.sms_stop_was_not_ringing, context));
+                    }
                     else
                         sendSMS(source, Resources.getString(R.string.sms_unknown_command, context));
                 }

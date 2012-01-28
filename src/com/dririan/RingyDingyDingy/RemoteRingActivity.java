@@ -88,11 +88,15 @@ public class RemoteRingActivity extends Activity {
         stopRinging();
     }
 
-    public static void stopRinging() {
+    public static boolean stopRinging() {
         // Stop the bloody ringer and reset the settings
+        boolean wasStopped = false;
+
         if(RemoteRingActivity.ringtone != null && RemoteRingActivity.audioManager != null) {
-            if(ringtone.isPlaying())
+            if(ringtone.isPlaying()) {
                 ringtone.stop();
+                wasStopped = true;
+            }
             audioManager.setRingerMode(oldMode);
             audioManager.setStreamVolume(AudioManager.STREAM_RING, oldVolume, AudioManager.FLAG_REMOVE_SOUND_AND_VIBRATE);
         }
@@ -101,6 +105,8 @@ public class RemoteRingActivity extends Activity {
             RemoteRingActivity.alertDialog.dismiss();
         if(RemoteRingActivity._instance != null)
             RemoteRingActivity._instance.finish();
+
+        return wasStopped;
     }
 
 }
