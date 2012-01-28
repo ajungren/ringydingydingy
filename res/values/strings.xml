@@ -2,9 +2,6 @@
 <resources>
     <string name="app_name">RingyDingyDingy</string>
     <string name="device_admin_prompt">RingyDingyDingy needs device administration privileges to enable remote locking. Please accept this if you want to lock your phone remotely.</string>
-    <string name="lock_error_needs_froyo">Sorry, but I can\'t do a remote lock. Locking needs Froyo or newer.</string>
-    <string name="lock_error_needs_permission">Sorry, but I can\'t do a remote lock. I haven\'t been given permission to.</string>
-    <string name="lock_success">Phone locked!</string>
     <string name="ok">OK</string>
     <string name="preferences_activation_code">Activation code</string>
     <string name="preferences_header">Welcome to RingyDingyDingy!\n\nTo perform a remote ring, text:\n\&quot;RingyDingyDingy &lt;code&gt; ring\&quot;\nto this phone, without quotes.\n\nTo stop a remote ring, text:\n\&quot;RingyDingyDingy &lt;code&gt; stop\&quot;\n\n&lt;remote_lock_information&gt;&lt;settings&gt;</string>
@@ -30,7 +27,10 @@
     <string name="remote_ring_stop_button">Stop</string>
     <string name="remote_ring_text">Remote ring has been initiated by</string>
     <string name="settings">Settings</string>
-    <string name="unknown_command">Unknown command. Please text \&quot;RingyDingyDingy &lt;code&gt; help\&quot; for a list of commands.</string>
+    <string name="sms_help">Text \&quot;RingyDingyDingy &lt;code&gt; &lt;cmd&gt;\&quot;. Replace &lt;code&gt; with your activation code. &lt;cmd&gt; is one of: help, lock, ring, stop.</string>
+    <string name="sms_lock_needs_froyo">Sorry, but I can\'t do a remote lock. Locking needs Froyo or newer.</string>
+    <string name="sms_lock_needs_permission">Sorry, but I can\'t do a remote lock. I haven\'t been given permission to.</string>
+    <string name="sms_lock_success">Phone locked!</string>
+    <string name="sms_unknown_command">Unknown command. Please text \&quot;RingyDingyDingy &lt;code&gt; help\&quot; for a list of commands.</string>
     <string name="your_activation_code">Your activation code is:</string>
-    <string name="help_message">Text \&quot;RingyDingyDingy &lt;code&gt; &lt;cmd&gt;\&quot;. Replace &lt;code&gt; with your activation code. &lt;cmd&gt; is one of: help, lock, ring, stop.</string>
 </resources>

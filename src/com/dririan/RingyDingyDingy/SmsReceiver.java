@@ -58,19 +58,19 @@ public class SmsReceiver extends BroadcastReceiver {
                         tokens.add("ring");
 
                     if(tokens.get(2).compareToIgnoreCase("help") == 0)
-                        sendSMS(source, Resources.getString(R.string.help_message, context));
+                        sendSMS(source, Resources.getString(R.string.sms_help, context));
                     else if(tokens.get(2).compareToIgnoreCase("lock") == 0) {
                         if(Integer.parseInt(Build.VERSION.SDK) >= 8) {
                             LockingSupport lockingSupport = LockingSupport.getInstance(context);
                             if(lockingSupport.isActive()) {
                                 lockingSupport.lock();
-                                sendSMS(source, Resources.getString(R.string.lock_success, context));
+                                sendSMS(source, Resources.getString(R.string.sms_lock_success, context));
                             }
                             else
-                                sendSMS(source, Resources.getString(R.string.lock_error_needs_permission, context));
+                                sendSMS(source, Resources.getString(R.string.sms_lock_needs_permission, context));
                         }
                         else
-                            sendSMS(source, Resources.getString(R.string.lock_error_needs_froyo, context));
+                            sendSMS(source, Resources.getString(R.string.sms_lock_needs_froyo, context));
                     }
                     else if(tokens.get(2).compareToIgnoreCase("ring") == 0) {
                         Intent remoteRingIntent = new Intent();
@@ -82,7 +82,7 @@ public class SmsReceiver extends BroadcastReceiver {
                     else if(tokens.get(2).compareToIgnoreCase("stop") == 0)
                         RemoteRingActivity.stopRinging();
                     else
-                        sendSMS(source, Resources.getString(R.string.unknown_command, context));
+                        sendSMS(source, Resources.getString(R.string.sms_unknown_command, context));
                 }
             }
         }
