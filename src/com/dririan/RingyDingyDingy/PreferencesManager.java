@@ -23,8 +23,6 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 public class PreferencesManager {
-    public static final String PREFERENCE_NAME = "RingyDingyDingy";
-
     private SharedPreferences sharedPreferences = null;
 
     public PreferencesManager(Context context) {
