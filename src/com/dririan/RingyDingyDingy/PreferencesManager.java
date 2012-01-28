@@ -57,4 +57,9 @@ public class PreferencesManager {
         editor.putString("activation_code", code);
         editor.commit();
     }
+
+    public boolean smsRepliesEnabled() {
+        return sharedPreferences.getBoolean("send_sms_replies", true);
+    }
+
 }

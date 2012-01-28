@@ -16,6 +16,9 @@
     <string name="preferences_generate_code_dialog_text">Your new activation code is:\n&lt;code&gt;</string>
     <string name="preferences_generate_code_summary">Tap to generate a new random code</string>
     <string name="preferences_generate_code_title">Generate new code</string>
+    <string name="preferences_send_sms_replies_disable_summary">Tap to disable sending replies to text messages</string>
+    <string name="preferences_send_sms_replies_enable_summary">Tap to enable sending replies to text messages</string>
+    <string name="preferences_send_sms_replies_title">Send SMS replies</string>
     <string name="preferences_set_code_dialog_message">Please enter your new activation code. It must be between four and eight characters (letters, numbers, and symbols) long and cannot contain spaces. Please note that anyone with access to your phone can view your code at any time, so don\'t use anything secret like a PIN code!</string>
     <string name="preferences_set_code_dialog_title">Enter New Activation Code</string>
     <string name="preferences_set_code_error">Sorry, your code wasn\'t valid. It must be between four and eight characters (letters, numbers, and symbols) long and cannot contain spaces.</string>

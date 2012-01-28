@@ -29,6 +29,7 @@ import android.telephony.SmsManager;
 import android.telephony.SmsMessage;
 
 public class SmsReceiver extends BroadcastReceiver {
+    private PreferencesManager preferencesManager = null;
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -41,7 +42,7 @@ public class SmsReceiver extends BroadcastReceiver {
             messages = new SmsMessage[pdus.length];
 
             // Get the activation code
-            PreferencesManager preferencesManager = new PreferencesManager(context);
+            preferencesManager = new PreferencesManager(context);
             String code = preferencesManager.getCode();
 
             for(int i=0; i < messages.length; i++) {
@@ -89,8 +90,10 @@ public class SmsReceiver extends BroadcastReceiver {
     }
 
     private void sendSMS(String destination, String message) {
-        SmsManager smsManager = SmsManager.getDefault();
-        smsManager.sendTextMessage(destination, null, message, null, null);
+        if(preferencesManager.smsRepliesEnabled()) {
+            SmsManager smsManager = SmsManager.getDefault();
+            smsManager.sendTextMessage(destination, null, message, null, null);
+        }
     }
 
 }

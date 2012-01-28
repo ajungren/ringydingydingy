@@ -17,5 +17,10 @@
         <CheckBoxPreference android:title="@string/preferences_remote_lock_title"
                             android:persistent="false"
                             android:key="remote_lock" />
+        <CheckBoxPreference android:title="@string/preferences_send_sms_replies_title"
+                            android:defaultValue="true"
+                            android:key="send_sms_replies"
+                            android:summaryOff="@string/preferences_send_sms_replies_enable_summary"
+                            android:summaryOn="@string/preferences_send_sms_replies_disable_summary" />
     </PreferenceCategory>
 </PreferenceScreen>
