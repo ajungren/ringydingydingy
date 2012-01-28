@@ -63,6 +63,9 @@ public class PreferencesActivity extends PreferenceActivity {
                 PreferencesManager preferencesManager = new PreferencesManager(PreferencesActivity.this);
                 String code = preferencesManager.resetCode();
 
+                // Notify the EditTextPreference setCode that the code has changed
+                setCode.setText(code);
+
                 String message = PreferencesActivity.this.getString(R.string.preferences_generate_code_dialog_text).replace("<code>", code);
                 builder.setTitle(R.string.app_name)
                        .setMessage(message)
