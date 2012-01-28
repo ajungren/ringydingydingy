@@ -74,6 +74,10 @@ public class SmsReceiver extends BroadcastReceiver {
                             sendSMS(source, Resources.getString(R.string.sms_lock_needs_froyo, context));
                     }
                     else if(tokens.get(2).compareToIgnoreCase("ring") == 0) {
+                        // If a remote ring is already happening, don't start another
+                        if(RemoteRingActivity.ringtone != null && RemoteRingActivity.ringtone.isPlaying())
+                            return;
+
                         Intent remoteRingIntent = new Intent();
                         remoteRingIntent.setClass(context, RemoteRingActivity.class)
                                         .setData(Uri.fromParts("remotering", source, null))
