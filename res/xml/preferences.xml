@@ -1,10 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <PreferenceCategory android:title="@string/preferences_activation_code">
-        <Preference android:title="@string/preferences_generate_code_title" android:summary="@string/preferences_generate_code_summary" android:key="generate_code" android:persistent="false" />
-        <EditTextPreference android:title="@string/preferences_set_code_title" android:summary="@string/preferences_set_code_summary" android:dialogTitle="@string/preferences_set_code_dialog_title" android:dialogMessage="@string/preferences_set_code_dialog_message" android:key="activation_code" android:singleLine="true" android:imeOptions="actionDone" />
+        <Preference android:title="@string/preferences_generate_code_title"
+                    android:key="generate_code"
+                    android:persistent="false"
+                    android:summary="@string/preferences_generate_code_summary" />
+        <EditTextPreference android:title="@string/preferences_set_code_title"
+                            android:dialogMessage="@string/preferences_set_code_dialog_message"
+                            android:dialogTitle="@string/preferences_set_code_dialog_title"
+                            android:imeOptions="actionDone"
+                            android:key="activation_code"
+                            android:singleLine="true"
+                            android:summary="@string/preferences_set_code_summary" />
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/preferences_remote_control">
-        <CheckBoxPreference android:title="@string/preferences_remote_lock_title" android:key="remote_lock" android:persistent="false" />
+        <CheckBoxPreference android:title="@string/preferences_remote_lock_title"
+                            android:persistent="false"
+                            android:key="remote_lock" />
     </PreferenceCategory>
 </PreferenceScreen>
