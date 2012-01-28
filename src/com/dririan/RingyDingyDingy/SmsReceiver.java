@@ -75,15 +75,17 @@ public class SmsReceiver extends BroadcastReceiver {
                     }
                     else if(tokens.get(2).compareToIgnoreCase("ring") == 0) {
                         // If a remote ring is already happening, don't start another
-                        if(RemoteRingActivity.ringtone != null && RemoteRingActivity.ringtone.isPlaying())
+                        if(RemoteRingActivity.ringtone != null && RemoteRingActivity.ringtone.isPlaying()) {
+                            sendSMS(source, context.getString(R.string.sms_ring_was_ringing));
                             return;
+                        }
 
                         Intent remoteRingIntent = new Intent();
                         remoteRingIntent.setClass(context, RemoteRingActivity.class)
                                         .setData(Uri.fromParts("remotering", source, null))
                                         .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         context.startActivity(remoteRingIntent);
-                        sendSMS(source, context.getString(R.string.sms_ring));
+                        sendSMS(source, context.getString(R.string.sms_ring_success));
                     }
                     else if(tokens.get(2).compareToIgnoreCase("stop") == 0) {
                         if(RemoteRingActivity.stopRinging())

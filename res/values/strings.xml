@@ -34,7 +34,8 @@
     <string name="sms_lock_needs_froyo">Sorry, but I can\'t do a remote lock. Remote locking needs Android 2.2 (Froyo) or newer.</string>
     <string name="sms_lock_needs_permission">Sorry, but I can\'t do a remote lock. Remote locking is disabled.</string>
     <string name="sms_lock_success">Phone locked!</string>
-    <string name="sms_ring">The remote ring has been initiated. Text back \&quot;RingyDingyDingy &lt;code&gt; stop\&quot; to stop the remote ring.</string>
+    <string name="sms_ring_success">The remote ring has been initiated. Text back \&quot;RingyDingyDingy &lt;code&gt; stop\&quot; to stop the remote ring.</string>
+    <string name="sms_ring_was_ringing">Sorry, but I can\'t start a remote ring. A remote ring has already been initiated.</string>
     <string name="sms_stop_success">The remote ring has been stopped.</string>
     <string name="sms_stop_was_not_ringing">Sorry, but I can\'t stop the remote ring. No remote ring was initiated.</string>
     <string name="sms_unknown_command">Unknown command. Please text \&quot;RingyDingyDingy &lt;code&gt; help\&quot; for a list of commands.</string>
