@@ -29,17 +29,21 @@ import android.provider.Settings;
 
 public class RemoteRingActivity extends Activity {
     public static final String INTENT = "com.dririan.RingyDingyDingy.REMOTE_RING";
+    private static AlertDialog alertDialog = null;
+    public static AudioManager audioManager = null;
+    public static Ringtone ringtone = null;
+    public static int oldMode = 0;
+    public static int oldVolume = 0;
+    public static RemoteRingActivity _instance = null;
 
-    public AudioManager audioManager = null;
-    public int oldMode = 0;
-    public int oldVolume = 0;
-    public Ringtone ringtone = null;
     public String source = "";
 
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        _instance = this;
 
         // Get the source of the message
         Intent intent = this.getIntent();
@@ -69,11 +73,10 @@ public class RemoteRingActivity extends Activity {
                .setMessage(Resources.getString(R.string.remote_ring_text, this) + " " + source)
                .setNeutralButton(R.string.remote_ring_stop_button, new DialogInterface.OnClickListener() {
                    public void onClick(DialogInterface dialog, int id) {
-                       RemoteRingActivity.this.stopRinging();
-                       RemoteRingActivity.this.finish();
+                       RemoteRingActivity.stopRinging();
                    }
                });
-        AlertDialog alertDialog = builder.create();
+        alertDialog = builder.create();
         alertDialog.show();
     }
 
@@ -85,12 +88,15 @@ public class RemoteRingActivity extends Activity {
         stopRinging();
     }
 
-    public void stopRinging() {
+    public static void stopRinging() {
         // Stop the bloody ringer and reset the settings
         if(ringtone.isPlaying())
             ringtone.stop();
         audioManager.setRingerMode(oldMode);
         audioManager.setStreamVolume(AudioManager.STREAM_RING, oldVolume, AudioManager.FLAG_REMOVE_SOUND_AND_VIBRATE);
+
+        RemoteRingActivity.alertDialog.dismiss();
+        RemoteRingActivity._instance.finish();
     }
 
 }
