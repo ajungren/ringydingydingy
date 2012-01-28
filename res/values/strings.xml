@@ -7,7 +7,7 @@
     <string name="lock_success">Phone locked!</string>
     <string name="ok">OK</string>
     <string name="preferences_activation_code">Activation code</string>
-    <string name="preferences_header">Welcome to RingyDingyDingy!\n\nTo perform a remote ring, text \&quot;RingyDingyDingy &lt;code&gt;\&quot; or \&quot;RingyDingyDingy &lt;code&gt; ring\&quot; to this phone.&lt;remote_lock_information&gt;\n\n&lt;settings&gt;</string>
+    <string name="preferences_header">Welcome to RingyDingyDingy!\n\nTo perform a remote ring, text:\n\&quot;RingyDingyDingy &lt;code&gt; ring\&quot;\nto this phone, without quotes.\n\nTo stop a remote ring, text:\n\&quot;RingyDingyDingy &lt;code&gt; stop\&quot;\n\n&lt;remote_lock_information&gt;&lt;settings&gt;</string>
     <string name="preferences_header_settings_default">To change your activation code&lt;remote_lock_settings&gt;, press Menu and tap Settings.</string>
     <string name="preferences_header_settings_holo">To change your activation code&lt;remote_lock_settings&gt;, tap the Settings icon on the action bar.</string>
     <string name="preferences_remote_control">Remote control</string>
@@ -24,13 +24,13 @@
     <string name="preferences_set_code_error">Sorry, your code wasn\'t valid. It must be between four and eight characters (letters, numbers, and symbols) long and cannot contain spaces.</string>
     <string name="preferences_set_code_summary">Tap to type in your own activation code</string>
     <string name="preferences_set_code_title">Manually set code</string>
-    <string name="remote_lock_disabled">\nRemote locking is currently disabled.</string>
-    <string name="remote_lock_information">\nTo perform a remote lock, text \&quot;RingyDingyDingy &lt;code&gt; lock\&quot; to this phone.</string>
+    <string name="remote_lock_disabled">Remote locking is currently disabled.\n\n</string>
+    <string name="remote_lock_information">To perform a remote lock, text:\n\&quot;RingyDingyDingy &lt;code&gt; lock\&quot; to this phone.\n\n</string>
     <string name="remote_lock_settings">or &lt;remote_lock_toggle&gt; remote locking</string>
     <string name="remote_ring_stop_button">Stop</string>
     <string name="remote_ring_text">Remote ring has been initiated by</string>
     <string name="settings">Settings</string>
     <string name="unknown_command">Unknown command. Please text \&quot;RingyDingyDingy &lt;code&gt; help\&quot; for a list of commands.</string>
     <string name="your_activation_code">Your activation code is:</string>
-    <string name="help_message">Text \&quot;RingyDingyDingy &lt;code&gt; &lt;cmd&gt;\&quot;. Replace &lt;code&gt; with your activation code. &lt;cmd&gt; is one of: help, lock, ring.</string>
+    <string name="help_message">Text \&quot;RingyDingyDingy &lt;code&gt; &lt;cmd&gt;\&quot;. Replace &lt;code&gt; with your activation code. &lt;cmd&gt; is one of: help, lock, ring, stop.</string>
 </resources>
