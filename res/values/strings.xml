@@ -7,7 +7,9 @@
     <string name="lock_success">Phone locked!</string>
     <string name="ok">OK</string>
     <string name="preferences_activation_code">Activation code</string>
-    <string name="preferences_header">Welcome to RingyDingyDingy!\n\nTo perform a remote ring, text \&quot;RingyDingyDingy &lt;code&gt;\&quot; or \&quot;RingyDingyDingy &lt;code&gt; ring\&quot; to this phone.&lt;remote_lock_information&gt;\n\nTo change your activation code&lt;remote_lock_settings&gt;, press Menu and tap Settings.</string>
+    <string name="preferences_header">Welcome to RingyDingyDingy!\n\nTo perform a remote ring, text \&quot;RingyDingyDingy &lt;code&gt;\&quot; or \&quot;RingyDingyDingy &lt;code&gt; ring\&quot; to this phone.&lt;remote_lock_information&gt;\n\n&lt;settings&gt;</string>
+    <string name="preferences_header_settings_default">To change your activation code&lt;remote_lock_settings&gt;, press Menu and tap Settings.</string>
+    <string name="preferences_header_settings_holo">To change your activation code&lt;remote_lock_settings&gt;, tap the Settings icon on the action bar.</string>
     <string name="preferences_remote_control">Remote control</string>
     <string name="preferences_remote_lock_title">Remote locking</string>
     <string name="preferences_remote_lock_disable_summary">Tap to disable remote locking</string>

@@ -78,6 +78,7 @@ public class MainActivity extends Activity {
         String code = preferencesManager.getCode();
         String remoteLockInformation = "";
         String remoteLockSettings = "";
+        String settings = "";
 
         // Show the activation code on the TextView
         TextView textView = (TextView)findViewById(R.id.activation_code);
@@ -97,9 +98,16 @@ public class MainActivity extends Activity {
             }
         }
 
+        // If we're on Honeycomb or newer, the Settings icon is on the action
+        // bar. Otherwise, it's in the normal menu.
+        if(Integer.parseInt(Build.VERSION.SDK) >= 11)
+            settings = Resources.getString(R.string.preferences_header_settings_holo, this);
+        else
+            settings = Resources.getString(R.string.preferences_header_settings_default, this);
+
         // Update the header
         TextView header = (TextView)findViewById(R.id.header);
         String headerText = Resources.getString(R.string.preferences_header, this);
-        header.setText(headerText.replace("<remote_lock_information>", remoteLockInformation).replace("<remote_lock_settings>", remoteLockSettings).replace("<code>", code));
+        header.setText(headerText.replace("<settings>", settings).replace("<remote_lock_information>", remoteLockInformation).replace("<remote_lock_settings>", remoteLockSettings).replace("<code>", code));
     }
 }
