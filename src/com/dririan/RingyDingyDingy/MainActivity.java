@@ -86,7 +86,7 @@ public class MainActivity extends Activity {
         textView.setText(code);
 
         // If we're on Froyo or newer, show information about remote locking
-        if(Integer.parseInt(Build.VERSION.SDK) >= 8) {
+        if(Build.VERSION.SDK_INT >= 8) {
             remoteLockSettings = " " + this.getString(R.string.remote_lock_settings);
 
             if(LockingSupport.getInstance(this).isActive()) {
@@ -101,7 +101,7 @@ public class MainActivity extends Activity {
 
         // If we're on Honeycomb or newer, the Settings icon is on the action
         // bar. Otherwise, it's in the normal menu.
-        if(Integer.parseInt(Build.VERSION.SDK) >= 11)
+        if(Build.VERSION.SDK_INT >= 11)
             settings = this.getString(R.string.preferences_header_settings_holo);
         else
             settings = this.getString(R.string.preferences_header_settings_default);

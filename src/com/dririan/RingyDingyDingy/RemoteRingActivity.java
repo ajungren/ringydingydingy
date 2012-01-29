@@ -55,7 +55,7 @@ public class RemoteRingActivity extends Activity {
             source = "unknown";
 
         // Get the contact name, if available
-        if(Integer.parseInt(Build.VERSION.SDK) >= 5) {
+        if(Build.VERSION.SDK_INT >= 5) {
             String[] contact = ContactSupport.lookupByNumber(this, source);
             if(contact[0] != null)
                 source = contact[0];

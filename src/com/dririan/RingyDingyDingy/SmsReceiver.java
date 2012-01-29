@@ -62,7 +62,7 @@ public class SmsReceiver extends BroadcastReceiver {
                     if(tokens.get(2).compareToIgnoreCase("help") == 0)
                         sendSMS(source, context.getString(R.string.sms_help));
                     else if(tokens.get(2).compareToIgnoreCase("lock") == 0) {
-                        if(Integer.parseInt(Build.VERSION.SDK) >= 8) {
+                        if(Build.VERSION.SDK_INT >= 8) {
                             LockingSupport lockingSupport = LockingSupport.getInstance(context);
                             if(lockingSupport.isActive()) {
                                 lockingSupport.lock();

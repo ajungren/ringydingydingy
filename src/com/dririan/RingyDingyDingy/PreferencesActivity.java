@@ -94,7 +94,7 @@ public class PreferencesActivity extends PreferenceActivity {
             }
         });
 
-        if(Integer.parseInt(Build.VERSION.SDK) < 8) {
+        if(Build.VERSION.SDK_INT < 8) {
             remoteLock.setEnabled(false);
             remoteLock.setSummary(R.string.preferences_remote_lock_needs_froyo);
         }
