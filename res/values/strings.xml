@@ -25,7 +25,7 @@
     <string name="preferences_set_code_summary">Tap to type in your own activation code</string>
     <string name="preferences_set_code_title">Manually set code</string>
     <string name="remote_lock_disabled">Remote locking is currently disabled.\n\n</string>
-    <string name="remote_lock_information">To perform a remote lock, text:\n\&quot;RingyDingyDingy &lt;code&gt; lock\&quot; to this phone.\n\n</string>
+    <string name="remote_lock_information">To perform a remote lock, text:\n\&quot;RingyDingyDingy &lt;code&gt; lock\&quot;\n\n</string>
     <string name="remote_lock_settings">or &lt;remote_lock_toggle&gt; remote locking</string>
     <string name="remote_ring_stop_button">Stop</string>
     <string name="remote_ring_text">Remote ring has been initiated by</string>
