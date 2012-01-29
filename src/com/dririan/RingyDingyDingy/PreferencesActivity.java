@@ -34,7 +34,7 @@ public class PreferencesActivity extends PreferenceActivity {
     private Preference generateCode;
 
     @Override
-    protected void onActivityResult (int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(resultCode == 0)
             remoteLock.setChecked(false);
         else {
@@ -94,11 +94,7 @@ public class PreferencesActivity extends PreferenceActivity {
             }
         });
 
-        if(Build.VERSION.SDK_INT < 8) {
-            remoteLock.setEnabled(false);
-            remoteLock.setSummary(R.string.preferences_remote_lock_needs_froyo);
-        }
-        else {
+        if(Build.VERSION.SDK_INT >= 8) {
             LockingSupport lockingSupport = LockingSupport.getInstance(this);
 
             remoteLock.setChecked(lockingSupport.isActive());
@@ -121,6 +117,10 @@ public class PreferencesActivity extends PreferenceActivity {
                     return true;
                 }
             });
+        }
+        else {
+            remoteLock.setEnabled(false);
+            remoteLock.setSummary(R.string.preferences_remote_lock_needs_froyo);
         }
     }
 
