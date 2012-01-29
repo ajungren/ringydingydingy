@@ -25,6 +25,7 @@ import android.content.Intent;
 import android.media.AudioManager;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 
@@ -52,6 +53,13 @@ public class RemoteRingActivity extends Activity {
             source = intent.getData().getSchemeSpecificPart();
         else
             source = "unknown";
+
+        // Get the contact name, if available
+        if(Integer.parseInt(Build.VERSION.SDK) >= 5) {
+            String[] contact = ContactSupport.lookupByNumber(this, source);
+            if(contact[0] != null)
+                source = contact[0];
+        }
 
         // Prepare the AudioManager, set the ringer mode to normal, and set the volume to maximum
         audioManager = (AudioManager)this.getSystemService(Context.AUDIO_SERVICE);
