@@ -23,8 +23,6 @@ import java.util.Arrays;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.telephony.SmsManager;
 import android.telephony.SmsMessage;
@@ -42,60 +40,22 @@ public class SmsReceiver extends BroadcastReceiver {
             Object[] pdus = (Object[]) bundle.get("pdus");
             messages = new SmsMessage[pdus.length];
 
-            // Get the activation code
-            preferencesManager = new PreferencesManager(context);
-            String code = preferencesManager.getCode();
-
             for(int i=0; i < messages.length; i++) {
                 messages[i] = SmsMessage.createFromPdu((byte[])pdus[i]);
                 message = messages[i].getMessageBody().toString();
                 ArrayList<String> tokens = new ArrayList<String>(Arrays.asList(message.trim().split("\\s+")));
                 String source = messages[i].getOriginatingAddress();
+                int returnMessageId = -1;
 
-                if(tokens.get(0).compareToIgnoreCase("RingyDingyDingy") == 0 && tokens.get(1).compareTo(code) == 0) {
+                returnMessageId = MessageHandler.processMessage(context, tokens, source);
+                if(returnMessageId != -1) {
                     // Drop the SMS message so it doesn't go to the user's inbox
                     this.abortBroadcast();
 
-                    if(tokens.size() < 3)
-                        tokens.add("ring");
-
-                    if(tokens.get(2).compareToIgnoreCase("help") == 0)
-                        sendSMS(source, context.getString(R.string.sms_help));
-                    else if(tokens.get(2).compareToIgnoreCase("lock") == 0) {
-                        if(Build.VERSION.SDK_INT >= 8) {
-                            LockingSupport lockingSupport = LockingSupport.getInstance(context);
-                            if(lockingSupport.isActive()) {
-                                lockingSupport.lock();
-                                sendSMS(source, context.getString(R.string.sms_lock_success));
-                            }
-                            else
-                                sendSMS(source, context.getString(R.string.sms_lock_needs_permission));
-                        }
-                        else
-                            sendSMS(source, context.getString(R.string.sms_lock_needs_froyo));
-                    }
-                    else if(tokens.get(2).compareToIgnoreCase("ring") == 0) {
-                        // If a remote ring is already happening, don't start another
-                        if(RemoteRingActivity.ringtone != null && RemoteRingActivity.ringtone.isPlaying()) {
-                            sendSMS(source, context.getString(R.string.sms_ring_was_ringing));
-                            return;
-                        }
-
-                        Intent remoteRingIntent = new Intent();
-                        remoteRingIntent.setClass(context, RemoteRingActivity.class)
-                                        .setData(Uri.fromParts("remotering", source, null))
-                                        .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        context.startActivity(remoteRingIntent);
-                        sendSMS(source, context.getString(R.string.sms_ring_success));
-                    }
-                    else if(tokens.get(2).compareToIgnoreCase("stop") == 0) {
-                        if(RemoteRingActivity.stopRinging())
-                            sendSMS(source, context.getString(R.string.sms_stop_success));
-                        else
-                            sendSMS(source, context.getString(R.string.sms_stop_was_not_ringing));
-                    }
-                    else
-                        sendSMS(source, context.getString(R.string.sms_unknown_command));
+                    // sendSMS(String, String) needs preferencesManager to
+                    // determine if SMS replies are enabled or not
+                    preferencesManager = new PreferencesManager(context);
+                    sendSMS(source, context.getString(returnMessageId));
                 }
             }
         }
