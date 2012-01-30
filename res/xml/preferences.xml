@@ -24,6 +24,11 @@
                             android:summaryOn="@string/preferences_send_sms_replies_disable_summary" />
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/preferences_triggers">
+        <CheckBoxPreference android:title="@string/preferences_google_voice_trigger_title"
+                            android:defaultValue="true"
+                            android:key="google_voice_trigger"
+                            android:summaryOff="@string/preferences_google_voice_trigger_enable_summary"
+                            android:summaryOn="@string/preferences_google_voice_trigger_disable_summary" />
         <CheckBoxPreference android:title="@string/preferences_sms_trigger_title"
                             android:defaultValue="true"
                             android:key="sms_trigger"

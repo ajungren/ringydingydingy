@@ -39,6 +39,10 @@ public class PreferencesManager {
         return code;
     }
 
+    public boolean googleVoiceTriggerEnabled() {
+        return sharedPreferences.getBoolean("google_voice_trigger", true);
+    }
+
     public String resetCode() {
         Random random = new Random();
         int codeInt = 0;
