@@ -17,9 +17,6 @@
 
 package com.dririan.RingyDingyDingy;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -48,11 +45,10 @@ public class SmsReceiver extends BroadcastReceiver {
             for(int i=0; i < messages.length; i++) {
                 messages[i] = SmsMessage.createFromPdu((byte[])pdus[i]);
                 message = messages[i].getMessageBody().toString();
-                ArrayList<String> tokens = new ArrayList<String>(Arrays.asList(message.trim().split("\\s+")));
                 String source = messages[i].getOriginatingAddress();
                 int returnMessageId = -1;
 
-                returnMessageId = MessageHandler.processMessage(context, tokens, source);
+                returnMessageId = MessageHandler.processMessage(context, message, source);
                 if(returnMessageId != -1) {
                     // Drop the SMS message so it doesn't go to the user's inbox
                     this.abortBroadcast();
