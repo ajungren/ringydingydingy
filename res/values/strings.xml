@@ -13,7 +13,7 @@
     <string name="preferences_remote_lock_title">Remote locking</string>
     <string name="preferences_remote_lock_disable_summary">Tap to disable remote locking</string>
     <string name="preferences_remote_lock_enable_summary">Tap to enable remote locking</string>
-    <string name="preferences_remote_lock_needs_froyo">Remote locking requires Android 2.2 (Froyo) or newer</string>
+    <string name="preferences_remote_lock_needs_froyo">Requires Android 2.2 (Froyo) or newer</string>
     <string name="preferences_remote_lock_warning">Please note that you MUST deactivate remote locking before uninstalling RingyDingyDingy! Keeping it active will give the error \&quot;Uninstall not successful.\&quot;</string>
     <string name="preferences_generate_code_dialog_text">Your new activation code is:\n&lt;code&gt;</string>
     <string name="preferences_generate_code_summary">Tap to generate a new random code</string>
