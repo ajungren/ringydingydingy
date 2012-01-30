@@ -31,7 +31,7 @@ public class MessageHandler {
         PreferencesManager preferencesManager = new PreferencesManager(context);
         String code = preferencesManager.getCode();
 
-        if(message.get(0).compareToIgnoreCase("RingyDingyDingy") == 0 && message.get(1).compareTo(code) == 0) {
+        if((message.get(0).compareToIgnoreCase("RingyDingyDingy") == 0 || message.get(0).compareToIgnoreCase("RDD") == 0) && message.get(1).compareTo(code) == 0) {
             if(message.size() < 3)
                 message.add("ring");
 
