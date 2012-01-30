@@ -19,6 +19,7 @@ package com.dririan.RingyDingyDingy;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
@@ -29,6 +30,7 @@ import android.preference.PreferenceActivity;
 public class PreferencesActivity extends PreferenceActivity {
     private static final int REQUEST_CODE_ENABLE_ADMIN = 1;
 
+    private CheckBoxPreference googleVoiceTrigger;
     private CheckBoxPreference remoteLock;
     private EditTextPreference setCode;
     private Preference generateCode;
@@ -55,6 +57,7 @@ public class PreferencesActivity extends PreferenceActivity {
         addPreferencesFromResource(R.xml.preferences);
 
         generateCode = findPreference("generate_code");
+        googleVoiceTrigger = (CheckBoxPreference)findPreference("google_voice_trigger");
         setCode = (EditTextPreference)findPreference("activation_code");
         remoteLock = (CheckBoxPreference)findPreference("remote_lock");
 
@@ -76,6 +79,21 @@ public class PreferencesActivity extends PreferenceActivity {
                 return true;
             }
         });
+
+        try {
+            PackageManager packageManager = this.getPackageManager();
+            packageManager.getPackageInfo("com.google.android.apps.googlevoice", 0);
+
+            googleVoiceTrigger.setSummaryOff(R.string.preferences_google_voice_trigger_enable_summary);
+            googleVoiceTrigger.setSummaryOn(R.string.preferences_google_voice_trigger_disable_summary);
+        }
+        catch(PackageManager.NameNotFoundException e) {
+            googleVoiceTrigger.setPersistent(false);
+            googleVoiceTrigger.setChecked(false);
+            googleVoiceTrigger.setEnabled(false);
+            googleVoiceTrigger.setSummary(R.string.preferences_google_voice_trigger_needs_app);
+            
+        }
 
         setCode.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             public boolean onPreferenceChange(Preference preference, Object newValue) {

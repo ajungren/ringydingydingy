@@ -20,6 +20,7 @@
     <string name="preferences_generate_code_title">Generate new code</string>
     <string name="preferences_google_voice_trigger_disable_summary">Tap to disable Google Voice activation</string>
     <string name="preferences_google_voice_trigger_enable_summary">Tap to enable Google Voice activation</string>
+    <string name="preferences_google_voice_trigger_needs_app">Requires the Google Voice app</string>
     <string name="preferences_google_voice_trigger_title">Google Voice</string>
     <string name="preferences_send_sms_replies_disable_summary">Tap to disable sending replies to text messages</string>
     <string name="preferences_send_sms_replies_enable_summary">Tap to enable sending replies to text messages</string>
