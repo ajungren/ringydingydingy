@@ -69,8 +69,7 @@ public class MainActivity extends Activity {
     public void updateHeader() {
         // Get the activation code
         String code = preferencesManager.getCode();
-        String remoteLockInformation = "";
-        String remoteLockSettings = "";
+        String remoteLock = "";
         String settings = "";
 
         // Show the activation code on the TextView
@@ -79,28 +78,22 @@ public class MainActivity extends Activity {
 
         // If we're on Froyo or newer, show information about remote locking
         if(Build.VERSION.SDK_INT >= 8) {
-            remoteLockSettings = " " + this.getString(R.string.remote_lock_settings);
-
-            if(LockingSupport.getInstance(this).isActive()) {
-                remoteLockInformation = this.getString(R.string.remote_lock_information);
-                remoteLockSettings = remoteLockSettings.replace("<remote_lock_toggle>", "disable");
-            }
-            else {
-                remoteLockInformation = this.getString(R.string.remote_lock_disabled);
-                remoteLockSettings = remoteLockSettings.replace("<remote_lock_toggle>", "enable");
-            }
+            if(LockingSupport.getInstance(this).isActive())
+                remoteLock = this.getString(R.string.main_header_remote_lock_enabled);
+            else
+                remoteLock = this.getString(R.string.main_header_remote_lock_disabled);
         }
 
         // If we're on Honeycomb or newer, the Settings icon is on the action
         // bar. Otherwise, it's in the normal menu.
         if(Build.VERSION.SDK_INT >= 11)
-            settings = this.getString(R.string.preferences_header_settings_holo);
+            settings = this.getString(R.string.main_header_settings_holo);
         else
-            settings = this.getString(R.string.preferences_header_settings_default);
+            settings = this.getString(R.string.main_header_settings_default);
 
         // Update the header
         TextView header = (TextView)findViewById(R.id.header);
-        String headerText = this.getString(R.string.preferences_header);
-        header.setText(headerText.replace("<settings>", settings).replace("<remote_lock_information>", remoteLockInformation).replace("<remote_lock_settings>", remoteLockSettings).replace("<code>", code));
+        String headerText = this.getString(R.string.main_header);
+        header.setText(headerText.replace("<settings>", settings).replace("<remote_lock>", remoteLock).replace("<code>", code));
     }
 }
