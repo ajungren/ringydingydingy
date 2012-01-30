@@ -23,4 +23,11 @@
                             android:summaryOff="@string/preferences_send_sms_replies_enable_summary"
                             android:summaryOn="@string/preferences_send_sms_replies_disable_summary" />
     </PreferenceCategory>
+    <PreferenceCategory android:title="@string/preferences_triggers">
+        <CheckBoxPreference android:title="@string/preferences_sms_trigger_title"
+                            android:defaultValue="true"
+                            android:key="sms_trigger"
+                            android:summaryOff="@string/preferences_sms_trigger_enable_summary"
+                            android:summaryOn="@string/preferences_sms_trigger_disable_summary" />
+    </PreferenceCategory>
 </PreferenceScreen>

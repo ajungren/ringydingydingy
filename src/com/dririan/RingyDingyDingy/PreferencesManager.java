@@ -63,4 +63,8 @@ public class PreferencesManager {
         return sharedPreferences.getBoolean("send_sms_replies", true);
     }
 
+    public boolean smsTriggerEnabled() {
+    	return sharedPreferences.getBoolean("sms_trigger", true);
+    }
+
 }

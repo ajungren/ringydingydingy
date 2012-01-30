@@ -32,6 +32,11 @@ public class SmsReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        // Check if the SMS trigger is enabled
+        preferencesManager = new PreferencesManager(context);
+        if(!preferencesManager.smsTriggerEnabled())
+            return;
+    
         Bundle bundle = intent.getExtras();
         SmsMessage[] messages = null;
         String message = "";
@@ -52,9 +57,6 @@ public class SmsReceiver extends BroadcastReceiver {
                     // Drop the SMS message so it doesn't go to the user's inbox
                     this.abortBroadcast();
 
-                    // sendSMS(String, String) needs preferencesManager to
-                    // determine if SMS replies are enabled or not
-                    preferencesManager = new PreferencesManager(context);
                     sendSMS(source, context.getString(returnMessageId));
                 }
             }

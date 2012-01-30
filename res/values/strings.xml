@@ -24,6 +24,10 @@
     <string name="preferences_set_code_error">Sorry, your code wasn\'t valid. It must be between four and eight characters (letters, numbers, and symbols) long and cannot contain spaces.</string>
     <string name="preferences_set_code_summary">Tap to type in your own activation code</string>
     <string name="preferences_set_code_title">Manually set code</string>
+    <string name="preferences_sms_trigger_disable_summary">Tap to disable SMS activation</string>
+    <string name="preferences_sms_trigger_enable_summary">Tap to enable SMS activation</string>
+    <string name="preferences_sms_trigger_title">Text messages (SMS)</string>
+    <string name="preferences_triggers">Triggers</string>
     <string name="remote_lock_disabled">Remote locking is currently disabled.\n\n</string>
     <string name="remote_lock_information">To perform a remote lock, text:\n\&quot;RingyDingyDingy &lt;code&gt; lock\&quot;\n\n</string>
     <string name="remote_lock_settings">or &lt;remote_lock_toggle&gt; remote locking</string>
