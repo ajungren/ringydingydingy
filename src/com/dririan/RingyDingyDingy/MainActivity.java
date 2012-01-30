@@ -19,7 +19,6 @@ package com.dririan.RingyDingyDingy;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
@@ -29,13 +28,6 @@ import android.widget.TextView;
 
 public class MainActivity extends Activity {
     private PreferencesManager preferencesManager = null;
-
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-
-        setRequestedOrientation(newConfig.orientation);
-    }
 
     /** Called when the activity is first created. */
     @Override
