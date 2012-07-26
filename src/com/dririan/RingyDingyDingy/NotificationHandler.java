@@ -31,6 +31,7 @@ public class NotificationHandler extends BroadcastReceiver {
     private static NotificationManager notificationManager = null;
     private static PreferencesManager preferencesManager = null;
 
+    @SuppressWarnings("deprecation")
     public static void displayNotification(Context context) {
         if(notification == null) {
             preferencesManager = new PreferencesManager(context);
@@ -45,6 +46,7 @@ public class NotificationHandler extends BroadcastReceiver {
         }
     }
 
+    @SuppressWarnings("deprecation")
     public static void updateNotification(Context context) {
         CharSequence title, message;
         Intent intent = new Intent(ToggleHandler.INTENT);
