@@ -8,6 +8,7 @@
     <string name="main_header_remote_lock_enabled">To perform a remote lock, send:\n\&quot;RingyDingyDingy &lt;code&gt; lock\&quot;\n\n</string>
     <string name="main_header_settings_default">, press Menu and tap Settings.</string>
     <string name="main_header_settings_holo">, tap the Settings icon on the action bar.</string>
+    <string name="notification_default_title">Enable/disable RingyDingyDingy</string>
     <string name="notification_disabled">RingyDingyDingy disabled</string>
     <string name="notification_disabled_message">Tap to enable RingyDingyDingy</string>
     <string name="notification_enabled">RingyDingyDingy enabled</string>

@@ -36,7 +36,7 @@ public class NotificationHandler extends BroadcastReceiver {
             preferencesManager = new PreferencesManager(context);
 
             notificationManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
-            notification = new Notification(R.drawable.icon, "RingyDingyDingy", System.currentTimeMillis());
+            notification = new Notification(R.drawable.icon, context.getString(R.string.notification_default_title), System.currentTimeMillis());
 
             notification.defaults = 0;      // This disables sound, vibration, lights, etc. for the notification
             notification.flags = Notification.FLAG_ONGOING_EVENT | Notification.FLAG_NO_CLEAR;
