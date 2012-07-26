@@ -39,6 +39,10 @@ public class PreferencesManager {
         return code;
     }
 
+    public boolean getEnabled() {
+        return sharedPreferences.getBoolean("enabled", true);
+    }
+
     public boolean googleVoiceTriggerEnabled() {
         return sharedPreferences.getBoolean("google_voice_trigger", true);
     }
@@ -63,12 +67,24 @@ public class PreferencesManager {
         editor.commit();
     }
 
+    public void setEnabled(boolean enabled) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean("enabled", enabled);
+        editor.commit();
+    }
+
     public boolean smsRepliesEnabled() {
         return sharedPreferences.getBoolean("send_sms_replies", true);
     }
 
     public boolean smsTriggerEnabled() {
-    	return sharedPreferences.getBoolean("sms_trigger", true);
+        return sharedPreferences.getBoolean("sms_trigger", true);
     }
 
+    public void toggleEnabled() {
+        if(this.getEnabled())
+            this.setEnabled(false);
+        else
+            this.setEnabled(true);
+    }
 }

@@ -37,6 +37,9 @@ public class MainActivity extends Activity {
 
         preferencesManager = new PreferencesManager(this);
         updateHeader();
+
+        // Display the notification if it isn't already displayed
+        NotificationHandler.displayNotification(this);
     }
 
     @Override

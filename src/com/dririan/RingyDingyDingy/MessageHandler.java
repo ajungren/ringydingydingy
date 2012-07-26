@@ -25,8 +25,12 @@ import android.os.Build;
 public class MessageHandler {
 
     public static int processMessage(Context context, String message, String source) {
-        // Get the activation code
+        // If RingyDingyDingy is not enabled, don't do anything
         PreferencesManager preferencesManager = new PreferencesManager(context);
+        if(!preferencesManager.getEnabled())
+            return -1;
+
+        // Get the activation code
         String code = preferencesManager.getCode();
 
         // Split the message into tokens
@@ -73,5 +77,4 @@ public class MessageHandler {
 
         return -1;
     }
-
 }
