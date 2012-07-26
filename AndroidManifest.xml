@@ -5,7 +5,8 @@
           package="com.dririan.RingyDingyDingy">
     <uses-sdk android:minSdkVersion="4"
               android:targetSdkVersion="16" />
-    <uses-feature android:name="android.hardware.telephony" android:required="false" />
+    <uses-feature android:name="android.hardware.telephony"
+                  android:required="false" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
@@ -25,35 +26,42 @@
                   android:label="@string/settings" />
         <activity android:name=".RemoteRingActivity"
                   android:enabled="true"
+                  android:exported="false"
                   android:theme="@android:style/Theme.Dialog">
             <intent-filter>
                 <action android:name="com.dririan.RingyDingyDingy.REMOTE_RING" />
             </intent-filter>
         </activity>
-        <receiver android:name=".DeviceAdmin">
+        <receiver android:name=".DeviceAdmin"
+                  android:enabled="true"
+                  android:exported="false">
             <meta-data android:name="android.app.device_admin"
                        android:resource="@xml/device_admin_policies" />
         </receiver>
+        <receiver android:name=".GoogleVoiceReceiver"
+                  android:enabled="true"
+                  android:exported="true">
+            <intent-filter android:priority="1000">
+                <action android:name="com.google.android.apps.googlevoice.SMS_RECEIVED" />
+            </intent-filter>
+        </receiver>
         <receiver android:name=".NotificationHandler"
-                  android:enabled="true">
+                  android:enabled="true"
+                  android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
         <receiver android:name=".SmsReceiver"
-                  android:enabled="true">
+                  android:enabled="true"
+                  android:exported="true">
             <intent-filter android:priority="1000">
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />
             </intent-filter>
         </receiver>
-        <receiver android:name=".GoogleVoiceReceiver"
-                  android:enabled="true">
-            <intent-filter android:priority="1000">
-                <action android:name="com.google.android.apps.googlevoice.SMS_RECEIVED" />
-            </intent-filter>
-        </receiver>
         <receiver android:name=".ToggleHandler"
-                  android:enabled="true">
+                  android:enabled="true"
+                  android:exported="false">
             <intent-filter>
                 <action android:name="com.dririan.RingyDingyDingy.TOGGLE" />
             </intent-filter>
