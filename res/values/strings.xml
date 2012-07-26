@@ -9,10 +9,12 @@
     <string name="main_header_settings_default">, press Menu and tap Settings.</string>
     <string name="main_header_settings_holo">, tap the Settings icon on the action bar.</string>
     <string name="notification_disabled">RingyDingyDingy disabled</string>
-    <string name="notification_disabled_message">Tap to enable</string>
+    <string name="notification_disabled_message">Tap to enable RingyDingyDingy</string>
     <string name="notification_enabled">RingyDingyDingy enabled</string>
-    <string name="notification_enabled_message">Tap to disable</string>
+    <string name="notification_enabled_message">Tap to disable RingyDingyDingy</string>
     <string name="preferences_activation_code">Activation code</string>
+    <string name="preferences_enable">Enable RingyDingyDingy</string>
+    <string name="preferences_general">General settings</string>
     <string name="preferences_remote_control">Remote control</string>
     <string name="preferences_remote_lock_title">Remote locking</string>
     <string name="preferences_remote_lock_disable_summary">Tap to disable remote locking</string>

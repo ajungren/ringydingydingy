@@ -30,6 +30,7 @@ import android.preference.PreferenceActivity;
 public class PreferencesActivity extends PreferenceActivity {
     private static final int REQUEST_CODE_ENABLE_ADMIN = 1;
 
+    private CheckBoxPreference enabled;
     private CheckBoxPreference googleVoiceTrigger;
     private CheckBoxPreference remoteLock;
     private EditTextPreference setCode;
@@ -56,10 +57,23 @@ public class PreferencesActivity extends PreferenceActivity {
 
         addPreferencesFromResource(R.xml.preferences);
 
+        enabled = (CheckBoxPreference)findPreference("enabled");
         generateCode = findPreference("generate_code");
         googleVoiceTrigger = (CheckBoxPreference)findPreference("google_voice_trigger");
         setCode = (EditTextPreference)findPreference("activation_code");
         remoteLock = (CheckBoxPreference)findPreference("remote_lock");
+
+        enabled.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                PreferencesManager preferencesManager = new PreferencesManager(PreferencesActivity.this);
+                boolean nowEnabled = preferencesManager.toggleEnabled();
+
+                NotificationHandler.updateNotification(PreferencesActivity.this);
+                enabled.setChecked(nowEnabled);
+
+                return false;
+            }
+        });
 
         generateCode.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             public boolean onPreferenceClick(Preference preference) {
@@ -92,7 +106,6 @@ public class PreferencesActivity extends PreferenceActivity {
             googleVoiceTrigger.setChecked(false);
             googleVoiceTrigger.setEnabled(false);
             googleVoiceTrigger.setSummary(R.string.preferences_google_voice_trigger_needs_app);
-            
         }
 
         setCode.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
@@ -141,5 +154,4 @@ public class PreferencesActivity extends PreferenceActivity {
             remoteLock.setSummary(R.string.preferences_remote_lock_needs_froyo);
         }
     }
-
 }

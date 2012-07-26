@@ -81,10 +81,14 @@ public class PreferencesManager {
         return sharedPreferences.getBoolean("sms_trigger", true);
     }
 
-    public void toggleEnabled() {
-        if(this.getEnabled())
+    public boolean toggleEnabled() {
+        if(this.getEnabled()) {
             this.setEnabled(false);
-        else
+            return false;
+        }
+        else {
             this.setEnabled(true);
+            return true;
+        }
     }
 }

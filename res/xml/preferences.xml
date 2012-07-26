@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="@string/preferences_general">
+        <CheckBoxPreference android:title="@string/preferences_enable"
+                            android:defaultValue="true"
+                            android:key="enabled" 
+                            android:summaryOff="@string/notification_disabled_message"
+                            android:summaryOn="@string/notification_enabled_message" />
+    </PreferenceCategory>
     <PreferenceCategory android:title="@string/preferences_activation_code">
         <Preference android:title="@string/preferences_generate_code_title"
                     android:key="generate_code"
