@@ -30,7 +30,7 @@ public class SmsReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         // Check if the SMS trigger is enabled
-        preferencesManager = new PreferencesManager(context);
+        preferencesManager = PreferencesManager.getInstance(context);
         if(!preferencesManager.smsTriggerEnabled())
             return;
 

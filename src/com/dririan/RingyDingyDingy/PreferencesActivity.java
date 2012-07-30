@@ -73,7 +73,7 @@ public class PreferencesActivity extends PreferenceActivity {
 
         enabled.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             public boolean onPreferenceChange(Preference preference, Object newValue) {
-                PreferencesManager preferencesManager = new PreferencesManager(PreferencesActivity.this);
+                PreferencesManager preferencesManager = PreferencesManager.getInstance(PreferencesActivity.this);
                 boolean nowEnabled = preferencesManager.toggleEnabled();
 
                 NotificationHandler.updateNotification(PreferencesActivity.this);
@@ -86,7 +86,7 @@ public class PreferencesActivity extends PreferenceActivity {
         generateCode.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             public boolean onPreferenceClick(Preference preference) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(PreferencesActivity.this);
-                PreferencesManager preferencesManager = new PreferencesManager(PreferencesActivity.this);
+                PreferencesManager preferencesManager = PreferencesManager.getInstance(PreferencesActivity.this);
                 String code = preferencesManager.resetCode();
 
                 // Notify the EditTextPreference setCode that the code has changed
@@ -201,7 +201,7 @@ public class PreferencesActivity extends PreferenceActivity {
 
     public static void updateEnabled() {
         if(_instance != null) {
-            PreferencesManager preferencesManager = new PreferencesManager(_instance);
+            PreferencesManager preferencesManager = PreferencesManager.getInstance(_instance);
             _instance.enabled.setChecked(preferencesManager.getEnabled());
         }
     }

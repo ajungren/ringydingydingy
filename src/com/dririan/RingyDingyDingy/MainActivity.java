@@ -35,7 +35,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
-        preferencesManager = new PreferencesManager(this);
+        preferencesManager = PreferencesManager.getInstance(this);
         updateHeader();
 
         // Display the notification if it isn't already displayed

@@ -24,7 +24,7 @@ import android.os.Build;
 public class MessageHandler {
     public static int processMessage(Context context, String message, String source) {
         // If RingyDingyDingy is not enabled, don't do anything
-        PreferencesManager preferencesManager = new PreferencesManager(context);
+        PreferencesManager preferencesManager = PreferencesManager.getInstance(context);
         if(!preferencesManager.getEnabled())
             return -1;
 

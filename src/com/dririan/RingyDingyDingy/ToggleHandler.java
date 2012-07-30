@@ -26,7 +26,7 @@ public class ToggleHandler extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        PreferencesManager preferencesManager = new PreferencesManager(context);
+        PreferencesManager preferencesManager = PreferencesManager.getInstance(context);
 
         preferencesManager.toggleEnabled();
 

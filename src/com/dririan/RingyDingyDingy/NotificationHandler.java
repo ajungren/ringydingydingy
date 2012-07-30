@@ -34,7 +34,7 @@ public class NotificationHandler extends BroadcastReceiver {
     @SuppressWarnings("deprecation")
     public static void displayNotification(Context context, boolean force) {
         if(preferencesManager == null)
-            preferencesManager = new PreferencesManager(context);
+            preferencesManager = PreferencesManager.getInstance(context);
 
         if(notification == null && (force || preferencesManager.getShowNotification())) {
             notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);

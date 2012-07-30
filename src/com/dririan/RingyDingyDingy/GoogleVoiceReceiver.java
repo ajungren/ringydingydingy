@@ -26,7 +26,7 @@ public class GoogleVoiceReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         // Check if the Google Voice trigger is enabled
-        PreferencesManager preferencesManager = new PreferencesManager(context);
+        PreferencesManager preferencesManager = PreferencesManager.getInstance(context);
         if(!preferencesManager.googleVoiceTriggerEnabled())
             return;
 

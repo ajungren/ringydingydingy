@@ -24,10 +24,17 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 public class PreferencesManager {
+    private static PreferencesManager _instance = null;
+
     private SharedPreferences sharedPreferences = null;
 
-    public PreferencesManager(Context context) {
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+    public static PreferencesManager getInstance(Context context) {
+        if(_instance == null) {
+            _instance = new PreferencesManager();
+            _instance.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        }
+
+        return _instance;
     }
 
     public String getCode() {
