@@ -46,7 +46,7 @@
     <string name="remote_ring_stop_button">Stop</string>
     <string name="remote_ring_text">Remote ring has been initiated by</string>
     <string name="settings">Settings</string>
-    <string name="sms_help">Send \&quot;RingyDingyDingy &lt;code&gt; &lt;cmd&gt;\&quot;. Replace &lt;code&gt; with your activation code. &lt;cmd&gt; is one of: help, lock, ring, stop.</string>
+    <string name="sms_help">Send \&quot;RingyDingyDingy &lt;code&gt; &lt;cmd&gt;\&quot;. &lt;cmd&gt; is one of: help, lock, ring, stop.</string>
     <string name="sms_lock_needs_froyo">Sorry, but I can\'t do a remote lock. Remote locking needs Android 2.2 (Froyo) or newer.</string>
     <string name="sms_lock_needs_permission">Sorry, but I can\'t do a remote lock. Remote locking is disabled.</string>
     <string name="sms_lock_success">Device locked!</string>

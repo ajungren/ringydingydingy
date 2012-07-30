@@ -33,7 +33,7 @@ public class SmsReceiver extends BroadcastReceiver {
         preferencesManager = new PreferencesManager(context);
         if(!preferencesManager.smsTriggerEnabled())
             return;
-    
+
         Bundle bundle = intent.getExtras();
         SmsMessage[] messages = null;
         String message = "";
@@ -53,7 +53,7 @@ public class SmsReceiver extends BroadcastReceiver {
                     // Drop the SMS message so it doesn't go to the user's inbox
                     this.abortBroadcast();
 
-                    sendSMS(source, context.getString(returnMessageId));
+                    sendSMS(source, context.getString(returnMessageId).replace("<code>", preferencesManager.getCode()));
                 }
             }
         }
