@@ -29,7 +29,7 @@
     <string name="preferences_pager_code_title">Enter New Pager Code</string>
     <string name="preferences_pager_disable_summary">Tap to disable receiving pages (uses a separate activation code)</string>
     <string name="preferences_pager_enable_summary">Tap to enable receiving pages (uses a separate activation code)</string>
-    <string name="preferences_remote_control">Remote control</string>
+    <string name="preferences_remote_control">Remote commands</string>
     <string name="preferences_remote_lock_title">Remote locking</string>
     <string name="preferences_remote_lock_disable_summary">Tap to disable remote locking</string>
     <string name="preferences_remote_lock_enable_summary">Tap to enable remote locking</string>
