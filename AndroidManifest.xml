@@ -29,7 +29,9 @@
                   android:exported="false"
                   android:theme="@android:style/Theme.Dialog">
             <intent-filter>
-                <action android:name="com.dririan.RingyDingyDingy.REMOTE_RING" />
+                <action android:name="com.dririan.RingyDingyDingy.COMMAND_PAGE" />
+                <action android:name="com.dririan.RingyDingyDingy.COMMAND_RING" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <receiver android:name=".DeviceAdmin"

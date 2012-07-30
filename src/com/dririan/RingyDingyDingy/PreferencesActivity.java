@@ -34,6 +34,7 @@ public class PreferencesActivity extends PreferenceActivity {
     private CheckBoxPreference googleVoiceTrigger;
     private CheckBoxPreference remoteLock;
     private EditTextPreference setCode;
+    private EditTextPreference setPagerCode;
     private CheckBoxPreference showNotification;
     private Preference generateCode;
 
@@ -63,6 +64,7 @@ public class PreferencesActivity extends PreferenceActivity {
         generateCode = findPreference("generate_code");
         googleVoiceTrigger = (CheckBoxPreference)findPreference("google_voice_trigger");
         setCode = (EditTextPreference)findPreference("activation_code");
+        setPagerCode = (EditTextPreference)findPreference("pager_code");
         showNotification = (CheckBoxPreference)findPreference("show_notification");
         remoteLock = (CheckBoxPreference)findPreference("remote_lock");
 
@@ -125,6 +127,21 @@ public class PreferencesActivity extends PreferenceActivity {
 
                     return false;
                 }
+            }
+        });
+
+        setPagerCode.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                if(!((String) newValue).contains(" "))
+                    return true;
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(PreferencesActivity.this);
+                builder.setTitle(R.string.app_name)
+                       .setMessage(R.string.preferences_pager_error)
+                       .setNeutralButton(R.string.ok, null)
+                       .show();
+
+                return false;
             }
         });
 

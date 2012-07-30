@@ -43,12 +43,20 @@ public class PreferencesManager {
         return sharedPreferences.getBoolean("enabled", true);
     }
 
+    public String getPagerCode() {
+        return sharedPreferences.getString("pager_code", "PageMe");
+    }
+
     public boolean getShowNotification() {
         return sharedPreferences.getBoolean("show_notification", true);
     }
 
     public boolean googleVoiceTriggerEnabled() {
         return sharedPreferences.getBoolean("google_voice_trigger", true);
+    }
+
+    public boolean pagerEnabled() {
+        return sharedPreferences.getBoolean("pager", true);
     }
 
     public String resetCode() {

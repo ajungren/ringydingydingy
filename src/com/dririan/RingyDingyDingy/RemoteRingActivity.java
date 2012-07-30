@@ -30,7 +30,8 @@ import android.os.Bundle;
 import android.provider.Settings;
 
 public class RemoteRingActivity extends Activity {
-    public static final String INTENT = "com.dririan.RingyDingyDingy.REMOTE_RING";
+    public static final String PAGE_INTENT = "com.dririan.RingyDingyDingy.COMMAND_PAGE";
+    public static final String RING_INTENT = "com.dririan.RingyDingyDingy.COMMAND_RING";
     private static AlertDialog alertDialog = null;
     public static AudioManager audioManager = null;
     public static Ringtone ringtone = null;
@@ -50,7 +51,7 @@ public class RemoteRingActivity extends Activity {
         // Get the source of the message
         Intent intent = this.getIntent();
         if(intent != null)
-            source = intent.getData().getSchemeSpecificPart();
+            source = intent.getStringExtra("source");
         else
             source = "unknown";
 
@@ -79,12 +80,17 @@ public class RemoteRingActivity extends Activity {
         // Show an AlertDialog and stop the ringtone when the user hits Stop
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.app_name)
-               .setMessage(this.getString(R.string.remote_ring_text) + " " + source)
                .setNeutralButton(R.string.remote_ring_stop_button, new DialogInterface.OnClickListener() {
                    public void onClick(DialogInterface dialog, int id) {
                        RemoteRingActivity.stopRinging();
                    }
                });
+
+        if(intent.getAction() == PAGE_INTENT)
+            builder.setMessage(this.getString(R.string.page_from) + " " + source + ":\n" + intent.getStringExtra("message"));
+        else if(intent.getAction() == RING_INTENT)
+            builder.setMessage(this.getString(R.string.remote_ring_text) + " " + source);
+
         alertDialog = builder.create();
         alertDialog.show();
     }

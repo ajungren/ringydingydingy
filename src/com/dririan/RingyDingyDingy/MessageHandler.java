@@ -19,7 +19,6 @@ package com.dririan.RingyDingyDingy;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Build;
 
 public class MessageHandler {
@@ -35,6 +34,22 @@ public class MessageHandler {
         // Split the message into tokens
         String[] messageTokens = message.split("\\s+");
 
+        String pagerCode = preferencesManager.getPagerCode();
+        if(messageTokens[0].compareTo(pagerCode) == 0) {
+            if(preferencesManager.pagerEnabled()) {
+                Intent emergencyPageIntent = new Intent();
+                emergencyPageIntent.setAction(RemoteRingActivity.PAGE_INTENT)
+                                .putExtra("message", message.substring(pagerCode.length() + 1))
+                                .putExtra("source", source)
+                                .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(emergencyPageIntent);
+
+                return R.string.sms_page_success;
+            }
+            else
+                return R.string.sms_page_disabled;
+        }
+
         if((messageTokens[0].compareToIgnoreCase("RingyDingyDingy") == 0 || messageTokens[0].compareToIgnoreCase("RDD") == 0) && messageTokens[1].compareTo(code) == 0 || messageTokens[0].compareTo(code) == 0) {
             int offset;
             if(messageTokens[0].compareTo(code) == 0)
@@ -49,8 +64,8 @@ public class MessageHandler {
                 }
 
                 Intent remoteRingIntent = new Intent();
-                remoteRingIntent.setClass(context, RemoteRingActivity.class)
-                                .setData(Uri.fromParts("remotering", source, null))
+                remoteRingIntent.setAction(RemoteRingActivity.RING_INTENT)
+                                .putExtra("source", source)
                                 .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(remoteRingIntent);
 

@@ -25,6 +25,19 @@
                             android:summary="@string/preferences_set_code_summary" />
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/preferences_remote_control">
+        <CheckBoxPreference android:title="@string/preferences_pager"
+                            android:defaultValue="true"
+                            android:persistent="true"
+                            android:key="pager"
+                            android:summaryOff="@string/preferences_pager_enable_summary"
+                            android:summaryOn="@string/preferences_pager_disable_summary" />
+        <EditTextPreference android:title="@string/preferences_pager_code"
+                            android:dialogMessage="@string/preferences_pager_code_message"
+                            android:dialogTitle="@string/preferences_pager_code_title"
+                            android:imeOptions="actionDone"
+                            android:key="pager_code"
+                            android:singleLine="true"
+                            android:summary="@string/preferences_pager_code_summary" />
         <CheckBoxPreference android:title="@string/preferences_remote_lock_title"
                             android:persistent="false"
                             android:key="remote_lock" />
