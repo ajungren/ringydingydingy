@@ -29,6 +29,8 @@ public class ToggleHandler extends BroadcastReceiver {
         PreferencesManager preferencesManager = new PreferencesManager(context);
 
         preferencesManager.toggleEnabled();
+
+        PreferencesActivity.updateEnabled();
         NotificationHandler.updateNotification(context);
     }
 }

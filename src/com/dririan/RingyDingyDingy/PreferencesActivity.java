@@ -29,6 +29,7 @@ import android.preference.PreferenceActivity;
 
 public class PreferencesActivity extends PreferenceActivity {
     private static final int REQUEST_CODE_ENABLE_ADMIN = 1;
+    public static PreferencesActivity _instance = null;
 
     private CheckBoxPreference enabled;
     private CheckBoxPreference googleVoiceTrigger;
@@ -57,6 +58,8 @@ public class PreferencesActivity extends PreferenceActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        _instance = this;
 
         addPreferencesFromResource(R.xml.preferences);
 
@@ -187,6 +190,19 @@ public class PreferencesActivity extends PreferenceActivity {
         else {
             remoteLock.setEnabled(false);
             remoteLock.setSummary(R.string.preferences_remote_lock_needs_froyo);
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        _instance = null;
+    }
+
+    public static void updateEnabled() {
+        if(_instance != null) {
+            PreferencesManager preferencesManager = new PreferencesManager(_instance);
+            _instance.enabled.setChecked(preferencesManager.getEnabled());
         }
     }
 }
