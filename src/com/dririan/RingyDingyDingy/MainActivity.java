@@ -72,12 +72,23 @@ public class MainActivity extends Activity {
     public void updateHeader() {
         // Get the activation code
         String code = preferencesManager.getCode();
+        String pager = "";
+        String pagerCode = "";
         String remoteLock = "";
         String settings = "";
 
         // Show the activation code on the TextView
         TextView textView = (TextView) findViewById(R.id.activation_code);
         textView.setText(code);
+
+        // If the pager is enabled, show how to use it, otherwise notify the
+        // user that it's disabled
+        if(preferencesManager.pagerEnabled()) {
+            pager = this.getString(R.string.main_header_pager_enabled);
+            pagerCode = preferencesManager.getPagerCode();
+        }
+        else
+            pager = this.getString(R.string.main_header_pager_disabled);
 
         // If we're on Froyo or newer, show information about remote locking
         if(Build.VERSION.SDK_INT >= 8) {
@@ -97,6 +108,6 @@ public class MainActivity extends Activity {
         // Update the header
         TextView header = (TextView) findViewById(R.id.header);
         String headerText = this.getString(R.string.main_header);
-        header.setText(headerText.replace("<settings>", settings).replace("<remote_lock>", remoteLock).replace("<code>", code));
+        header.setText(headerText.replace("<settings>", settings).replace("<pager>", pager).replace("<pager_code>", pagerCode).replace("<remote_lock>", remoteLock).replace("<code>", code));
     }
 }
