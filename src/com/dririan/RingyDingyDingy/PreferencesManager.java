@@ -56,7 +56,7 @@ public class PreferencesManager {
     }
 
     public boolean pagerEnabled() {
-        return sharedPreferences.getBoolean("pager", true);
+        return sharedPreferences.getBoolean("pager", false);
     }
 
     public String resetCode() {

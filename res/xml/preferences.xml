@@ -26,7 +26,7 @@
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/preferences_remote_control">
         <CheckBoxPreference android:title="@string/preferences_pager"
-                            android:defaultValue="true"
+                            android:defaultValue="false"
                             android:persistent="true"
                             android:key="pager"
                             android:summaryOff="@string/preferences_pager_enable_summary"
