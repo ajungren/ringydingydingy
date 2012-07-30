@@ -32,10 +32,11 @@ public class NotificationHandler extends BroadcastReceiver {
     private static PreferencesManager preferencesManager = null;
 
     @SuppressWarnings("deprecation")
-    public static void displayNotification(Context context) {
-        if(notification == null) {
+    public static void displayNotification(Context context, boolean force) {
+        if(preferencesManager == null)
             preferencesManager = new PreferencesManager(context);
 
+        if(notification == null && (force || preferencesManager.getShowNotification())) {
             notificationManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
             notification = new Notification(R.drawable.icon, context.getString(R.string.notification_default_title), System.currentTimeMillis());
 
@@ -43,6 +44,17 @@ public class NotificationHandler extends BroadcastReceiver {
             notification.flags = Notification.FLAG_ONGOING_EVENT | Notification.FLAG_NO_CLEAR;
 
             updateNotification(context);
+        }
+    }
+
+    public static void displayNotification(Context context) {
+        displayNotification(context, false);
+    }
+
+    public static void hideNotification() {
+        if(notification != null) {
+            notificationManager.cancel(NOTIFICATION_ID);
+            notification = null;
         }
     }
 

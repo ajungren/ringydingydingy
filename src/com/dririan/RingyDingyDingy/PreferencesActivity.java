@@ -34,6 +34,7 @@ public class PreferencesActivity extends PreferenceActivity {
     private CheckBoxPreference googleVoiceTrigger;
     private CheckBoxPreference remoteLock;
     private EditTextPreference setCode;
+    private CheckBoxPreference showNotification;
     private Preference generateCode;
 
     @Override
@@ -62,6 +63,7 @@ public class PreferencesActivity extends PreferenceActivity {
         generateCode = findPreference("generate_code");
         googleVoiceTrigger = (CheckBoxPreference)findPreference("google_voice_trigger");
         setCode = (EditTextPreference)findPreference("activation_code");
+        showNotification = (CheckBoxPreference)findPreference("show_notification");
         remoteLock = (CheckBoxPreference)findPreference("remote_lock");
 
         enabled.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
@@ -123,6 +125,21 @@ public class PreferencesActivity extends PreferenceActivity {
 
                     return false;
                 }
+            }
+        });
+
+        showNotification.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                // IMPORTANT: Because this fires BEFORE the preference is
+                // changed, if it is checked, it is about to be unchecked, etc.
+                if(showNotification.isChecked())
+                    NotificationHandler.hideNotification();
+                else
+                    // The true in this call forces displayNotification to
+                    // ignore the value of the show_notification preference
+                    NotificationHandler.displayNotification(PreferencesActivity.this, true);
+
+                return true;
             }
         });
 

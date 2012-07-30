@@ -6,6 +6,10 @@
                             android:key="enabled" 
                             android:summaryOff="@string/notification_disabled_message"
                             android:summaryOn="@string/notification_enabled_message" />
+        <CheckBoxPreference android:title="@string/preferences_notification"
+                            android:defaultValue="true"
+                            android:key="show_notification"
+                            android:summary="@string/preferences_notification_summary" />
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/preferences_activation_code">
         <Preference android:title="@string/preferences_generate_code_title"
