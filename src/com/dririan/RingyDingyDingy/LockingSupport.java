@@ -33,7 +33,7 @@ public class LockingSupport {
         if(_instance == null) {
             _instance = new LockingSupport();
             _instance.context = context;
-            _instance.policyManager = (DevicePolicyManager)context.getSystemService(Context.DEVICE_POLICY_SERVICE);
+            _instance.policyManager = (DevicePolicyManager) context.getSystemService(Context.DEVICE_POLICY_SERVICE);
             _instance.deviceAdmin = new ComponentName(_instance.context, DeviceAdmin.class);
         }
 

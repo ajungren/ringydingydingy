@@ -63,7 +63,7 @@ public class RemoteRingActivity extends Activity {
         }
 
         // Prepare the AudioManager, set the ringer mode to normal, and set the volume to maximum
-        audioManager = (AudioManager)this.getSystemService(Context.AUDIO_SERVICE);
+        audioManager = (AudioManager) this.getSystemService(Context.AUDIO_SERVICE);
         oldMode = audioManager.getRingerMode();
         oldVolume = audioManager.getStreamVolume(AudioManager.STREAM_RING);
         audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);

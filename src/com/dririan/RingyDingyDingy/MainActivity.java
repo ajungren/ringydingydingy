@@ -76,7 +76,7 @@ public class MainActivity extends Activity {
         String settings = "";
 
         // Show the activation code on the TextView
-        TextView textView = (TextView)findViewById(R.id.activation_code);
+        TextView textView = (TextView) findViewById(R.id.activation_code);
         textView.setText(code);
 
         // If we're on Froyo or newer, show information about remote locking
@@ -95,7 +95,7 @@ public class MainActivity extends Activity {
             settings = this.getString(R.string.main_header_settings_default);
 
         // Update the header
-        TextView header = (TextView)findViewById(R.id.header);
+        TextView header = (TextView) findViewById(R.id.header);
         String headerText = this.getString(R.string.main_header);
         header.setText(headerText.replace("<settings>", settings).replace("<remote_lock>", remoteLock).replace("<code>", code));
     }

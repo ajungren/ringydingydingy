@@ -43,7 +43,7 @@ public class SmsReceiver extends BroadcastReceiver {
             messages = new SmsMessage[pdus.length];
 
             for(int i=0; i < messages.length; i++) {
-                messages[i] = SmsMessage.createFromPdu((byte[])pdus[i]);
+                messages[i] = SmsMessage.createFromPdu((byte[]) pdus[i]);
                 message = messages[i].getMessageBody().toString();
                 String source = messages[i].getOriginatingAddress();
                 int returnMessageId = -1;

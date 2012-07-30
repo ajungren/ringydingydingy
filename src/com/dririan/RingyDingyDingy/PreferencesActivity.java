@@ -60,13 +60,13 @@ public class PreferencesActivity extends PreferenceActivity {
 
         addPreferencesFromResource(R.xml.preferences);
 
-        enabled = (CheckBoxPreference)findPreference("enabled");
+        enabled = (CheckBoxPreference) findPreference("enabled");
         generateCode = findPreference("generate_code");
-        googleVoiceTrigger = (CheckBoxPreference)findPreference("google_voice_trigger");
-        setCode = (EditTextPreference)findPreference("activation_code");
-        setPagerCode = (EditTextPreference)findPreference("pager_code");
-        showNotification = (CheckBoxPreference)findPreference("show_notification");
-        remoteLock = (CheckBoxPreference)findPreference("remote_lock");
+        googleVoiceTrigger = (CheckBoxPreference) findPreference("google_voice_trigger");
+        setCode = (EditTextPreference) findPreference("activation_code");
+        setPagerCode = (EditTextPreference) findPreference("pager_code");
+        showNotification = (CheckBoxPreference) findPreference("show_notification");
+        remoteLock = (CheckBoxPreference) findPreference("remote_lock");
 
         enabled.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             public boolean onPreferenceChange(Preference preference, Object newValue) {
