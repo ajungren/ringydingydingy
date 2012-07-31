@@ -17,6 +17,7 @@
 
 package com.dririan.RingyDingyDingy;
 
+import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -53,16 +54,18 @@ public class SmsReceiver extends BroadcastReceiver {
                     // Drop the SMS message so it doesn't go to the user's inbox
                     this.abortBroadcast();
 
-                    sendSMS(source, context.getString(returnMessageId).replace("<code>", preferencesManager.getCode()));
+                    sendSms(context, source, context.getString(returnMessageId).replace("<code>", preferencesManager.getCode()));
                 }
             }
         }
     }
 
-    private void sendSMS(String destination, String message) {
+    private void sendSms(Context context, String destination, String message) {
         if(preferencesManager.smsRepliesEnabled()) {
+            PendingIntent sentIntent = PendingIntent.getBroadcast(context, 0, new Intent("com.dririan.RingyDingyDingy.SMS_SENT"), 0);
             SmsManager smsManager = SmsManager.getDefault();
-            smsManager.sendTextMessage(destination, null, message, null, null);
+
+            smsManager.sendTextMessage(destination, null, message, sentIntent, null);
         }
     }
 

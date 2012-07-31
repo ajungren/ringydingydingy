@@ -65,6 +65,14 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
+        <receiver android:name=".SmsErrorHandler"
+                  android:enabled="true"
+                  android:exported="false">
+            <intent-filter>
+                <action android:name="com.dririan.RingyDingyDingy.SMS_SENT" />
+                <category android:name="android.intent.category.DEfAULT" />
+            </intent-filter>
+        </receiver>
         <receiver android:name=".SmsReceiver"
                   android:enabled="true"
                   android:exported="true">
