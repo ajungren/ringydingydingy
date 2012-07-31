@@ -18,7 +18,9 @@
 package com.dririan.RingyDingyDingy;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
@@ -40,6 +42,25 @@ public class MainActivity extends Activity {
 
         // Display the notification if it isn't already displayed
         NotificationHandler.displayNotification(this);
+
+        // Display the "What's new" dialog if it needs to be displayed
+        int versionCode;
+        try {
+            versionCode = getPackageManager().getPackageInfo(getPackageName(), 0).versionCode;
+        } catch (NameNotFoundException e) {
+            versionCode = -1;
+        }
+
+        if(preferencesManager.getLastSeenVersion() != versionCode) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle(R.string.whats_new_title)
+                   .setMessage(R.string.whats_new_message)
+                   .setNeutralButton(R.string.ok, null)
+                   .show();
+
+            if(versionCode != -1)
+                preferencesManager.setLastSeenVersion(versionCode);
+        }
     }
 
     @Override

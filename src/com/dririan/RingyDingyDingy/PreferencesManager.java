@@ -50,6 +50,10 @@ public class PreferencesManager {
         return sharedPreferences.getBoolean("enabled", true);
     }
 
+    public int getLastSeenVersion() {
+        return sharedPreferences.getInt("last_seen_version", 0);
+    }
+
     public String getPagerCode() {
         return sharedPreferences.getString("pager_code", "PageMe");
     }
@@ -89,6 +93,12 @@ public class PreferencesManager {
     public void setEnabled(boolean enabled) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putBoolean("enabled", enabled);
+        editor.commit();
+    }
+
+    public void setLastSeenVersion(int version) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt("last_seen_version", version);
         editor.commit();
     }
 
