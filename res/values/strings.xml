@@ -16,6 +16,10 @@
     <string name="notification_enabled">RingyDingyDingy enabled</string>
     <string name="notification_enabled_message">Tap to disable RingyDingyDingy</string>
     <string name="page_from">Page from</string>
+    <string name="permission_define_command_description">Allows the application to add new commands to RingyDingyDingy.</string>
+    <string name="permission_define_command_label">add new RingyDingyDingy commands</string>
+    <string name="permission_execute_command_description">Allows the application to execute RingyDingyDingy commands.</string>
+    <string name="permission_execute_command_label">execute RingyDingyDingy commands</string>
     <string name="preferences_activation_code">Activation code</string>
     <string name="preferences_enable">Enable RingyDingyDingy</string>
     <string name="preferences_general">General settings</string>
