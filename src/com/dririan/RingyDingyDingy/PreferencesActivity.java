@@ -73,12 +73,7 @@ public class PreferencesActivity extends PreferenceActivity {
 
         enabled.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             public boolean onPreferenceChange(Preference preference, Object newValue) {
-                PreferencesManager preferencesManager = PreferencesManager.getInstance(PreferencesActivity.this);
-                boolean nowEnabled = preferencesManager.toggleEnabled();
-
-                NotificationHandler.updateNotification(PreferencesActivity.this);
-                enabled.setChecked(nowEnabled);
-
+                PreferencesActivity.this.sendBroadcast(new Intent(ToggleHandler.INTENT));
                 return false;
             }
         });
