@@ -60,72 +60,31 @@ public class SmsReceiver extends BroadcastReceiver {
             }
         }
         else {
-            int messageId = R.string.sms_unknown_command;
             int resultCode = getResultCode();
+            String message = getResultData();
+            String source;
 
-            if(action.compareTo("com.dririan.RingyDingyDingy.COMMAND_HELP") == 0)
-                messageId = R.string.sms_help;
-            else if(action.compareTo(ApiHandler.LOCK_INTENT) == 0) {
+            if(intent.hasExtra("source"))
+                source = intent.getStringExtra("source");
+            else
+                // If there is no source in the intent, there is no way to send a reply
+                return;
+
+            if(message == null) {
                 switch(resultCode) {
                 case Activity.RESULT_OK:
-                    messageId = R.string.sms_lock_success;
+                    message = context.getString(R.string.sms_success);
                     break;
-                case ApiHandler.RESULT_NEEDS_FROYO:
-                    messageId = R.string.sms_lock_needs_froyo;
-                    break;
-                case ApiHandler.RESULT_NOT_ACTIVE:
-                    messageId = R.string.sms_lock_needs_permission;
+                case ApiHandler.RESULT_UNKNOWN_COMMAND:
+                    message = context.getString(R.string.sms_unknown_command);
                     break;
                 default:
-                    messageId = R.string.sms_unknown_error;
+                    message = context.getString(R.string.sms_unknown_error);
                     break;
                 }
             }
-            else if(action.compareTo(ApiHandler.RING_INTENT) == 0) {
-                if(intent.hasExtra("message")) {
-                    switch(resultCode) {
-                    case Activity.RESULT_OK:
-                        messageId = R.string.sms_page_success;
-                        break;
-                    case ApiHandler.RESULT_PAGER_DISABLED:
-                        messageId = R.string.sms_page_disabled;
-                        break;
-                    default:
-                        messageId = R.string.sms_unknown_error;
-                        break;
-                    }
-                }
-                else {
-                    switch(resultCode) {
-                    case Activity.RESULT_OK:
-                        messageId = R.string.sms_ring_success;
-                        break;
-                    case ApiHandler.RESULT_ALREADY_RINGING:
-                        messageId = R.string.sms_ring_was_ringing;
-                        break;
-                    default:
-                        messageId = R.string.sms_unknown_error;
-                        break;
-                    }
-                }
-            }
-            else if(action.compareTo(ApiHandler.STOP_INTENT) == 0) {
-                switch(resultCode) {
-                case Activity.RESULT_OK:
-                    messageId = R.string.sms_stop_success;
-                    break;
-                case ApiHandler.RESULT_NOT_RINGING:
-                    messageId = R.string.sms_stop_was_not_ringing;
-                    break;
-                default:
-                    messageId = R.string.sms_unknown_error;
-                    break;
-                }
-            }
-            else if(resultCode == Activity.RESULT_OK)
-                messageId = R.string.sms_success;
 
-            sendSms(context, intent.getStringExtra("source"), context.getString(messageId).replace("<code>", preferencesManager.getCode()));
+            sendSms(context, source, message.replace("<code>", preferencesManager.getCode()));
         }
     }
 

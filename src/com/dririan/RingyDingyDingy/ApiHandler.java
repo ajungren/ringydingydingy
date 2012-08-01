@@ -61,41 +61,66 @@ public class ApiHandler extends BroadcastReceiver {
                 if(lockingSupport.isActive()) {
                     lockingSupport.lock();
                     setResultCode(Activity.RESULT_OK);
+                    setResultData(context.getString(R.string.sms_lock_success));
+                    return;
                 }
-                else
+                else {
                     setResultCode(RESULT_NOT_ACTIVE);
+                    setResultData(context.getString(R.string.sms_lock_needs_permission));
+                    return;
+                }
             }
-            else
+            else {
                 setResultCode(RESULT_NEEDS_FROYO);
+                setResultData(context.getString(R.string.sms_lock_needs_froyo));
+                return;
+            }
         }
         else if(action.compareTo(RING_INTENT) == 0) {
             // If a remote ring is already happening, don't start another
-            if(RemoteRingActivity.ringtone != null && RemoteRingActivity.ringtone.isPlaying())
+            if(RemoteRingActivity.ringtone != null && RemoteRingActivity.ringtone.isPlaying()) {
                 setResultCode(RESULT_ALREADY_RINGING);
+                setResultData(context.getString(R.string.sms_ring_was_ringing));
+                return;
+            }
             else {
                 Intent newIntent = new Intent(context, RemoteRingActivity.class);
 
                 if(intent.hasExtra("message")) {
                     if(!PreferencesManager.getInstance(context).pagerEnabled()) {
                         setResultCode(ApiHandler.RESULT_PAGER_DISABLED);
+                        setResultData(context.getString(R.string.sms_page_disabled));
                         return;
                     }
+
+                    setResultData(context.getString(R.string.sms_page_success));
                     newIntent.putExtra("message", intent.getStringExtra("message"));
                 }
+                else
+                    setResultData(context.getString(R.string.sms_ring_success));
+
                 if(intent.hasExtra("source"))
                     newIntent.putExtra("source", intent.getStringExtra("source"));
 
                 newIntent.setAction(action)
                          .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(newIntent);
+
                 setResultCode(Activity.RESULT_OK);
+                return;
             }
         }
         else if(action.compareTo(STOP_INTENT) == 0) {
-            if(RemoteRingActivity.stopRinging())
+            if(RemoteRingActivity.stopRinging()) {
                 setResultCode(Activity.RESULT_OK);
-            else
+                setResultData(context.getString(R.string.sms_stop_success));
+                return;
+            }
+            else {
                 setResultCode(RESULT_NOT_RINGING);
+                setResultData(context.getString(R.string.sms_stop_was_not_ringing));
+                return;
+            }
         }
     }
 }
