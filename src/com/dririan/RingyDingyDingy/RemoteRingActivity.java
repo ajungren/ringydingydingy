@@ -28,6 +28,7 @@ import android.media.RingtoneManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.util.Log;
 
 public class RemoteRingActivity extends Activity {
     private static AlertDialog alertDialog = null;
@@ -72,8 +73,11 @@ public class RemoteRingActivity extends Activity {
         if(ringtone == null)
             ringtone = RingtoneManager.getRingtone(this, Settings.System.DEFAULT_NOTIFICATION_URI);
 
-        // Play the ringtone
-        ringtone.play();
+        // Play the ringtone if one was found
+        if(ringtone == null)
+            Log.e("RingyDingyDingy", "No ringtone was found");
+        else
+            ringtone.play();
 
         // Show an AlertDialog and stop the ringtone when the user hits Stop
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
