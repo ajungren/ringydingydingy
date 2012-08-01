@@ -33,7 +33,7 @@ public class GoogleVoiceReceiver extends BroadcastReceiver {
         String source = intent.getExtras().getString("com.google.android.apps.googlevoice.PHONE_NUMBER");
         String message = intent.getExtras().getString("com.google.android.apps.googlevoice.TEXT");
 
-        MessageHandler.processMessage(context, message, source);
+        MessageHandler.processMessage(context, null, message, source);
     }
 
 }

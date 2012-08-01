@@ -17,12 +17,12 @@
 
 package com.dririan.RingyDingyDingy;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 
 public class MessageHandler {
-    public static int processMessage(Context context, String message, String source) {
+    public static int processMessage(Context context, BroadcastReceiver resultReceiver, String message, String source) {
         // If RingyDingyDingy is not enabled, don't do anything
         PreferencesManager preferencesManager = PreferencesManager.getInstance(context);
         if(!preferencesManager.getEnabled())
@@ -74,23 +74,20 @@ public class MessageHandler {
             else if(messageTokens[offset+1].compareToIgnoreCase("help") == 0)
                 return R.string.sms_help;
             else if(messageTokens[offset+1].compareToIgnoreCase("lock") == 0) {
-                if(Build.VERSION.SDK_INT >= 8) {
-                    LockingSupport lockingSupport = LockingSupport.getInstance(context);
-                    if(lockingSupport.isActive()) {
-                        lockingSupport.lock();
-                        return R.string.sms_lock_success;
-                    }
-                    else
-                        return R.string.sms_lock_needs_permission;
-                }
-                else
-                    return R.string.sms_lock_needs_froyo;
+                Intent lockIntent = new Intent();
+                lockIntent.setAction(ApiHandler.LOCK_INTENT)
+                          .putExtra("source", source);
+                context.sendOrderedBroadcast(lockIntent, ApiHandler.PERMISSION_HANDLE_INTERNAL, resultReceiver, null, ApiHandler.RESULT_UNKNOWN_COMMAND, null, null);
+
+                return 0;
             }
             else if(messageTokens[offset+1].compareToIgnoreCase("stop") == 0) {
-                if(RemoteRingActivity.stopRinging())
-                    return R.string.sms_stop_success;
-                else
-                    return R.string.sms_stop_was_not_ringing;
+                Intent stopIntent = new Intent();
+                stopIntent.setAction(ApiHandler.STOP_INTENT)
+                          .putExtra("source", source);
+                context.sendOrderedBroadcast(stopIntent, ApiHandler.PERMISSION_HANDLE_INTERNAL, resultReceiver, null, ApiHandler.RESULT_UNKNOWN_COMMAND, null, null);
+
+                return 0;
             }
             else
                 return R.string.sms_unknown_command;
