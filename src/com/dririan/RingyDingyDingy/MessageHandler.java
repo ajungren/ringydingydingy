@@ -38,7 +38,7 @@ public class MessageHandler {
         String pagerCode = preferencesManager.getPagerCode();
         if(messageTokens[0].compareToIgnoreCase(pagerCode) == 0) {
             Intent intent = new Intent();
-            intent.setAction(ApiHandler.RING_INTENT)
+            intent.setAction(ApiHandler.INTENT_RING)
                   .putExtra("message", message.substring(pagerCode.length() + 1))
                   .putExtra("source", source);
 
@@ -58,13 +58,13 @@ public class MessageHandler {
                 offset = 1;
 
             if(messageTokens.length < offset+2 || messageTokens[offset+1].compareToIgnoreCase("ring") == 0)
-                intent.setAction(ApiHandler.RING_INTENT);
+                intent.setAction(ApiHandler.INTENT_RING);
             else if(messageTokens[offset+1].compareToIgnoreCase("help") == 0)
                 intent.setAction("com.dririan.RingyDingyDingy.COMMAND_HELP");
             else if(messageTokens[offset+1].compareToIgnoreCase("lock") == 0)
-                intent.setAction(ApiHandler.LOCK_INTENT);
+                intent.setAction(ApiHandler.INTENT_LOCK);
             else if(messageTokens[offset+1].compareToIgnoreCase("stop") == 0)
-                intent.setAction(ApiHandler.STOP_INTENT);
+                intent.setAction(ApiHandler.INTENT_STOP);
             else {
                 // The command is unknown, so let external apps handle it
                 intent.setAction("com.dririan.RingyDingyDingy.COMMAND_" + messageTokens[offset+1].toUpperCase());
