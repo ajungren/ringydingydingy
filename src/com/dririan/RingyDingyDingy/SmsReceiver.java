@@ -53,7 +53,7 @@ public class SmsReceiver extends BroadcastReceiver {
                     message = messages[i].getMessageBody().toString();
                     String source = messages[i].getOriginatingAddress();
 
-                    if(!MessageHandler.processMessage(context, new SmsReceiver(), message, source))
+                    if(MessageHandler.processMessage(context, new SmsReceiver(), message, source))
                         // Drop the SMS message so it doesn't go to the user's inbox
                         this.abortBroadcast();
                 }
