@@ -28,9 +28,9 @@ public class ApiHandler extends BroadcastReceiver {
     public static final int API_LEVEL = 0;
 
     // Permissions
+    public static final String PERMISSION_EXECUTE = "com.dririan.RingyDingyDingy.EXECUTE_COMMAND";
     public static final String PERMISSION_HANDLE = "com.dririan.RingyDingyDingy.HANDLE_COMMAND";
     public static final String PERMISSION_HANDLE_INTERNAL = "com.dririan.RingyDingyDingy.HANDLE_INTERNAL_COMMAND";
-    public static final String PERMISSION_EXECUTE = "com.dririan.RingyDingyDingy.EXECUTE_COMMAND";
 
     // Generic result codes
     public static final int RESULT_UNKNOWN_COMMAND = -42;
