@@ -50,7 +50,7 @@ public class RemoteRingActivity extends Activity {
 
         // Get the source of the message
         Intent intent = this.getIntent();
-        if(intent != null)
+        if(intent != null && intent.hasExtra("source"))
             source = intent.getStringExtra("source");
         else
             source = "unknown";
@@ -86,9 +86,9 @@ public class RemoteRingActivity extends Activity {
                    }
                });
 
-        if(intent.getAction() == PAGE_INTENT)
+        if(intent.getAction().compareTo(PAGE_INTENT) == 0)
             builder.setMessage(this.getString(R.string.page_from) + " " + source + ":\n" + intent.getStringExtra("message"));
-        else if(intent.getAction() == RING_INTENT)
+        else if(intent.getAction().compareTo(RING_INTENT) == 0)
             builder.setMessage(this.getString(R.string.remote_ring_text) + " " + source);
 
         alertDialog = builder.create();
