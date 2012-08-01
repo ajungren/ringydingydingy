@@ -36,7 +36,7 @@ public class MessageHandler {
         String[] messageTokens = message.split("\\s+");
 
         String pagerCode = preferencesManager.getPagerCode();
-        if(messageTokens[0].compareTo(pagerCode) == 0) {
+        if(messageTokens[0].compareToIgnoreCase(pagerCode) == 0) {
             Intent intent = new Intent();
             intent.setAction(ApiHandler.RING_INTENT)
                   .putExtra("message", message.substring(pagerCode.length() + 1))
@@ -46,7 +46,8 @@ public class MessageHandler {
             return true;
         }
 
-        if((messageTokens[0].compareToIgnoreCase("RingyDingyDingy") == 0 || messageTokens[0].compareToIgnoreCase("RDD") == 0) && messageTokens[1].compareTo(code) == 0 || messageTokens[0].compareTo(code) == 0) {
+        if((messageTokens[0].compareToIgnoreCase("RingyDingyDingy") == 0 || messageTokens[0].compareToIgnoreCase("RDD") == 0) &&
+            messageTokens[1].compareToIgnoreCase(code) == 0 || messageTokens[0].compareToIgnoreCase(code) == 0) {
             Intent intent = new Intent().putExtra("source", source);
             String permission = ApiHandler.PERMISSION_HANDLE_INTERNAL;
 
