@@ -24,9 +24,6 @@ import android.content.Intent;
 import android.os.Build;
 
 public class ApiHandler extends BroadcastReceiver {
-    // RingyDingyDingy API level
-    public static final int API_LEVEL = 0;
-
     // Permissions
     public static final String PERMISSION_EXECUTE = "com.dririan.RingyDingyDingy.EXECUTE_COMMAND";
     public static final String PERMISSION_HANDLE = "com.dririan.RingyDingyDingy.HANDLE_COMMAND";
