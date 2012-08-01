@@ -52,7 +52,7 @@ public class MainActivity extends Activity {
         }
 
         if(preferencesManager.getLastSeenVersion() != versionCode) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            AlertDialog.Builder builder = ThemedDialogBuilder.getBuilder(this);
             builder.setTitle(R.string.whats_new_title)
                    .setMessage(R.string.whats_new_message)
                    .setNeutralButton(R.string.ok, null)

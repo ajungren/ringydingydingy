@@ -44,7 +44,7 @@ public class PreferencesActivity extends PreferenceActivity {
         if(resultCode == 0)
             remoteLock.setChecked(false);
         else {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            AlertDialog.Builder builder = ThemedDialogBuilder.getBuilder(this);
 
             builder.setIcon(android.R.drawable.ic_dialog_alert)
                    .setTitle(R.string.app_name)
@@ -80,7 +80,7 @@ public class PreferencesActivity extends PreferenceActivity {
 
         generateCode.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             public boolean onPreferenceClick(Preference preference) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(PreferencesActivity.this);
+                AlertDialog.Builder builder = ThemedDialogBuilder.getBuilder(PreferencesActivity.this);
                 PreferencesManager preferencesManager = PreferencesManager.getInstance(PreferencesActivity.this);
                 String code = preferencesManager.resetCode();
 
