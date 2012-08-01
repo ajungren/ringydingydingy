@@ -43,22 +43,15 @@
         <activity android:name=".PreferencesActivity"
                   android:label="@string/settings" />
         <activity android:name=".RemoteRingActivity"
-                  android:enabled="true"
-                  android:exported="true"
-                  android:permission="com.dririan.RingyDingyDingy.EXECUTE_COMMAND"
-                  android:theme="@android:style/Theme.Dialog">
-            <intent-filter>
-                <action android:name="com.dririan.RingyDingyDingy.COMMAND_PAGE" />
-                <action android:name="com.dririan.RingyDingyDingy.COMMAND_RING" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
+                  android:theme="@android:style/Theme.Dialog" />
         <receiver android:name=".ApiHandler"
                   android:enabled="true"
                   android:exported="true"
                   android:permission="com.dririan.RingyDingyDingy.EXECUTE_COMMAND">
             <intent-filter>
                 <action android:name="com.dririan.RingyDingyDingy.COMMAND_LOCK" />
+                <action android:name="com.dririan.RingyDingyDingy.COMMAND_PAGE" />
+                <action android:name="com.dririan.RingyDingyDingy.COMMAND_RING" />
                 <action android:name="com.dririan.RingyDingyDingy.COMMAND_STOP" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>

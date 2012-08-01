@@ -22,11 +22,12 @@ import android.content.Context;
 import android.content.Intent;
 
 public class MessageHandler {
-    public static int processMessage(Context context, BroadcastReceiver resultReceiver, String message, String source) {
-        // If RingyDingyDingy is not enabled, don't do anything
+    public static boolean processMessage(Context context, BroadcastReceiver resultReceiver, String message, String source) {
         PreferencesManager preferencesManager = PreferencesManager.getInstance(context);
+
+        // If RingyDingyDingy is not enabled, don't do anything
         if(!preferencesManager.getEnabled())
-            return -1;
+            return false;
 
         // Get the activation code
         String code = preferencesManager.getCode();
@@ -44,55 +45,37 @@ public class MessageHandler {
                           .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(pageIntent);
 
-                return R.string.sms_page_success;
+                return true;
             }
-            else
-                return R.string.sms_page_disabled;
         }
 
         if((messageTokens[0].compareToIgnoreCase("RingyDingyDingy") == 0 || messageTokens[0].compareToIgnoreCase("RDD") == 0) && messageTokens[1].compareTo(code) == 0 || messageTokens[0].compareTo(code) == 0) {
+            Intent intent = new Intent().putExtra("source", source);
+            String permission = ApiHandler.PERMISSION_HANDLE_INTERNAL;
+
             int offset;
             if(messageTokens[0].compareTo(code) == 0)
                 offset = 0;
             else
                 offset = 1;
 
-            if(messageTokens.length < offset+2 || messageTokens[offset+1].compareToIgnoreCase("ring") == 0) {
-                // If a remote ring is already happening, don't start another
-                if(RemoteRingActivity.ringtone != null && RemoteRingActivity.ringtone.isPlaying()) {
-                    return R.string.sms_ring_was_ringing;
-                }
-
-                Intent remoteRingIntent = new Intent();
-                remoteRingIntent.setAction(RemoteRingActivity.RING_INTENT)
-                                .putExtra("source", source)
-                                .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                context.startActivity(remoteRingIntent);
-
-                return R.string.sms_ring_success;
-            }
+            if(messageTokens.length < offset+2 || messageTokens[offset+1].compareToIgnoreCase("ring") == 0)
+                intent.setAction(ApiHandler.RING_INTENT);
             else if(messageTokens[offset+1].compareToIgnoreCase("help") == 0)
-                return R.string.sms_help;
-            else if(messageTokens[offset+1].compareToIgnoreCase("lock") == 0) {
-                Intent lockIntent = new Intent();
-                lockIntent.setAction(ApiHandler.LOCK_INTENT)
-                          .putExtra("source", source);
-                context.sendOrderedBroadcast(lockIntent, ApiHandler.PERMISSION_HANDLE_INTERNAL, resultReceiver, null, ApiHandler.RESULT_UNKNOWN_COMMAND, null, null);
-
-                return 0;
+                intent.setAction("com.dririan.RingyDingyDingy.COMMAND_HELP");
+            else if(messageTokens[offset+1].compareToIgnoreCase("lock") == 0)
+                intent.setAction(ApiHandler.LOCK_INTENT);
+            else if(messageTokens[offset+1].compareToIgnoreCase("stop") == 0)
+                intent.setAction(ApiHandler.STOP_INTENT);
+            else {
+                // The command is unknown, so let external apps handle it
+                intent.setAction("com.dririan.RingyDingyDingy.COMMAND_" + messageTokens[offset+1].toUpperCase());
+                permission = ApiHandler.PERMISSION_HANDLE;
             }
-            else if(messageTokens[offset+1].compareToIgnoreCase("stop") == 0) {
-                Intent stopIntent = new Intent();
-                stopIntent.setAction(ApiHandler.STOP_INTENT)
-                          .putExtra("source", source);
-                context.sendOrderedBroadcast(stopIntent, ApiHandler.PERMISSION_HANDLE_INTERNAL, resultReceiver, null, ApiHandler.RESULT_UNKNOWN_COMMAND, null, null);
 
-                return 0;
-            }
-            else
-                return R.string.sms_unknown_command;
+            context.sendOrderedBroadcast(intent, permission, resultReceiver, null, ApiHandler.RESULT_UNKNOWN_COMMAND, null, null);
         }
 
-        return -1;
+        return false;
     }
 }

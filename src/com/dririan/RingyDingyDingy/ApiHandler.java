@@ -39,16 +39,23 @@ public class ApiHandler extends BroadcastReceiver {
     public static final int RESULT_NEEDS_FROYO = 1;
     public static final int RESULT_NOT_ACTIVE = 2;
 
+    // COMMAND_RING result codes
+    public static final int RESULT_ALREADY_RINGING = 1;
+
     // COMMAND_STOP result codes
     public static final int RESULT_NOT_RINGING = 1;
 
     // Pre-defined command intents
     public static final String LOCK_INTENT = "com.dririan.RingyDingyDingy.COMMAND_LOCK";
+    public static final String RING_INTENT = "com.dririan.RingyDingyDingy.COMMAND_RING";
+    public static final String PAGE_INTENT = "com.dririan.RingyDingyDingy.COMMAND_PAGE";
     public static final String STOP_INTENT = "com.dririan.RingyDingyDingy.COMMAND_STOP";
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        if(intent.getAction().compareTo(LOCK_INTENT) == 0) {
+        String action = intent.getAction();
+
+        if(action.compareTo(LOCK_INTENT) == 0) {
             if(Build.VERSION.SDK_INT >= 8) {
                 LockingSupport lockingSupport = LockingSupport.getInstance(context);
                 if(lockingSupport.isActive()) {
@@ -61,7 +68,27 @@ public class ApiHandler extends BroadcastReceiver {
             else
                 setResultCode(RESULT_NEEDS_FROYO);
         }
-        else if(intent.getAction().compareTo(STOP_INTENT) == 0) {
+        else if(action.compareTo(RING_INTENT) == 0 || action.compareTo(PAGE_INTENT) == 0) {
+            // If a remote ring is already happening, don't start another
+            if(RemoteRingActivity.ringtone != null && RemoteRingActivity.ringtone.isPlaying())
+                setResultCode(RESULT_ALREADY_RINGING);
+            else {
+                Intent newIntent = new Intent(context, RemoteRingActivity.class);
+                String source;
+
+                if(intent.hasExtra("source"))
+                    source = intent.getStringExtra("source");
+                else
+                    source = "unknown";
+
+                newIntent.setAction(action)
+                         .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                         .putExtra("source", source);
+                context.startActivity(newIntent);
+                setResultCode(Activity.RESULT_OK);
+            }
+        }
+        else if(action.compareTo(STOP_INTENT) == 0) {
             if(RemoteRingActivity.stopRinging())
                 setResultCode(Activity.RESULT_OK);
             else

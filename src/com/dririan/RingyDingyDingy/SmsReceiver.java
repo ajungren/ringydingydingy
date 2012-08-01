@@ -33,8 +33,9 @@ public class SmsReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         preferencesManager = PreferencesManager.getInstance(context);
+        String action = intent.getAction();
 
-        if(intent.getAction().compareTo("android.provider.Telephony.SMS_RECEIVED") == 0) {
+        if(action.compareTo("android.provider.Telephony.SMS_RECEIVED") == 0) {
             // Check if the SMS trigger is enabled
             if(!preferencesManager.smsTriggerEnabled())
                 return;
@@ -51,13 +52,10 @@ public class SmsReceiver extends BroadcastReceiver {
                     messages[i] = SmsMessage.createFromPdu((byte[]) pdus[i]);
                     message = messages[i].getMessageBody().toString();
                     String source = messages[i].getOriginatingAddress();
-                    int returnMessageId = -1;
 
-                    returnMessageId = MessageHandler.processMessage(context, new SmsReceiver(), message, source);
-                    if(returnMessageId != -1) {
+                    if(!MessageHandler.processMessage(context, new SmsReceiver(), message, source))
                         // Drop the SMS message so it doesn't go to the user's inbox
                         this.abortBroadcast();
-                    }
                 }
             }
         }
@@ -65,7 +63,9 @@ public class SmsReceiver extends BroadcastReceiver {
             int messageId = R.string.sms_unknown_command;
             int resultCode = getResultCode();
 
-            if(intent.getAction().compareTo(ApiHandler.LOCK_INTENT) == 0) {
+            if(action.compareTo("com.dririan.RingyDingyDingy.COMMAND_HELP") == 0)
+                messageId = R.string.sms_help;
+            else if(action.compareTo(ApiHandler.LOCK_INTENT) == 0) {
                 switch(resultCode) {
                 case Activity.RESULT_OK:
                     messageId = R.string.sms_lock_success;
@@ -81,7 +81,20 @@ public class SmsReceiver extends BroadcastReceiver {
                     break;
                 }
             }
-            else if(intent.getAction().compareTo(ApiHandler.STOP_INTENT) == 0) {
+            else if(action.compareTo(ApiHandler.RING_INTENT) == 0) {
+                switch(resultCode) {
+                case Activity.RESULT_OK:
+                    messageId = R.string.sms_ring_success;
+                    break;
+                case ApiHandler.RESULT_ALREADY_RINGING:
+                    messageId = R.string.sms_ring_was_ringing;
+                    break;
+                default:
+                    messageId = R.string.sms_unknown_error;
+                    break;
+                }
+            }
+            else if(action.compareTo(ApiHandler.STOP_INTENT) == 0) {
                 switch(resultCode) {
                 case Activity.RESULT_OK:
                     messageId = R.string.sms_stop_success;
