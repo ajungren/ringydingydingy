@@ -30,8 +30,6 @@ import android.os.Bundle;
 import android.provider.Settings;
 
 public class RemoteRingActivity extends Activity {
-    public static final String PAGE_INTENT = "com.dririan.RingyDingyDingy.COMMAND_PAGE";
-    public static final String RING_INTENT = "com.dririan.RingyDingyDingy.COMMAND_RING";
     private static AlertDialog alertDialog = null;
     public static AudioManager audioManager = null;
     public static Ringtone ringtone = null;
@@ -86,9 +84,9 @@ public class RemoteRingActivity extends Activity {
                    }
                });
 
-        if(intent.getAction().compareTo(PAGE_INTENT) == 0)
+        if(intent.hasExtra("message"))
             builder.setMessage(this.getString(R.string.page_from) + " " + source + ":\n" + intent.getStringExtra("message"));
-        else if(intent.getAction().compareTo(RING_INTENT) == 0)
+        else
             builder.setMessage(this.getString(R.string.remote_ring_text) + " " + source);
 
         alertDialog = builder.create();

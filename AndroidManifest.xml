@@ -50,7 +50,6 @@
                   android:permission="com.dririan.RingyDingyDingy.EXECUTE_COMMAND">
             <intent-filter>
                 <action android:name="com.dririan.RingyDingyDingy.COMMAND_LOCK" />
-                <action android:name="com.dririan.RingyDingyDingy.COMMAND_PAGE" />
                 <action android:name="com.dririan.RingyDingyDingy.COMMAND_RING" />
                 <action android:name="com.dririan.RingyDingyDingy.COMMAND_STOP" />
                 <category android:name="android.intent.category.DEFAULT" />

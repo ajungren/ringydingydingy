@@ -38,13 +38,12 @@ public class MessageHandler {
         String pagerCode = preferencesManager.getPagerCode();
         if(messageTokens[0].compareTo(pagerCode) == 0) {
             if(preferencesManager.pagerEnabled()) {
-                Intent pageIntent = new Intent();
-                pageIntent.setAction(RemoteRingActivity.PAGE_INTENT)
-                          .putExtra("message", message.substring(pagerCode.length() + 1))
-                          .putExtra("source", source)
-                          .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                context.startActivity(pageIntent);
+                Intent intent = new Intent();
+                intent.setAction(ApiHandler.RING_INTENT)
+                      .putExtra("message", message.substring(pagerCode.length() + 1))
+                      .putExtra("source", source);
 
+                context.sendOrderedBroadcast(intent, ApiHandler.PERMISSION_HANDLE_INTERNAL, resultReceiver, null, ApiHandler.RESULT_UNKNOWN_COMMAND, null, null);
                 return true;
             }
         }
@@ -74,6 +73,7 @@ public class MessageHandler {
             }
 
             context.sendOrderedBroadcast(intent, permission, resultReceiver, null, ApiHandler.RESULT_UNKNOWN_COMMAND, null, null);
+            return true;
         }
 
         return false;
