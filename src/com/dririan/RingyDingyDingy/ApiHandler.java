@@ -41,6 +41,7 @@ public class ApiHandler extends BroadcastReceiver {
 
     // COMMAND_RING result codes
     public static final int RESULT_ALREADY_RINGING = 1;
+    public static final int RESULT_PAGER_DISABLED = 2;
 
     // COMMAND_STOP result codes
     public static final int RESULT_NOT_RINGING = 1;
@@ -74,8 +75,13 @@ public class ApiHandler extends BroadcastReceiver {
             else {
                 Intent newIntent = new Intent(context, RemoteRingActivity.class);
 
-                if(intent.hasExtra("message"))
+                if(intent.hasExtra("message")) {
+                    if(!PreferencesManager.getInstance(context).pagerEnabled()) {
+                        setResultCode(ApiHandler.RESULT_PAGER_DISABLED);
+                        return;
+                    }
                     newIntent.putExtra("message", intent.getStringExtra("message"));
+                }
                 if(intent.hasExtra("source"))
                     newIntent.putExtra("source", intent.getStringExtra("source"));
 

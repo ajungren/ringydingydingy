@@ -82,16 +82,31 @@ public class SmsReceiver extends BroadcastReceiver {
                 }
             }
             else if(action.compareTo(ApiHandler.RING_INTENT) == 0) {
-                switch(resultCode) {
-                case Activity.RESULT_OK:
-                    messageId = R.string.sms_ring_success;
-                    break;
-                case ApiHandler.RESULT_ALREADY_RINGING:
-                    messageId = R.string.sms_ring_was_ringing;
-                    break;
-                default:
-                    messageId = R.string.sms_unknown_error;
-                    break;
+                if(intent.hasExtra("message")) {
+                    switch(resultCode) {
+                    case Activity.RESULT_OK:
+                        messageId = R.string.sms_page_success;
+                        break;
+                    case ApiHandler.RESULT_PAGER_DISABLED:
+                        messageId = R.string.sms_page_disabled;
+                        break;
+                    default:
+                        messageId = R.string.sms_unknown_error;
+                        break;
+                    }
+                }
+                else {
+                    switch(resultCode) {
+                    case Activity.RESULT_OK:
+                        messageId = R.string.sms_ring_success;
+                        break;
+                    case ApiHandler.RESULT_ALREADY_RINGING:
+                        messageId = R.string.sms_ring_was_ringing;
+                        break;
+                    default:
+                        messageId = R.string.sms_unknown_error;
+                        break;
+                    }
                 }
             }
             else if(action.compareTo(ApiHandler.STOP_INTENT) == 0) {
