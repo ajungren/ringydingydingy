@@ -67,10 +67,12 @@ public class NotificationHandler extends BroadcastReceiver {
         if(preferencesManager.getEnabled()) {
             title = context.getText(R.string.notification_enabled);
             message = context.getText(R.string.notification_enabled_message);
+            notification.icon = R.drawable.icon;
         }
         else {
             title = context.getText(R.string.notification_disabled);
             message = context.getText(R.string.notification_disabled_message);
+            notification.icon = R.drawable.icon_disabled;
         }
 
         notification.setLatestEventInfo(context, title, message, pendingIntent);
