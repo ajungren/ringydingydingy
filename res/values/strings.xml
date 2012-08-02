@@ -3,11 +3,11 @@
     <string name="app_name">RingyDingyDingy</string>
     <string name="device_admin_prompt">RingyDingyDingy needs device administration privileges to enable remote locking. Please accept this if you want to lock your device remotely.</string>
     <string name="ok">OK</string>
-    <string name="main_header">Welcome to RingyDingyDingy!\n\nTo perform a remote ring, send:\n\&quot;RingyDingyDingy &lt;code&gt; ring\&quot;\nto this device, without quotes.\n\nTo stop a remote ring, send:\n\&quot;RingyDingyDingy &lt;code&gt; stop\&quot;\n\n&lt;remote_lock&gt;You can also use \&quot;rdd\&quot; instead of \&quot;RingyDingyDingy\&quot;.\n\n&lt;pager&gt;\n\nTo change your activation code, available commands, and enabled triggers (ways to send commands to RingyDingyDingy)&lt;settings&gt;</string>
+    <string name="main_header">Welcome to RingyDingyDingy!\n\nTo perform a remote ring, send:\n\&quot;rdd &lt;code&gt;\&quot;\nto this device, without quotes.\n\nTo stop a remote ring, send:\n\&quot;rdd &lt;code&gt; stop\&quot;\n\n&lt;remote_lock&gt;&lt;pager&gt;\n\nTo change your activation code, available commands, and enabled triggers (ways to send commands to RingyDingyDingy)&lt;settings&gt;</string>
     <string name="main_header_pager_disabled">Pager is currently disabled.</string>
     <string name="main_header_pager_enabled">To send a page to this device, send:\n\&quot;&lt;pager_code&gt; (message to display)\&quot;</string>
     <string name="main_header_remote_lock_disabled">Remote locking is currently disabled.\n\n</string>
-    <string name="main_header_remote_lock_enabled">To perform a remote lock, send:\n\&quot;RingyDingyDingy &lt;code&gt; lock\&quot;\n\n</string>
+    <string name="main_header_remote_lock_enabled">To perform a remote lock, send:\n\&quot;rdd &lt;code&gt; lock\&quot;\n\n</string>
     <string name="main_header_settings_default">, press Menu and tap Settings.</string>
     <string name="main_header_settings_holo">, tap the Settings icon on the action bar.</string>
     <string name="notification_default_title">Enable/disable RingyDingyDingy</string>
