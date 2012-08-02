@@ -28,6 +28,9 @@ public class ToggleHandler extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         PreferencesManager preferencesManager = PreferencesManager.getInstance(context);
 
+        // If somehow the ringtone is still playing, stop it
+        RemoteRingActivity.stopRinging();
+
         preferencesManager.toggleEnabled();
 
         PreferencesActivity.updateEnabled();
