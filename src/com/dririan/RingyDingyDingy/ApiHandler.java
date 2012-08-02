@@ -75,7 +75,9 @@ public class ApiHandler extends BroadcastReceiver {
         }
         else if(action.compareTo(INTENT_RING) == 0) {
             // If a remote ring is already happening, don't start another
-            if(RemoteRingActivity.ringtone != null && RemoteRingActivity.ringtone.isPlaying()) {
+            // However, if a ring is happening, a page will override it
+            if(RemoteRingActivity.activationLevel == RemoteRingActivity.LEVEL_PAGE_ACTIVE ||
+              (RemoteRingActivity.activationLevel == RemoteRingActivity.LEVEL_RING_ACTIVE && !intent.hasExtra("message"))) {
                 setResultCode(RESULT_ALREADY_RINGING);
                 setResultData(context.getString(R.string.sms_ring_was_ringing));
                 return;
@@ -87,6 +89,12 @@ public class ApiHandler extends BroadcastReceiver {
                     if(!PreferencesManager.getInstance(context).pagerEnabled()) {
                         setResultCode(ApiHandler.RESULT_PAGER_DISABLED);
                         setResultData(context.getString(R.string.sms_page_disabled));
+                        return;
+                    }
+
+                    if(RemoteRingActivity.activationLevel == RemoteRingActivity.LEVEL_RING_ACTIVE) {
+                        RemoteRingActivity.updateDialog(intent.getStringExtra("source"), intent.getStringExtra("message"));
+                        setResultData(context.getString(R.string.sms_page_success));
                         return;
                     }
 

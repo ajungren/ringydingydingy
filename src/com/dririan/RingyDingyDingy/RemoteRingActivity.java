@@ -31,12 +31,18 @@ import android.provider.Settings;
 import android.util.Log;
 
 public class RemoteRingActivity extends Activity {
+    public static final int LEVEL_NOT_ACTIVE = 0;
+    public static final int LEVEL_RING_ACTIVE = 1;
+    public static final int LEVEL_PAGE_ACTIVE = 2;
+
     private static AlertDialog alertDialog = null;
-    public static AudioManager audioManager = null;
-    public static Ringtone ringtone = null;
-    public static int oldMode = 0;
-    public static int oldVolume = 0;
-    public static RemoteRingActivity _instance = null;
+    private static AudioManager audioManager = null;
+    private static Ringtone ringtone = null;
+    private static int oldMode = 0;
+    private static int oldVolume = 0;
+    private static RemoteRingActivity _instance = null;
+
+    public static int activationLevel = LEVEL_NOT_ACTIVE;
 
     public String source = "";
 
@@ -88,10 +94,14 @@ public class RemoteRingActivity extends Activity {
                    }
                });
 
-        if(intent.hasExtra("message"))
+        if(intent.hasExtra("message")) {
+            activationLevel = LEVEL_PAGE_ACTIVE;
             builder.setMessage(this.getString(R.string.page_from) + " " + source + ":\n" + intent.getStringExtra("message"));
-        else
+        }
+        else {
+            activationLevel = LEVEL_RING_ACTIVE;
             builder.setMessage(this.getString(R.string.remote_ring_text) + " " + source);
+        }
 
         alertDialog = builder.create();
         alertDialog.show();
@@ -108,6 +118,8 @@ public class RemoteRingActivity extends Activity {
     public static boolean stopRinging() {
         // Stop the bloody ringer and reset the settings
         boolean wasStopped = false;
+
+        activationLevel = LEVEL_NOT_ACTIVE;
 
         if(RemoteRingActivity.ringtone != null && RemoteRingActivity.audioManager != null) {
             if(ringtone.isPlaying()) {
@@ -126,4 +138,13 @@ public class RemoteRingActivity extends Activity {
         return wasStopped;
     }
 
+    public static void updateDialog(String source, String message) {
+        if(_instance != null && alertDialog != null) {
+            if(source == null)
+                source = "unknown";
+
+            activationLevel = LEVEL_PAGE_ACTIVE;
+            alertDialog.setMessage(_instance.getString(R.string.page_from) + " " + source + ":\n" + message);
+        }
+    }
 }
