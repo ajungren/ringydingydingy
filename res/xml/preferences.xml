@@ -10,6 +10,10 @@
                             android:defaultValue="true"
                             android:key="show_notification"
                             android:summary="@string/preferences_notification_summary" />
+        <Preference android:title="@string/preferences_ringtone_title"
+                    android:key="ringtone"
+                    android:persistent="false"
+                    android:summary="@string/preferences_ringtone_summary" />
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/preferences_activation_code">
         <Preference android:title="@string/preferences_generate_code_title"

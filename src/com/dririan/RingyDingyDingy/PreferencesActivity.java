@@ -20,37 +20,58 @@ package com.dririan.RingyDingyDingy;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.EditTextPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
+import android.provider.Settings.System;
 
 public class PreferencesActivity extends PreferenceActivity {
-    private static final int REQUEST_CODE_ENABLE_ADMIN = 1;
+    private static final int REQUEST_ENABLE_ADMIN = 1;
+    private static final int REQUEST_PICK_RINGTONE = 2;
+
     public static PreferencesActivity _instance = null;
 
     private CheckBoxPreference enabled;
     private CheckBoxPreference googleVoiceTrigger;
     private CheckBoxPreference remoteLock;
+    private Preference ringtone;
     private EditTextPreference setCode;
     private EditTextPreference setPagerCode;
     private CheckBoxPreference showNotification;
     private Preference generateCode;
+    private PreferencesManager preferencesManager;
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(resultCode == 0)
-            remoteLock.setChecked(false);
-        else {
-            AlertDialog.Builder builder = ThemedDialogBuilder.getBuilder(this);
+        if(requestCode == REQUEST_ENABLE_ADMIN) {
+            if(resultCode == 0)
+                remoteLock.setChecked(false);
+            else {
+                AlertDialog.Builder builder = ThemedDialogBuilder.getBuilder(this);
 
-            builder.setIcon(android.R.drawable.ic_dialog_alert)
-                   .setTitle(R.string.app_name)
-                   .setMessage(R.string.preferences_remote_lock_warning)
-                   .setNeutralButton(R.string.ok, null)
-                   .show();
+                builder.setIcon(android.R.drawable.ic_dialog_alert)
+                       .setTitle(R.string.app_name)
+                       .setMessage(R.string.preferences_remote_lock_warning)
+                       .setNeutralButton(R.string.ok, null)
+                       .show();
+            }
+        }
+        else if(requestCode == REQUEST_PICK_RINGTONE) {
+            if(data != null) {
+                Uri ringtoneUri = data.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI);
+                String ringtone = ringtoneUri.toString();
+
+                if(ringtoneUri == System.DEFAULT_RINGTONE_URI)
+                    ringtone = "";
+
+                preferencesManager.setRingtone(ringtone);
+                updateRingtone();
+            }
         }
     }
 
@@ -60,12 +81,14 @@ public class PreferencesActivity extends PreferenceActivity {
         super.onCreate(savedInstanceState);
 
         _instance = this;
+        preferencesManager = PreferencesManager.getInstance(this);
 
         addPreferencesFromResource(R.xml.preferences);
 
         enabled = (CheckBoxPreference) findPreference("enabled");
         generateCode = findPreference("generate_code");
         googleVoiceTrigger = (CheckBoxPreference) findPreference("google_voice_trigger");
+        ringtone = findPreference("ringtone");
         setCode = (EditTextPreference) findPreference("activation_code");
         setPagerCode = (EditTextPreference) findPreference("pager_code");
         showNotification = (CheckBoxPreference) findPreference("show_notification");
@@ -110,6 +133,25 @@ public class PreferencesActivity extends PreferenceActivity {
             googleVoiceTrigger.setEnabled(false);
             googleVoiceTrigger.setSummary(R.string.preferences_google_voice_trigger_needs_app);
         }
+
+        ringtone.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            public boolean onPreferenceClick(Preference preference) {
+                Intent intent = new Intent(RingtoneManager.ACTION_RINGTONE_PICKER);
+                String oldRingtone = preferencesManager.getRingtone();
+                Uri oldRingtoneUri;
+
+                if(oldRingtone == "")
+                    oldRingtoneUri = System.DEFAULT_RINGTONE_URI;
+                else
+                    oldRingtoneUri = Uri.parse(oldRingtone);
+
+                intent.putExtra(RingtoneManager.EXTRA_RINGTONE_EXISTING_URI, oldRingtoneUri)
+                      .putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_SILENT, false);
+
+                PreferencesActivity.this.startActivityForResult(intent, REQUEST_PICK_RINGTONE);
+                return true;
+            }
+        });
 
         setCode.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             public boolean onPreferenceChange(Preference preference, Object newValue) {
@@ -175,7 +217,7 @@ public class PreferencesActivity extends PreferenceActivity {
                     }
                     else {
                         Intent lockingActivationIntent = lockingSupport.getActivationIntent();
-                        PreferencesActivity.this.startActivityForResult(lockingActivationIntent, REQUEST_CODE_ENABLE_ADMIN);
+                        PreferencesActivity.this.startActivityForResult(lockingActivationIntent, REQUEST_ENABLE_ADMIN);
                     }
 
                     return true;
@@ -186,12 +228,23 @@ public class PreferencesActivity extends PreferenceActivity {
             remoteLock.setEnabled(false);
             remoteLock.setSummary(R.string.preferences_remote_lock_needs_froyo);
         }
+
+        updateRingtone();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         _instance = null;
+    }
+
+    private void updateRingtone() {
+        String summary;
+
+        Uri ringtoneUri = Uri.parse(preferencesManager.getRingtone());
+        summary = RingtoneManager.getRingtone(this, ringtoneUri).getTitle(this);
+
+        ringtone.setSummary(summary);
     }
 
     public static void updateEnabled() {

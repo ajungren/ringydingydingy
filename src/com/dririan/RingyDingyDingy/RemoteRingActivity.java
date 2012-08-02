@@ -25,6 +25,7 @@ import android.content.Intent;
 import android.media.AudioManager;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -75,8 +76,13 @@ public class RemoteRingActivity extends Activity {
         audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
         audioManager.setStreamVolume(AudioManager.STREAM_RING, audioManager.getStreamMaxVolume(AudioManager.STREAM_RING), AudioManager.FLAG_REMOVE_SOUND_AND_VIBRATE);
 
-        // Get the current ringtone
-        ringtone = RingtoneManager.getRingtone(this, Settings.System.DEFAULT_RINGTONE_URI);
+        // Get the user's chosen ringtone
+        String preferredRingtone = PreferencesManager.getInstance(this).getRingtone();
+        ringtone = RingtoneManager.getRingtone(this, Uri.parse(preferredRingtone));
+
+        // Get the default ringtone if the ringtone wasn't found
+        if(ringtone == null)
+            ringtone = RingtoneManager.getRingtone(this, Settings.System.DEFAULT_RINGTONE_URI);
         if(ringtone == null)
             ringtone = RingtoneManager.getRingtone(this, Settings.System.DEFAULT_NOTIFICATION_URI);
 

@@ -58,6 +58,10 @@ public class PreferencesManager {
         return sharedPreferences.getString("pager_code", "PageMe");
     }
 
+    public String getRingtone() {
+        return sharedPreferences.getString("ringtone", "content://settings/system/ringtone");
+    }
+
     public boolean getShowNotification() {
         return sharedPreferences.getBoolean("show_notification", true);
     }
@@ -99,6 +103,12 @@ public class PreferencesManager {
     public void setLastSeenVersion(int version) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putInt("last_seen_version", version);
+        editor.commit();
+    }
+
+    public void setRingtone(String ringtone) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("ringtone", ringtone);
         editor.commit();
     }
 
