@@ -41,6 +41,7 @@ public class RemoteRingActivity extends Activity {
     private static int oldMode = 0;
     private static int oldVolume = 0;
     private static RemoteRingActivity _instance = null;
+    private static String message = "";
 
     public static int activationLevel = LEVEL_NOT_ACTIVE;
 
@@ -96,7 +97,8 @@ public class RemoteRingActivity extends Activity {
 
         if(intent.hasExtra("message")) {
             activationLevel = LEVEL_PAGE_ACTIVE;
-            builder.setMessage(this.getString(R.string.page_from) + " " + source + ":\n" + intent.getStringExtra("message"));
+            message = this.getString(R.string.page_from) + " " + source + ":\n" + intent.getStringExtra("message");
+            builder.setMessage(message);
         }
         else {
             activationLevel = LEVEL_RING_ACTIVE;
@@ -138,13 +140,21 @@ public class RemoteRingActivity extends Activity {
         return wasStopped;
     }
 
-    public static void updateDialog(String source, String message) {
+    public static void updateDialog(String source, String newMessage) {
         if(_instance != null && alertDialog != null) {
+            String prefix = "";
+
             if(source == null)
                 source = "unknown";
 
+            if(activationLevel == LEVEL_PAGE_ACTIVE)
+                prefix = message + "\n";
+
+            message = prefix + _instance.getString(R.string.page_from) + " " + source + ":\n" + newMessage;
+
+            alertDialog.setMessage(message);
+
             activationLevel = LEVEL_PAGE_ACTIVE;
-            alertDialog.setMessage(_instance.getString(R.string.page_from) + " " + source + ":\n" + message);
         }
     }
 }
