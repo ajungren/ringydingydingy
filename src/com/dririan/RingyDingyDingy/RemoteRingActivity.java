@@ -122,6 +122,7 @@ public class RemoteRingActivity extends Activity {
         boolean wasStopped = false;
 
         activationLevel = LEVEL_NOT_ACTIVE;
+        message = "";
 
         if(RemoteRingActivity.ringtone != null && RemoteRingActivity.audioManager != null) {
             if(ringtone.isPlaying()) {
