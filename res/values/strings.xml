@@ -37,7 +37,8 @@
     <string name="preferences_enable">Enable RingyDingyDingy</string>
     <string name="preferences_general">General settings</string>
     <string name="preferences_notification">Show toggle notification</string>
-    <string name="preferences_notification_summary">The toggle notification lets you quickly enable/disable RingyDingyDingy</string>
+    <string name="preferences_notification_disable_summary">Tap to hide a notification that lets you quickly enable/disable RingyDingyDingy</string>
+    <string name="preferences_notification_enable_summary">Tap to show a notification that lets you quickly enable/disable RingyDingyDingy</string>
     <string name="preferences_log">Enable activation logging</string>
     <string name="preferences_log_disable_summary">Tap to disable logging when a command is activated, who activated it, and what app was used</string>
     <string name="preferences_log_enable_summary">Tap to enable logging when a command is activated, who activated it, and what app was used</string>

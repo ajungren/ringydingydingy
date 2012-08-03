@@ -9,7 +9,8 @@
         <CheckBoxPreference android:title="@string/preferences_notification"
                             android:defaultValue="true"
                             android:key="show_notification"
-                            android:summary="@string/preferences_notification_summary" />
+                            android:summaryOff="@string/preferences_notification_enable_summary"
+                            android:summaryOn="@string/preferences_notification_disable_summary" />
         <Preference android:title="@string/preferences_ringtone_title"
                     android:key="ringtone"
                     android:persistent="false"
