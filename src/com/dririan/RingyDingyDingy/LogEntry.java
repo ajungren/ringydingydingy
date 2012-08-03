@@ -17,10 +17,19 @@
 
 package com.dririan.RingyDingyDingy;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import android.content.Context;
 import android.os.Build;
 
 public class LogEntry {
+    private static final DateFormat FORMAT_DATE = DateFormat.getDateInstance();
+    private static final DateFormat FORMAT_TIME = DateFormat.getTimeInstance();
+    private static final DateFormat PARSE_TIMESTAMP = new SimpleDateFormat("yyyy-MM-dd HH:mm:ssZ");
+
     public Context context;
     public long id;
     public String app = null;
@@ -64,8 +73,17 @@ public class LogEntry {
             stringBuilder.append(app);
         }
 
-        stringBuilder.append(" at ");
-        stringBuilder.append(timestamp);
+        try {
+            Date datetime = PARSE_TIMESTAMP.parse(timestamp + "+0000");
+
+            stringBuilder.append(" at ");
+            stringBuilder.append(FORMAT_TIME.format(datetime));
+            stringBuilder.append(" on ");
+            stringBuilder.append(FORMAT_DATE.format(datetime));
+        } catch (ParseException e) {
+            stringBuilder.append(" at ");
+            stringBuilder.append(timestamp);
+        }
 
         if(command.compareToIgnoreCase("ring") == 0 && argument != null) {
             stringBuilder.append(": ");
