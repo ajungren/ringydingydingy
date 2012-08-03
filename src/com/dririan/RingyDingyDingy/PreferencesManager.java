@@ -54,6 +54,10 @@ public class PreferencesManager {
         return sharedPreferences.getInt("last_seen_version", 0);
     }
 
+    public boolean getActivationLogEnabled() {
+        return sharedPreferences.getBoolean("activation_log", true);
+    }
+
     public String getPagerCode() {
         return sharedPreferences.getString("pager_code", "PageMe");
     }

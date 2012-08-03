@@ -26,7 +26,7 @@ public class LogHandler extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        if(intent.getAction().compareTo(INTENT_LOG) != 0)
+        if(intent.getAction().compareTo(INTENT_LOG) != 0 || !PreferencesManager.getInstance(context).getActivationLogEnabled())
             return;
 
         String command = intent.getStringExtra("command");
