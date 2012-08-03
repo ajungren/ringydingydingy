@@ -62,6 +62,7 @@ public class LogActivity extends ListActivity {
         case R.id.clear:
             AlertDialog.Builder builder = ThemedDialogBuilder.getBuilder(this);
 
+            database.open();
             if(database.isEmpty()) {
                 builder.setTitle(R.string.app_name)
                        .setMessage(this.getString(R.string.log_already_empty))
@@ -73,7 +74,9 @@ public class LogActivity extends ListActivity {
                        .setMessage(this.getString(R.string.log_clear_prompt))
                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                            public void onClick(DialogInterface dialog, int which) {
+                               database.open();
                                database.clear();
+                               database.close();
                                LogActivity.this.finish();
                            }
                        })
@@ -82,6 +85,7 @@ public class LogActivity extends ListActivity {
 
                 return true;
             }
+            database.close();
         default:
             return super.onOptionsItemSelected(menuItem);
         }
