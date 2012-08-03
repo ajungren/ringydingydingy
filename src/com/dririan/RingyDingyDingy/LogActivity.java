@@ -19,13 +19,19 @@ package com.dririan.RingyDingyDingy;
 
 import java.util.List;
 
+import android.app.AlertDialog;
 import android.app.ListActivity;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 public class LogActivity extends ListActivity {
     private ListView listView;
@@ -41,18 +47,46 @@ public class LogActivity extends ListActivity {
 
         listView = (ListView) findViewById(android.R.id.list);
 
-        // Display a progress bar while entries are loaded
-        ProgressBar progressBar = new ProgressBar(this);
-        progressBar.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
-        progressBar.setIndeterminate(true);
-        listView.setEmptyView(progressBar);
-        ViewGroup root = (ViewGroup) findViewById(android.R.id.content);
-        root.addView(progressBar);
+        updateEntries();
+    }
 
-        List<LogEntry> entries = database.getAllEntries();
-        ArrayAdapter<LogEntry> arrayAdapter = new ArrayAdapter<LogEntry>(this, android.R.layout.simple_list_item_1, entries);
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.log, menu);
 
-        setListAdapter(arrayAdapter);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menuItem) {
+        switch(menuItem.getItemId()) {
+        case R.id.clear:
+            AlertDialog.Builder builder = ThemedDialogBuilder.getBuilder(this);
+
+            if(database.isEmpty()) {
+                builder.setTitle(R.string.app_name)
+                       .setMessage(this.getString(R.string.log_already_empty))
+                       .setNeutralButton(R.string.ok, null)
+                       .show();
+            }
+            else {
+                builder.setTitle(R.string.app_name)
+                       .setMessage(this.getString(R.string.log_clear_prompt))
+                       .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                           public void onClick(DialogInterface dialog, int which) {
+                               database.clear();
+                               LogActivity.this.finish();
+                           }
+                       })
+                       .setNegativeButton(android.R.string.no, null)
+                       .show();
+
+                return true;
+            }
+        default:
+            return super.onOptionsItemSelected(menuItem);
+        }
     }
 
     @Override
@@ -65,5 +99,31 @@ public class LogActivity extends ListActivity {
     protected void onResume() {
         database.open();
         super.onResume();
+    }
+
+    private void updateEntries() {
+        ViewGroup root = (ViewGroup) findViewById(android.R.id.content);
+
+        if(database.isEmpty()) {
+            // Display a notice that the log is empty
+            TextView textView = new TextView(this);
+            textView.setText(R.string.log_empty);
+            textView.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+            listView.setEmptyView(textView);
+            root.addView(textView);
+        }
+        else {
+            // Display a progress bar while entries are loaded
+            ProgressBar progressBar = new ProgressBar(this);
+            progressBar.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+            progressBar.setIndeterminate(true);
+            listView.setEmptyView(progressBar);;
+            root.addView(progressBar);
+
+            List<LogEntry> entries = database.getAllEntries();
+            ArrayAdapter<LogEntry> arrayAdapter = new ArrayAdapter<LogEntry>(this, android.R.layout.simple_list_item_1, entries);
+
+            setListAdapter(arrayAdapter);
+        }
     }
 }

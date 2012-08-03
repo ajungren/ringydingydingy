@@ -49,12 +49,26 @@ public class LogDatabase {
         database.insert(LogOpenHelper.TABLE_NAME, null, contentValues);
     }
 
+    public void clear() {
+        database.delete(LogOpenHelper.TABLE_NAME, null, null);
+    }
+
     public void close() {
         openHelper.close();
     }
 
+    public boolean isEmpty() {
+        Cursor cursor = getCursor();
+
+        if(cursor == null)
+            return true;
+
+        cursor.close();
+        return false;
+    }
+
     public List<LogEntry> getAllEntries() {
-        Cursor cursor = database.query(LogOpenHelper.TABLE_NAME, allColumns, null, null, null, null, null);
+        Cursor cursor = getCursor();
         List<LogEntry> entries = new ArrayList<LogEntry>();
         LogEntry entry;
 
@@ -76,6 +90,17 @@ public class LogDatabase {
         }
 
         return entries;
+    }
+
+    public Cursor getCursor() {
+        Cursor cursor = database.query(LogOpenHelper.TABLE_NAME, allColumns, null, null, null, null, null);
+
+        if(cursor.isAfterLast()) {
+            cursor.close();
+            return null;
+        }
+
+        return cursor;
     }
 
     public void open() throws SQLiteException {
