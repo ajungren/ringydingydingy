@@ -17,7 +17,11 @@
 
 package com.dririan.RingyDingyDingy;
 
+import android.content.Context;
+import android.os.Build;
+
 public class LogEntry {
+    public Context context;
     public long id;
     public String app = null;
     public String argument = null;
@@ -40,7 +44,19 @@ public class LogEntry {
 
         if(this.source != null) {
             stringBuilder.append(" by ");
-            stringBuilder.append(source);
+
+            // Get the contact name, if available
+            boolean addedContactName = false;
+            if(Build.VERSION.SDK_INT >= 5) {
+                String[] contact = ContactSupport.lookupByNumber(context, source);
+                if(contact[0] != null) {
+                    addedContactName = true;
+                    stringBuilder.append(contact[0]);
+                }
+            }
+
+            if(!addedContactName)
+                stringBuilder.append(source);
         }
 
         if(this.app != null) {

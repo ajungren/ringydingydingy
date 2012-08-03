@@ -81,6 +81,7 @@ public class LogDatabase {
         while(!cursor.isAfterLast()) {
             entry = new LogEntry();
 
+            entry.context = context;
             entry.id = cursor.getLong(0);
             entry.command = cursor.getString(1);
             entry.argument = cursor.getString(2);
