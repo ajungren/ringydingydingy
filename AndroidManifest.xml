@@ -75,7 +75,7 @@
 
         <!-- RemoteRingActivity is the activity that is launched when a page or ring is activated -->
         <activity android:name=".RemoteRingActivity"
-                  android:theme="@android:style/Theme.Dialog" />
+                  android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
         <!-- ApiHandler handles all of the API calls, including when they are used by RingyDingyDingy itself  -->
         <receiver android:name=".ApiHandler"
