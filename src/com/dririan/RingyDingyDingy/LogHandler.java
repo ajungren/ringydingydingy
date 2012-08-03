@@ -39,8 +39,9 @@ public class LogHandler extends BroadcastReceiver {
             return;
 
         LogDatabase database = new LogDatabase(context);
-        database.open();
 
+        database.open();
         database.addEntry(command, argument, app, source);
+        database.close();
     }
 }

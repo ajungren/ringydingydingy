@@ -43,8 +43,6 @@ public class LogActivity extends ListActivity {
         setContentView(R.layout.log);
 
         database = new LogDatabase(this);
-        database.open();
-
         listView = (ListView) findViewById(android.R.id.list);
 
         updateEntries();
@@ -89,19 +87,8 @@ public class LogActivity extends ListActivity {
         }
     }
 
-    @Override
-    protected void onPause() {
-        database.close();
-        super.onPause();
-    }
-
-    @Override
-    protected void onResume() {
-        database.open();
-        super.onResume();
-    }
-
     private void updateEntries() {
+        database.open();
         ViewGroup root = (ViewGroup) findViewById(android.R.id.content);
 
         if(database.isEmpty()) {
@@ -125,5 +112,6 @@ public class LogActivity extends ListActivity {
 
             setListAdapter(arrayAdapter);
         }
+        database.close();
     }
 }
