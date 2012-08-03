@@ -11,7 +11,7 @@
     <string name="main_header_log_disabled">Activation logging is currently disabled.</string>
     <string name="main_header_log_enabled">Activation logging is enabled. To see the activation log, &lt;instructions&gt;</string>
     <string name="main_header_log_instructions_default">press Menu and tap View Log.</string>
-    <string name="main_header_log_instructions_holo">tap the eye icon on the action bar.</string>
+    <string name="main_header_log_instructions_holo">tap the View icon on the action bar.</string>
     <string name="main_header_pager_disabled">Pager is currently disabled.</string>
     <string name="main_header_pager_enabled">To send a page to this device, send:\n\&quot;&lt;pager_code&gt; (message to display)\&quot;</string>
     <string name="main_header_remote_lock_disabled">.\n\nRemote locking is currently disabled.</string>
