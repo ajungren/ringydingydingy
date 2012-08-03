@@ -98,7 +98,7 @@ public class LogDatabase {
     }
 
     public Cursor getCursor() {
-        Cursor cursor = database.query(LogOpenHelper.TABLE_NAME, allColumns, null, null, null, null, null);
+        Cursor cursor = database.query(LogOpenHelper.TABLE_NAME, allColumns, null, null, null, null, LogOpenHelper.COLUMN_TIMESTAMP + " DESC");
 
         if(cursor.isAfterLast()) {
             cursor.close();
