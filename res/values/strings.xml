@@ -37,6 +37,8 @@
     <string name="preferences_log">Enable activation logging</string>
     <string name="preferences_log_disable_summary">Tap to disable logging when a command is activated, who activated it, and what app was used</string>
     <string name="preferences_log_enable_summary">Tap to enable logging when a command is activated, who activated it, and what app was used</string>
+    <string name="preferences_log_max_entries">Maximum log size</string>
+    <string name="preferences_log_max_entries_summary">Tap to change the maximum number of log entries to keep (currently &lt;count&gt;)</string>
     <string name="preferences_logging">Activation logging</string>
     <string name="preferences_pager">Pager</string>
     <string name="preferences_pager_code">Set pager code</string>

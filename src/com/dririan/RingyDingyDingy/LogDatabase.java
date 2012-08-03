@@ -31,10 +31,12 @@ public class LogDatabase {
                                            LogOpenHelper.COLUMN_ARGUMENT, LogOpenHelper.COLUMN_APP,
                                            LogOpenHelper.COLUMN_SOURCE, LogOpenHelper.COLUMN_TIMESTAMP };
 
+    private Context context;
     private SQLiteDatabase database;
     private LogOpenHelper openHelper;
 
     public LogDatabase(Context context) {
+        this.context = context;
         openHelper = new LogOpenHelper(context);
     }
 
@@ -47,6 +49,8 @@ public class LogDatabase {
         contentValues.put(LogOpenHelper.COLUMN_SOURCE, source);
 
         database.insert(LogOpenHelper.TABLE_NAME, null, contentValues);
+
+        prune();
     }
 
     public void clear() {
@@ -105,5 +109,13 @@ public class LogDatabase {
 
     public void open() throws SQLiteException {
         database = openHelper.getWritableDatabase();
+    }
+
+    public void prune(String limit) {
+        database.execSQL("DELETE FROM log WHERE _id NOT IN (SELECT _id FROM log ORDER BY timestamp DESC LIMIT " + limit + ");");
+    }
+
+    public void prune() {
+        prune(PreferencesManager.getInstance(context).getActivationLogMaxEntries());
     }
 }

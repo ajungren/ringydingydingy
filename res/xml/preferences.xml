@@ -35,6 +35,12 @@
                             android:key="activation_log"
                             android:summaryOff="@string/preferences_log_enable_summary"
                             android:summaryOn="@string/preferences_log_disable_summary" />
+        <ListPreference android:title="@string/preferences_log_max_entries"
+                        android:defaultValue="15"
+                        android:entries="@array/log_size_entries"
+                        android:entryValues="@array/log_size_values"
+                        android:key="activation_log_max_entries"
+                        android:summary="@string/preferences_log_max_entries_summary" />
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/preferences_remote_control">
         <CheckBoxPreference android:title="@string/preferences_pager"

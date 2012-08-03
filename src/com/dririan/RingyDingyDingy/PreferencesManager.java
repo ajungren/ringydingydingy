@@ -58,6 +58,10 @@ public class PreferencesManager {
         return sharedPreferences.getBoolean("activation_log", true);
     }
 
+    public String getActivationLogMaxEntries() {
+        return sharedPreferences.getString("activation_log_max_entries", "15");
+    }
+
     public String getPagerCode() {
         return sharedPreferences.getString("pager_code", "PageMe");
     }

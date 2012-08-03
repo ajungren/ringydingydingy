@@ -26,6 +26,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.EditTextPreference;
+import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.provider.Settings.System;
@@ -36,6 +37,7 @@ public class PreferencesActivity extends PreferenceActivity {
 
     public static PreferencesActivity _instance = null;
 
+    private ListPreference activation_log_max_entries;
     private CheckBoxPreference enabled;
     private CheckBoxPreference googleVoiceTrigger;
     private CheckBoxPreference remoteLock;
@@ -85,6 +87,7 @@ public class PreferencesActivity extends PreferenceActivity {
 
         addPreferencesFromResource(R.xml.preferences);
 
+        activation_log_max_entries = (ListPreference) findPreference("activation_log_max_entries");
         enabled = (CheckBoxPreference) findPreference("enabled");
         generateCode = findPreference("generate_code");
         googleVoiceTrigger = (CheckBoxPreference) findPreference("google_voice_trigger");
@@ -93,6 +96,20 @@ public class PreferencesActivity extends PreferenceActivity {
         setPagerCode = (EditTextPreference) findPreference("pager_code");
         showNotification = (CheckBoxPreference) findPreference("show_notification");
         remoteLock = (CheckBoxPreference) findPreference("remote_lock");
+
+        activation_log_max_entries.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                LogDatabase database = new LogDatabase(PreferencesActivity.this);
+                String newCount = (String) newValue;
+                database.open();
+                database.prune(newCount);
+                database.close();
+
+                updateActivationLogMaxEntries(newCount);
+
+                return true;
+            }
+        });
 
         enabled.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             public boolean onPreferenceChange(Preference preference, Object newValue) {
@@ -229,6 +246,7 @@ public class PreferencesActivity extends PreferenceActivity {
             remoteLock.setSummary(R.string.preferences_remote_lock_needs_froyo);
         }
 
+        updateActivationLogMaxEntries(preferencesManager.getActivationLogMaxEntries());
         updateRingtone();
     }
 
@@ -236,6 +254,10 @@ public class PreferencesActivity extends PreferenceActivity {
     protected void onDestroy() {
         super.onDestroy();
         _instance = null;
+    }
+
+    private void updateActivationLogMaxEntries(String count) {
+        activation_log_max_entries.setSummary(this.getString(R.string.preferences_log_max_entries_summary).replace("<count>", count));
     }
 
     private void updateRingtone() {

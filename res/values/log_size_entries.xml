@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="log_size_entries">
+        <item>5 entries</item>
+        <item>10 entries</item>
+        <item>15 entries</item>
+        <item>25 entries</item>
+        <item>50 entries</item>
+        <item>100 entries</item>
+    </string-array>
+    <string-array name="log_size_values">
+        <item>5</item>
+        <item>10</item>
+        <item>15</item>
+        <item>25</item>
+        <item>50</item>
+        <item>100</item>
+    </string-array>
+</resources>
