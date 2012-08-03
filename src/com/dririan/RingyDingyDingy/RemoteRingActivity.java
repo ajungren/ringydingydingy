@@ -116,11 +116,16 @@ public class RemoteRingActivity extends Activity {
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
-
+    public void onStop() {
         // If the activity gets closed for some random reason, stop ringing so we don't annoy the user
         stopRinging();
+        super.onStop();
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        if(hasFocus)
+            stopRinging();
     }
 
     public static boolean stopRinging() {
