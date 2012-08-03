@@ -70,7 +70,7 @@ public class SmsReceiver extends BroadcastReceiver {
                 // If there is no source in the intent, there is no way to send a reply
                 return;
 
-            if(intent.getAction() == "com.dririan.RingyDingyDingy.COMMAND_HELP")
+            if(intent.getAction().compareTo("com.dririan.RingyDingyDingy.COMMAND_HELP") == 0)
                 message = context.getString(R.string.sms_help);
             else if(message == null) {
                 switch(resultCode) {
