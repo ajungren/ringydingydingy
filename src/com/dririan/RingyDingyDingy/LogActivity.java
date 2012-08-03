@@ -100,6 +100,7 @@ public class LogActivity extends ListActivity {
             TextView textView = new TextView(this);
             textView.setText(R.string.log_empty);
             textView.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+            textView.setPadding(10, 10, 10, 10);
             listView.setEmptyView(textView);
             root.addView(textView);
         }
