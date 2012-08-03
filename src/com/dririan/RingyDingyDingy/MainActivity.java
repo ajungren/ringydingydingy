@@ -98,6 +98,7 @@ public class MainActivity extends Activity {
     public void updateHeader() {
         // Get the activation code
         String code = preferencesManager.getCode();
+        String log = "";
         String pager = "";
         String pagerCode = "";
         String remoteLock = "";
@@ -106,6 +107,18 @@ public class MainActivity extends Activity {
         // Show the activation code on the TextView
         TextView textView = (TextView) findViewById(R.id.activation_code);
         textView.setText(code);
+
+        // If the activation log is enabled, show how to get to it, otherwise
+        // notify the user that it's disabled
+        if(preferencesManager.getActivationLogEnabled()) {
+            if(Build.VERSION.SDK_INT >= 11)
+                log = this.getString(R.string.main_header_log_enabled).replace("<instructions>", this.getString(R.string.main_header_log_instructions_holo));
+            else
+                log = this.getString(R.string.main_header_log_enabled).replace("<instructions>", this.getString(R.string.main_header_log_instructions_default));
+        }
+        else {
+            log = this.getString(R.string.main_header_log_disabled);
+        }
 
         // If the pager is enabled, show how to use it, otherwise notify the
         // user that it's disabled
@@ -134,6 +147,12 @@ public class MainActivity extends Activity {
         // Update the header
         TextView header = (TextView) findViewById(R.id.header);
         String headerText = this.getString(R.string.main_header);
-        header.setText(headerText.replace("<settings>", settings).replace("<pager>", pager).replace("<pager_code>", pagerCode).replace("<remote_lock>", remoteLock).replace("<code>", code));
+        header.setText(headerText.replace("<log>", log)
+                                 .replace("<settings>", settings)
+                                 .replace("<pager>", pager)
+                                 .replace("<pager_code>", pagerCode)
+                                 .replace("<remote_lock>", remoteLock)
+                                 // The code comes last because it is in other entries
+                                 .replace("<code>", code));
     }
 }
