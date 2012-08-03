@@ -20,6 +20,7 @@ package com.dririan.RingyDingyDingy;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
@@ -261,12 +262,20 @@ public class PreferencesActivity extends PreferenceActivity {
     }
 
     private void updateRingtone() {
-        String summary;
-
+        Ringtone ringtoneObject = null;
+        String summary = null;
         Uri ringtoneUri = Uri.parse(preferencesManager.getRingtone());
-        summary = RingtoneManager.getRingtone(this, ringtoneUri).getTitle(this);
 
-        ringtone.setSummary(summary);
+        if(ringtoneUri != null) {
+            ringtoneObject = RingtoneManager.getRingtone(this, ringtoneUri);
+            if(ringtoneObject != null)
+                summary = ringtoneObject.getTitle(this);
+        }
+
+        if(summary != null)
+            ringtone.setSummary(summary);
+        else
+            ringtone.setSummary(R.string.preferences_ringtone_unknown);
     }
 
     public static void updateEnabled() {
