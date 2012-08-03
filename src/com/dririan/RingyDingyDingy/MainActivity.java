@@ -79,6 +79,11 @@ public class MainActivity extends Activity {
             startActivity(preferencesActivity);
 
             return true;
+        case R.id.log:
+            Intent logActivity = new Intent(this, LogActivity.class);
+            startActivity(logActivity);
+
+            return true;
         default:
             return super.onOptionsItemSelected(menuItem);
         }

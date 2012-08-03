@@ -58,6 +58,10 @@
     <application android:icon="@drawable/icon"
                  android:label="@string/app_name">
 
+        <!-- LogActivity is used to view the activation log -->
+        <activity android:name=".LogActivity"
+                  android:label="@string/log_label" />
+
         <!-- MainActivity is the entry point, where information about how to use RingyDingyDingy is shown -->
         <activity android:name=".MainActivity"
                   android:enabled="true"
@@ -71,7 +75,7 @@
 
         <!-- PreferencesActivity is accessed by tapping Settings in the menu, and configures RingyDingyDingy -->
         <activity android:name=".PreferencesActivity"
-                  android:label="@string/settings" />
+                  android:label="@string/settings_label" />
 
         <!-- RemoteRingActivity is the activity that is launched when a page or ring is activated -->
         <activity android:name=".RemoteRingActivity"
@@ -104,6 +108,17 @@
                   android:exported="true">
             <intent-filter android:priority="1000">
                 <action android:name="com.google.android.apps.googlevoice.SMS_RECEIVED" />
+            </intent-filter>
+        </receiver>
+
+        <!-- LogHandler handles logging command activations -->
+        <receiver android:name=".LogHandler"
+                  android:enabled="true"
+                  android:exported="true"
+                  android:permission="com.dririan.RingyDingyDingy.EXECUTE_COMMAND">
+            <intent-filter>
+                <action android:name="com.dririan.RingyDingyDingy.LOG_COMMAND" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </receiver>
 

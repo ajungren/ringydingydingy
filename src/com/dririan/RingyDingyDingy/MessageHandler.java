@@ -37,10 +37,18 @@ public class MessageHandler {
 
         String pagerCode = preferencesManager.getPagerCode();
         if(messageTokens[0].compareToIgnoreCase(pagerCode) == 0) {
-            Intent intent = new Intent();
-            intent.setAction(ApiHandler.INTENT_RING)
-                  .putExtra("message", message.substring(pagerCode.length() + 1))
+            Intent intent = new Intent(ApiHandler.INTENT_RING);
+            Intent logIntent = new Intent(LogHandler.INTENT_LOG);
+            String pagerMessage = message.substring(pagerCode.length() + 1);
+
+            intent.putExtra("message", pagerMessage)
                   .putExtra("source", source);
+
+            logIntent.putExtra("command", "ring")
+                     .putExtra("argument", message.substring(pagerCode.length() + 1))
+                     .putExtra("app", "RingyDingyDingy")
+                     .putExtra("source", source);
+            context.sendBroadcast(logIntent);
 
             context.sendOrderedBroadcast(intent, ApiHandler.PERMISSION_HANDLE_INTERNAL, resultReceiver, null, ApiHandler.RESULT_UNKNOWN_COMMAND, null, null);
             return true;
@@ -57,19 +65,31 @@ public class MessageHandler {
             else
                 offset = 1;
 
-            if(messageTokens.length < offset+2 || messageTokens[offset+1].compareToIgnoreCase("ring") == 0)
+            String command = "";
+            if(messageTokens.length > offset+1)
+                command = messageTokens[offset+1];
+
+            if(messageTokens.length < offset+2 || command.compareToIgnoreCase("ring") == 0) {
+                command = "ring";
                 intent.setAction(ApiHandler.INTENT_RING);
-            else if(messageTokens[offset+1].compareToIgnoreCase("help") == 0)
+            }
+            else if(command.compareToIgnoreCase("help") == 0)
                 intent.setAction("com.dririan.RingyDingyDingy.COMMAND_HELP");
-            else if(messageTokens[offset+1].compareToIgnoreCase("lock") == 0)
+            else if(command.compareToIgnoreCase("lock") == 0)
                 intent.setAction(ApiHandler.INTENT_LOCK);
-            else if(messageTokens[offset+1].compareToIgnoreCase("stop") == 0)
+            else if(command.compareToIgnoreCase("stop") == 0)
                 intent.setAction(ApiHandler.INTENT_STOP);
             else {
                 // The command is unknown, so let external apps handle it
-                intent.setAction("com.dririan.RingyDingyDingy.COMMAND_" + messageTokens[offset+1].toUpperCase());
+                intent.setAction("com.dririan.RingyDingyDingy.COMMAND_" + command.toUpperCase());
                 permission = ApiHandler.PERMISSION_HANDLE;
             }
+
+            Intent logIntent = new Intent(LogHandler.INTENT_LOG);
+            logIntent.putExtra("command", command)
+                     .putExtra("app", "RingyDingyDingy")
+                     .putExtra("source", source);
+            context.sendBroadcast(logIntent);
 
             context.sendOrderedBroadcast(intent, permission, resultReceiver, null, ApiHandler.RESULT_UNKNOWN_COMMAND, null, null);
             return true;
