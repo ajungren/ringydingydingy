@@ -101,7 +101,7 @@ public class MainActivity extends Activity {
         String log = "";
         String pager = "";
         String pagerCode = "";
-        String remoteLock = "";
+        String remoteLock = ".";
         String settings = "";
 
         // Show the activation code on the TextView
