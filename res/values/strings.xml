@@ -84,18 +84,18 @@
     <string name="remote_ring_stop_button">Stop</string>
     <string name="remote_ring_text">Remote ring has been initiated by</string>
     <string name="settings_label">Settings</string>
-    <string name="sms_help">Send \&quot;RingyDingyDingy &lt;code&gt; &lt;cmd&gt;\&quot;. &lt;cmd&gt; is one of: help, lock, ring, stop.</string>
+    <string name="sms_help">Send \&quot;rdd &lt;code&gt; &lt;cmd&gt;\&quot;. &lt;cmd&gt; is one of: help, lock, ring, stop.</string>
     <string name="sms_lock_needs_froyo">Sorry, but I can\'t do a remote lock. Remote locking needs Android 2.2 (Froyo) or newer.</string>
     <string name="sms_lock_needs_permission">Sorry, but I can\'t do a remote lock. Remote locking is disabled.</string>
     <string name="sms_lock_success">Device locked!</string>
     <string name="sms_page_disabled">Sorry, pages are disabled.</string>
     <string name="sms_page_success">Your page has been sent successfully.</string>
-    <string name="sms_ring_success">The remote ring has been initiated. Send \&quot;RingyDingyDingy &lt;code&gt; stop\&quot; to stop the remote ring.</string>
+    <string name="sms_ring_success">The remote ring has been initiated. Send \&quot;rdd &lt;code&gt; stop\&quot; to stop the remote ring.</string>
     <string name="sms_ring_was_ringing">Sorry, but I can\'t start a remote ring. A remote ring has already been initiated.</string>
     <string name="sms_stop_success">The remote ring has been stopped.</string>
     <string name="sms_stop_was_not_ringing">Sorry, but I can\'t stop the remote ring. No remote ring was initiated.</string>
     <string name="sms_success">Command successful.</string>
-    <string name="sms_unknown_command">Unknown command. Please send \&quot;RingyDingyDingy &lt;code&gt; help\&quot; for a list of commands.</string>
+    <string name="sms_unknown_command">Unknown command. Send \&quot;rdd &lt;code&gt; help\&quot; for a list of commands.</string>
     <string name="sms_unknown_error">Unknown error.</string>
     <string name="your_activation_code">Your activation code is:</string>
 </resources>
