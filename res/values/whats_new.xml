@@ -3,14 +3,16 @@
     <string name="whats_new_message">
 Welcome to the new version of RingyDingyDingy!\n
 \n
-This version brings lots of bug fixes, and a few new features.\n
+This version brings a few bug fixes as well as a few new features.\n
 Please read the instructions that you\'ll see when you tap OK for information on how to use this app.\n
-If you have any problems, please e-mail us directly at ringydingydingy@0x3b.com.\n
+If you have any problems, please e-mail us directly at ringydingydingy@dririan.com.\n
 If you post a negative review on Google Play, we can\'t respond to you and help fix the problem.\n
 \n
 New features:\n
- * Notification that can be tapped to quickly enable/disable RingyDingyDingy (can be turned off in Settings)\n
- * Pager function that is the same as a remote ring, but displays a message as well (disabled by default; uses a different activation code)
+ * Activation logging that tells you what commands were activated, when they were activated, who activated them, and what app was used (can be turned off in Settings)\n
+ * Multiple pages will now accumulate in one dialog\n
+ * New icon!\n
+ * You can now choose what ringtone RDD will use\n
     </string>
     <string name="whats_new_title">What\'s New in RingyDingyDingy</string>
 </resources>
