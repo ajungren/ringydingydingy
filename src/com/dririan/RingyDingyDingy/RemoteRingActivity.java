@@ -48,6 +48,20 @@ public class RemoteRingActivity extends Activity {
 
     public String source = "";
 
+    private static String getContactNameByNumber(String number) {
+        if(_instance == null)
+            return "unknown";
+
+        // Get the contact name, if available
+        if(Build.VERSION.SDK_INT >= 5) {
+            String[] contact = ContactSupport.lookupByNumber(_instance, number);
+            if(contact[0] != null)
+                return contact[0];
+        }
+
+        return number;
+    }
+
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -62,12 +76,7 @@ public class RemoteRingActivity extends Activity {
         else
             source = "unknown";
 
-        // Get the contact name, if available
-        if(Build.VERSION.SDK_INT >= 5) {
-            String[] contact = ContactSupport.lookupByNumber(this, source);
-            if(contact[0] != null)
-                source = contact[0];
-        }
+        source = getContactNameByNumber(source);
 
         // Prepare the AudioManager, set the ringer mode to normal, and set the volume to maximum
         audioManager = (AudioManager) this.getSystemService(Context.AUDIO_SERVICE);
@@ -158,12 +167,14 @@ public class RemoteRingActivity extends Activity {
 
             if(source == null)
                 source = "unknown";
+            else {
+                source = getContactNameByNumber(source);
+            }
 
             if(activationLevel == LEVEL_PAGE_ACTIVE)
                 prefix = message + "\n";
 
             message = prefix + _instance.getString(R.string.page_from) + " " + source + ":\n" + newMessage;
-
             alertDialog.setMessage(message);
 
             activationLevel = LEVEL_PAGE_ACTIVE;
