@@ -37,9 +37,9 @@ public class LogEntry {
             stringBuilder.append("Page sent");
         }
         else {
-            stringBuilder.append("Command ");
-            stringBuilder.append(this.command);
-            stringBuilder.append(" used");
+            stringBuilder.append(this.command.substring(0, 1).toUpperCase());
+            stringBuilder.append(this.command.substring(1));
+            stringBuilder.append(" command sent");
         }
 
         if(this.source != null) {
