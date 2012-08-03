@@ -1,0 +1,4 @@
+permalink: /:title.html
+pygments: true
+safe: true
+
