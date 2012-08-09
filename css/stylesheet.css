@@ -7,6 +7,17 @@ h1, h2, p {
   width: 50%;
 }
 
+img#flattr {
+  border: 0px;
+  box-shadow: none;
+  height: 20px;
+  margin: 0px;
+  max-height: 20px;
+  max-width: 93px;
+  padding: 0px;
+  width: 93px;
+}
+
 img#gplay {
   border: 0px;
   box-shadow: none;
@@ -14,7 +25,7 @@ img#gplay {
   margin: 0px;
   max-height: 60px;
   max-width: 172px;
-  padding: 0px;
+  padding: 0px 10px;
   width: 172px;
 }
 
