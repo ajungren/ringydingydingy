@@ -64,6 +64,9 @@ public class NotificationHandler extends BroadcastReceiver {
         Intent intent = new Intent(ToggleHandler.INTENT);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
 
+        if(preferencesManager == null)
+            preferencesManager = PreferencesManager.getInstance(context);
+
         if(preferencesManager.getEnabled()) {
             title = context.getText(R.string.notification_enabled);
             message = context.getText(R.string.notification_enabled_message);
