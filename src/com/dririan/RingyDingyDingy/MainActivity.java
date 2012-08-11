@@ -51,7 +51,8 @@ public class MainActivity extends Activity {
             versionCode = -1;
         }
 
-        if(preferencesManager.getLastSeenVersion() != versionCode) {
+        // Minor versions shouldn't trigger the What's New dialog
+        if(preferencesManager.getLastSeenVersion()/100 != versionCode/100) {
             AlertDialog.Builder builder = ThemedDialogBuilder.getBuilder(this);
             builder.setTitle(R.string.whats_new_title)
                    .setMessage(R.string.whats_new_message)
