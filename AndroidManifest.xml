@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          android:versionCode="000702"
-          android:versionName="0.7.2"
+          android:versionCode="000703"
+          android:versionName="0.7.3"
           package="com.dririan.RingyDingyDingy">
     <!--  Target Jelly Bean, but require Donut at a minimum
           Jelly Bean is targeted to bring new features, such as the Action Bar.
