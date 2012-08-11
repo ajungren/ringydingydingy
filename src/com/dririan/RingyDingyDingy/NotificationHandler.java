@@ -64,6 +64,16 @@ public class NotificationHandler extends BroadcastReceiver {
         Intent intent = new Intent(ToggleHandler.INTENT);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
 
+        // The notification may be null if the app was updated, because the
+        // notification will still be shown, but the app will have been killed
+        // during the update process.
+        if(notification == null)
+            displayNotification(context);
+
+        // If the notification still is null, bail out
+        if(notification == null)
+            return;
+
         if(preferencesManager == null)
             preferencesManager = PreferencesManager.getInstance(context);
 
