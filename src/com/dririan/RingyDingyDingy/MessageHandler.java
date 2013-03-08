@@ -39,13 +39,17 @@ public class MessageHandler {
         if(messageTokens[0].compareToIgnoreCase(pagerCode) == 0) {
             Intent intent = new Intent(ApiHandler.INTENT_RING);
             Intent logIntent = new Intent(LogHandler.INTENT_LOG);
-            String pagerMessage = message.substring(pagerCode.length() + 1);
 
-            intent.putExtra("message", pagerMessage)
-                  .putExtra("source", source);
+            int prefixLength = pagerCode.length() + 1;
+            if(prefixLength < message.length()) {
+                String pagerMessage = message.substring(prefixLength);
+                intent.putExtra("message", pagerMessage);
+                logIntent.putExtra("argument", pagerMessage);
+            }
+
+            intent.putExtra("source", source);
 
             logIntent.putExtra("command", "ring")
-                     .putExtra("argument", message.substring(pagerCode.length() + 1))
                      .putExtra("app", "RingyDingyDingy")
                      .putExtra("source", source);
             context.sendBroadcast(logIntent);
