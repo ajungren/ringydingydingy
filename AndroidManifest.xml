@@ -7,7 +7,7 @@
           Jelly Bean is targeted to bring new features, such as the Action Bar.
           However, Donut is the minimum, because API level checks are used before using newer functions. -->
     <uses-sdk android:minSdkVersion="4"
-              android:targetSdkVersion="16" />
+              android:targetSdkVersion="17" />
 
     <!-- Telephony hardware is not needed as the Google Voice trigger works over Wi-Fi -->
     <uses-feature android:name="android.hardware.telephony"
@@ -55,7 +55,8 @@
     <!-- HANDLE_INTERNAL_COMMAND is used to handle commands that are built in to RingyDingyDingy -->
     <uses-permission android:name="com.dririan.RingyDingyDingy.HANDLE_INTERNAL_COMMAND" />
 
-    <application android:icon="@drawable/icon"
+    <application android:allowBackup="true"
+                 android:icon="@drawable/icon"
                  android:label="@string/app_name">
 
         <!-- LogActivity is used to view the activation log -->
