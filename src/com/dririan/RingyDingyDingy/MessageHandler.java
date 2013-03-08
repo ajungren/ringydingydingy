@@ -17,6 +17,8 @@
 
 package com.dririan.RingyDingyDingy;
 
+import java.util.Locale;
+
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -85,7 +87,7 @@ public class MessageHandler {
                 intent.setAction(ApiHandler.INTENT_STOP);
             else {
                 // The command is unknown, so let external apps handle it
-                intent.setAction("com.dririan.RingyDingyDingy.COMMAND_" + command.toUpperCase());
+                intent.setAction("com.dririan.RingyDingyDingy.COMMAND_" + command.toUpperCase(Locale.ENGLISH));
                 permission = ApiHandler.PERMISSION_HANDLE;
             }
 
