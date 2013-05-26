@@ -32,6 +32,6 @@ GitHub](https://github.com/dririan/ringydingydingy/issues) (but please first
 check to see if the issue has already been reported) as we can't reply to
 reviews left on Google Play, and so we won't be able to help fix the problem!
 If you don't have a GitHub account, you can also e-mail us at
-ringydingy**...**@dririan.com (replace **...** with **dingy**; this is an
+support@ringydingy**...**.com (replace **...** with **dingy**; this is an
 anti-spam measure).
 
