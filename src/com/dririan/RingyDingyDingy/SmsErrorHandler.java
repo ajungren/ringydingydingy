@@ -15,11 +15,11 @@ public class SmsErrorHandler extends BroadcastReceiver {
         if(intent.getAction().compareTo(INTENT) == 0) {
             int resultCode = getResultCode();
             String tag = "RingyDingyDingy";
-            String prefix = "Sent SMS: ";
+            String prefix = "Error sending SMS: ";
 
             switch(resultCode) {
             case Activity.RESULT_OK:
-                Log.d(tag, prefix + "RESULT_OK");
+                // Since the SMS was sent, no need to log anything
                 break;
             case SmsManager.RESULT_ERROR_GENERIC_FAILURE:
                 String msg = "ERROR_GENERIC_FAILURE";
@@ -27,19 +27,19 @@ public class SmsErrorHandler extends BroadcastReceiver {
                 if(intent.hasExtra("errorCode"))
                     msg += " (" + Integer.toString(intent.getIntExtra("errorCode", 0)) + ")";
 
-                Log.d(tag, prefix + msg);
+                Log.e(tag, prefix + msg);
                 break;
             case SmsManager.RESULT_ERROR_RADIO_OFF:
-                Log.d(tag, prefix + "ERROR_RADIO_OFF");
+                Log.e(tag, prefix + "ERROR_RADIO_OFF");
                 break;
             case SmsManager.RESULT_ERROR_NULL_PDU:
-                Log.d(tag, prefix + "ERROR_NULL_PDU");
+                Log.e(tag, prefix + "ERROR_NULL_PDU");
                 break;
             case SmsManager.RESULT_ERROR_NO_SERVICE:
-                Log.d(tag, prefix + "ERROR_NO_SERVICE");
+                Log.e(tag, prefix + "ERROR_NO_SERVICE");
                 break;
             default:
-                Log.d(tag, prefix + Integer.toString(resultCode));
+                Log.e(tag, prefix + "Unknown result code: " + Integer.toString(resultCode));
                 break;
             }
         }

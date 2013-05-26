@@ -25,7 +25,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.telephony.SmsManager;
 import android.telephony.SmsMessage;
-import android.util.Log;
 
 public class SmsReceiver extends BroadcastReceiver {
     private PreferencesManager preferencesManager = null;
@@ -94,7 +93,6 @@ public class SmsReceiver extends BroadcastReceiver {
         if(preferencesManager.smsRepliesEnabled()) {
             PendingIntent sentIntent = PendingIntent.getBroadcast(context, 0, new Intent("com.dririan.RingyDingyDingy.SMS_SENT"), 0);
 
-            Log.d("RingyDingyDingy", "Sending SMS to " + destination + ": " + message);
             SmsManager.getDefault().sendTextMessage(destination, null, message, sentIntent, null);
         }
     }
